@@ -5,7 +5,13 @@
  */
 package quemquersermillonario.gui.usuario;
 
+import com.sun.java.swing.plaf.windows.WindowsBorders;
+import java.sql.Date;
+import quemquersermillonario.dao.interfaces.GenericDAO;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
+import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelPersonalizados;
 
 /**
@@ -19,10 +25,18 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
      */
     
     private Usuario usuario;
+    private Boolean esModificacion=false;
+    private GenericDAO genericDAO;
+
+
+    
     public PantallaUsuarioRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        genericDAO = new UsuarioDAOImplHibernate();
+        
         this.setTitle("Registro Usuario");
+        usuario =  new Usuario();
         this.jComboBoxEstudios.setModel(ComboBoxModelPersonalizados.getEstudiosComboBoxModel());
     }
 
@@ -41,13 +55,14 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         jLabelAnio = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
         jLabelEstudios = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonAceptar = new javax.swing.JButton();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellidos = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
         jComboBoxEstudios = new javax.swing.JComboBox<>();
+        jTextFieldAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -69,9 +84,14 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         jLabelEstudios.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelEstudios.setText("Estudios:");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Aceptar");
+        jButtonAceptar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jTextFieldNombre.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
 
@@ -85,6 +105,8 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
                 jComboBoxEstudiosActionPerformed(evt);
             }
         });
+
+        jTextFieldAno.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,16 +123,21 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
                     .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNombre)
-                    .addComponent(jTextFieldApellidos)
-                    .addComponent(jTextFieldEmail)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2)
-                    .addComponent(jComboBoxEstudios, 0, 113, Short.MAX_VALUE))
-                .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldAno, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(85, 85, 85))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
         );
         layout.setVerticalGroup(
@@ -137,13 +164,15 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addComponent(jLabelAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
 
@@ -152,12 +181,34 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
 
     private void jComboBoxEstudiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstudiosActionPerformed
         // TODO add your handling code here:
+        //Cuando se cambia los estudios, se cambia en el usuario
+        this.usuario.setEstudios((Estudios)this.jComboBoxEstudios.getSelectedItem());
     }//GEN-LAST:event_jComboBoxEstudiosActionPerformed
 
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        // TODO add your handling code here:
+        pasarCamposAObjeto();
+        if (!esModificacion){
+            usuario.setFechaCreacion(OpcionesFijas.fechaActual());
+            genericDAO.guardar(usuario);
+            
+        }
+        
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
  
+    private void pasarCamposAObjeto(){
+        usuario.setNombre(jTextFieldNombre.getText());
+        usuario.setApellidos(jTextFieldApellidos.getText());
+        usuario.setEmail(jTextFieldEmail.getText());
+        usuario.setAnoNacimiento(Integer.parseInt(jTextFieldAno.getText()));
+        usuario.setActivo(1);
+        usuario.setFechaModificacion(OpcionesFijas.fechaActual());
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxEstudios;
     private javax.swing.JLabel jLabelAnio;
     private javax.swing.JLabel jLabelApellidos;
@@ -167,6 +218,7 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNombre;

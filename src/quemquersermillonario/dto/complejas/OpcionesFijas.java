@@ -5,6 +5,7 @@
  */
 package quemquersermillonario.dto.complejas;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import quemquersermillonario.dto.Estudios;
@@ -26,6 +27,10 @@ public class OpcionesFijas {
 
     public static void setListaEstudios(List<Estudios> listaEstudios) {
         OpcionesFijas.listaEstudios = listaEstudios;
+    }
+    
+    public static Date fechaActual(){
+        return new Date(new java.util.Date().getTime());
     }
     
     

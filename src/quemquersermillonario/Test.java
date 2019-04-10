@@ -9,8 +9,12 @@ package quemquersermillonario;
 
 
 import java.util.List;
+import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
 import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dto.Usuario;
+import sun.net.www.content.text.Generic;
 
 /**
  *
@@ -24,11 +28,15 @@ public class Test {
         estudios.setActivo(1);
         
       // SessionFactory  SESSION_FACTORY =  (SessionFactory) new AnnotationConfiguration().configure().buildSessionFactory();
-        EstudiosDAOImplHibernate estudiosDAOImplHibernate = new EstudiosDAOImplHibernate();
+        GenericDAO genericDAO = new UsuarioDAOImplHibernate();
       //  estudiosDAOImplHibernate.guardar(estudios);
         
-        List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
+       // List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
         
-        System.out.println(lista);
+        Usuario usuario = new Usuario();
+        usuario.setNombre("prueb");
+        usuario.setIdUsuario(1);
+        
+        genericDAO.guardar(usuario);
     }
 }

@@ -23,12 +23,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDUsuario", unique = true, nullable = false)
-    private int idEstudios;
+    private int idUsuario;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -45,10 +45,10 @@ public class Usuario implements Serializable{
     @Column(name = "Password")
     private String password;
 
-    @JoinColumn(name="Estudios_IDEstudios")
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Estudios_IDEstudios")
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Estudios estudios;
-    
+
     @Column(name = "Activo")
     private int activo;
 
@@ -61,12 +61,20 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public int getIdEstudios() {
-        return idEstudios;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdEstudios(int idEstudios) {
-        this.idEstudios = idEstudios;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Estudios getEstudios() {
+        return estudios;
+    }
+
+    public void setEstudios(Estudios estudios) {
+        this.estudios = estudios;
     }
 
     public String getNombre() {
