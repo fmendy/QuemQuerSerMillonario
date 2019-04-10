@@ -84,7 +84,7 @@ public class Estudios implements Serializable {
 
     @Override
     public String toString() {
-        return "Estudios{" + "idEstudios=" + idEstudios + ", nombre=" + nombre + ", activo=" + activo + ", fechaCreacion=" + fechaCreacion + ", fechaModificacion=" + fechaModificacion + '}';
+        return nombre;
     }
 
 }

@@ -6,6 +6,7 @@
 package quemquersermillonario.gui.usuario;
 
 import quemquersermillonario.dto.Usuario;
+import quemquersermillonario.gui.comboboxmodel.ComboBoxModelPersonalizados;
 
 /**
  *
@@ -22,6 +23,7 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle("Registro Usuario");
+        this.jComboBoxEstudios.setModel(ComboBoxModelPersonalizados.getEstudiosComboBoxModel());
     }
 
     /**
@@ -33,24 +35,140 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelApellidos = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelAnio = new javax.swing.JLabel();
+        jLabelPassword = new javax.swing.JLabel();
+        jLabelEstudios = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jTextFieldApellidos = new javax.swing.JTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jComboBoxEstudios = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabelApellidos.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelApellidos.setText("Apellidos:");
+
+        jLabelEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelEmail.setText("Email:");
+
+        jLabelNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelNombre.setText("Nombre:");
+
+        jLabelAnio.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelAnio.setText("Año Nacimiento:");
+
+        jLabelPassword.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelPassword.setText("Password:");
+
+        jLabelEstudios.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelEstudios.setText("Estudios:");
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Aceptar");
+
+        jTextFieldNombre.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+
+        jTextFieldApellidos.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+
+        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+
+        jComboBoxEstudios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEstudios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEstudiosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelAnio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNombre)
+                    .addComponent(jTextFieldApellidos)
+                    .addComponent(jTextFieldEmail)
+                    .addComponent(jPasswordField1)
+                    .addComponent(jPasswordField2)
+                    .addComponent(jComboBoxEstudios, 0, 113, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabelAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxEstudiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstudiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEstudiosActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxEstudios;
+    private javax.swing.JLabel jLabelAnio;
+    private javax.swing.JLabel jLabelApellidos;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEstudios;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JTextField jTextFieldApellidos;
+    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }
