@@ -19,17 +19,30 @@ import javax.persistence.Table;
  * @author alvaro
  */
 @Entity
-@Table(name = "Estudios")
-public class Estudios implements Serializable {
+@Table(name = "Usuario")
+public class Usuario implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDEstudios", unique = true, nullable = false)
+    @Column(name = "IDUsuario", unique = true, nullable = false)
     private int idEstudios;
 
-    @Column(name = "Nombre", nullable = false)
+    @Column(name = "Nombre")
     private String nombre;
 
+    @Column(name = "Apellidos")
+    private String apellidos;
+
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "AnoNacimiento")
+    private int anoNacimiento;
+
+    @Column(name = "Password")
+    private String password;
+
+    //private Estudios estudios;
     @Column(name = "Activo")
     private int activo;
 
@@ -39,7 +52,7 @@ public class Estudios implements Serializable {
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
 
-    public Estudios() {
+    public Usuario() {
     }
 
     public int getIdEstudios() {
@@ -56,6 +69,38 @@ public class Estudios implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAnoNacimiento() {
+        return anoNacimiento;
+    }
+
+    public void setAnoNacimiento(int anoNacimiento) {
+        this.anoNacimiento = anoNacimiento;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getActivo() {
@@ -80,11 +125,6 @@ public class Estudios implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
-    }
-
-    @Override
-    public String toString() {
-        return "Estudios{" + "idEstudios=" + idEstudios + ", nombre=" + nombre + ", activo=" + activo + ", fechaCreacion=" + fechaCreacion + ", fechaModificacion=" + fechaModificacion + '}';
     }
 
 }

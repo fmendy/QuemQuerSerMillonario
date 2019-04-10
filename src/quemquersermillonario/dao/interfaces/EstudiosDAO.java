@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quemquersermillonario.dao.implementation;
+package quemquersermillonario.dao.interfaces;
 
-import quemquersermillonario.dao.EstudiosDAO;
+import quemquersermillonario.dto.Estudios;
+
 
 /**
  *
  * @author alvaro
  */
-public class EstudiosDAOImplHibernate extends GenericDAOImplHibernate implements EstudiosDAO{
-    
+public interface EstudiosDAO extends GenericDAO<Estudios>{
 }

@@ -8,7 +8,8 @@ package quemquersermillonario;
 
 
 
-import quemquersermillonario.dao.implementation.EstudiosDAOImplHibernate;
+import java.util.List;
+import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
 import quemquersermillonario.dto.Estudios;
 
 /**
@@ -24,6 +25,10 @@ public class Test {
         
       // SessionFactory  SESSION_FACTORY =  (SessionFactory) new AnnotationConfiguration().configure().buildSessionFactory();
         EstudiosDAOImplHibernate estudiosDAOImplHibernate = new EstudiosDAOImplHibernate();
-        estudiosDAOImplHibernate.guardar(estudios);
+      //  estudiosDAOImplHibernate.guardar(estudios);
+        
+        List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
+        
+        System.out.println(lista);
     }
 }
