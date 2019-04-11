@@ -8,15 +8,31 @@ package quemquersermillonario.dto.complejas;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.logica.OpcionesFijasDAO;
 import quemquersermillonario.dto.Estudios;
-import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dto.Usuario;
 
 /**
  *
  * @author alvaro
  */
 public class OpcionesFijas {
-    public static List<Estudios> listaEstudios=new ArrayList<>();
+
+    public static List<Estudios> listaEstudios = new ArrayList<>();
+
+    public static Usuario usuario = new Usuario();
+    
+    public static UsuarioDAO usuarioDAO = new UsuarioDAOImplHibernate();
+
+    public static UsuarioDAO getUsuarioDAO() {
+        return usuarioDAO;
+    }
+
+    public static void setUsuarioDAO(UsuarioDAO usuarioDAO) {
+        OpcionesFijas.usuarioDAO = usuarioDAO;
+    }
 
     public OpcionesFijas() {
     }
@@ -28,11 +44,17 @@ public class OpcionesFijas {
     public static void setListaEstudios(List<Estudios> listaEstudios) {
         OpcionesFijas.listaEstudios = listaEstudios;
     }
-    
-    public static Date fechaActual(){
+
+    public static Date fechaActual() {
         return new Date(new java.util.Date().getTime());
     }
-    
-    
-    
+
+    public static Usuario getUsuario() {
+        return usuario;
+    }
+
+    public static void setUsuario(Usuario usuario) {
+        OpcionesFijas.usuario = usuario;
+    }
+
 }

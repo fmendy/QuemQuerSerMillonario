@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
     private String password;
 
     @JoinColumn(name = "Estudios_IDEstudios")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Estudios estudios;
 
     @Column(name = "Activo")
@@ -140,5 +140,12 @@ public class Usuario implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", anoNacimiento=" + anoNacimiento + ", password=" + password + ", estudios=" + estudios + ", activo=" + activo + ", fechaCreacion=" + fechaCreacion + ", fechaModificacion=" + fechaModificacion + '}';
+    }
+    
+    
 
 }

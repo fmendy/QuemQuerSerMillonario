@@ -46,7 +46,6 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/id9194035_quemquersermillonario?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
     <property name="hibernate.connection.username">admin</property>
     <property name="hibernate.connection.password">admin</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.show_sql">true</property>
     <mapping class="quemquersermillonario.dto.Estudios"/>
     <mapping class="quemquersermillonario.dto.Usuario"/>

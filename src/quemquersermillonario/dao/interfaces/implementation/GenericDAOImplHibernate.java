@@ -23,8 +23,8 @@ import quemquersermillonario.dao.HibernateUtils;
 public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
 
     SessionFactory sessionFactory;
-    private Session session;
-    private Transaction tx;
+    Session session;
+    Transaction tx;
 
     private final static Logger LOGGER = Logger.getLogger(GenericDAOImplHibernate.class.getName());
 

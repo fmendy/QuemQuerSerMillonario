@@ -13,4 +13,6 @@ import quemquersermillonario.dto.Usuario;
  */
 public interface UsuarioDAO extends GenericDAO<Usuario>{
     public Usuario buscarUsuarioEmail(Usuario usuario);
+    
+    public Boolean iniciarSesion(Usuario usuario);
 }

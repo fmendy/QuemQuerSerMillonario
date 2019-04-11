@@ -7,7 +7,9 @@ package quemquersermillonario.gui.usuario;
 
 import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.sql.Date;
+import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.GenericDAO;
+import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -23,20 +25,17 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
     /**
      * Creates new form PantallaUsuarioRegistro
      */
-    
     private Usuario usuario;
-    private Boolean esModificacion=false;
-    private GenericDAO genericDAO;
+    private Boolean esModificacion = false;
+    private UsuarioDAO usuarioDAO;
 
-
-    
     public PantallaUsuarioRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        genericDAO = new UsuarioDAOImplHibernate();
-        
+        usuarioDAO = new UsuarioDAOImplHibernate();
+
         this.setTitle("Registro Usuario");
-        usuario =  new Usuario();
+        usuario = new Usuario();
         this.jComboBoxEstudios.setModel(ComboBoxModelPersonalizados.getEstudiosComboBoxModel());
     }
 
@@ -94,10 +93,17 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         });
 
         jTextFieldNombre.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldNombre.setSelectionColor(new java.awt.Color(255, 255, 0));
 
         jTextFieldApellidos.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldApellidos.setSelectionColor(new java.awt.Color(255, 255, 0));
 
         jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
+
+        jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
+
+        jPasswordField2.setSelectionColor(new java.awt.Color(255, 255, 0));
 
         jComboBoxEstudios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxEstudios.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +113,7 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         });
 
         jTextFieldAno.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldAno.setSelectionColor(new java.awt.Color(255, 255, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,17 +131,17 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldAno, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(85, 85, 85))))
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                        .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,34 +151,36 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldNombre))
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jPasswordField1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -182,29 +191,47 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
     private void jComboBoxEstudiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstudiosActionPerformed
         // TODO add your handling code here:
         //Cuando se cambia los estudios, se cambia en el usuario
-        this.usuario.setEstudios((Estudios)this.jComboBoxEstudios.getSelectedItem());
     }//GEN-LAST:event_jComboBoxEstudiosActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
         pasarCamposAObjeto();
-        if (!esModificacion){
+
+        //Registro de Nuevo usuario
+        if (!esModificacion) {
             usuario.setFechaCreacion(OpcionesFijas.fechaActual());
-            genericDAO.guardar(usuario);
-            
+            if (usuarioDAO.buscarUsuarioEmail(usuario) == null) {
+                try {
+                    usuarioDAO.guardar(usuario);
+                    JOptionPane.showMessageDialog(this, "Enhorabuena ya se ha registrado", "Registrado", JOptionPane.INFORMATION_MESSAGE);
+                    this.setVisible(false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this,
+                            "Se ha producido un error al registrarse, "
+                            + "por favor contacte con el servicio técnico"
+                            + "indicando el siguente mensaje\n"
+                            + "Clase: " + this.getClass().getName() + "\n"
+                            + "Error: " + e.getMessage(),
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "El Email que ha introducido ya esta en uso, por favor intro"
+                        + "duzca otro, gracias.", "Error al registrarse", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        
+
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
- 
-    private void pasarCamposAObjeto(){
+    private void pasarCamposAObjeto() {
         usuario.setNombre(jTextFieldNombre.getText());
         usuario.setApellidos(jTextFieldApellidos.getText());
         usuario.setEmail(jTextFieldEmail.getText());
         usuario.setAnoNacimiento(Integer.parseInt(jTextFieldAno.getText()));
         usuario.setActivo(1);
+        usuario.setPassword(jPasswordField1.getText());
         usuario.setFechaModificacion(OpcionesFijas.fechaActual());
-        
+        usuario.setEstudios((Estudios) jComboBoxEstudios.getSelectedItem());
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

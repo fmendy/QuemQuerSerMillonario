@@ -7,6 +7,7 @@ package quemquersermillonario.dao.logica;
 
 import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
 import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 
 /**
@@ -14,6 +15,8 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  * @author alvaro
  */
 public class OpcionesFijasDAO {
+    
+   
 
     public OpcionesFijasDAO() {
         cargarEstudios();

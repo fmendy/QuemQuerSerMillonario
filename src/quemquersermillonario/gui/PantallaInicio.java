@@ -5,7 +5,11 @@
  */
 package quemquersermillonario.gui;
 
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
+import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.usuario.PantallaUsuarioRegistro;
 
 /**
@@ -19,9 +23,14 @@ public class PantallaInicio extends javax.swing.JFrame {
      * Creates new form PantallaIncio
      * En el momento de la creacion se cargan las opciones las cuales seran fijas
      */
+    
+    private UsuarioDAO usuarioDAO;
+    
     public PantallaInicio() {
         initComponents();
         new OpcionesFijasDAO();
+        this.setTitle("Bienvenido");
+        
     }
 
     /**
@@ -33,14 +42,43 @@ public class PantallaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jButtonIrRegistro = new javax.swing.JButton();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelPassword = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jButtonIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIrRegistro.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonIrRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIrRegistro.setText("REGISTRARSE");
+        jButtonIrRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonIrRegistroActionPerformed(evt);
+            }
+        });
+
+        jLabelEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelEmail.setText("Email:");
+
+        jLabelPassword.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelPassword.setText("Password:");
+
+        jPasswordField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
+
+        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldEmail.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
+
+        jButtonIniciar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIniciar.setText("INICIAR");
+        jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarActionPerformed(evt);
             }
         });
 
@@ -48,27 +86,63 @@ public class PantallaInicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addComponent(jTextFieldEmail))
+                .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(122, 122, 122))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(133, 133, 133))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jButton1)
-                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonIniciar)
+                .addGap(20, 20, 20)
+                .addComponent(jButtonIrRegistro)
+                .addGap(61, 61, 61))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrRegistroActionPerformed
         // TODO add your handling code here:
         PantallaUsuarioRegistro pur= new PantallaUsuarioRegistro(this, true);
+        
         pur.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonIrRegistroActionPerformed
+
+    private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
+        // TODO add your handling code here:
+        OpcionesFijas.usuario.setEmail(jTextFieldEmail.getText());
+        OpcionesFijas.usuario.setPassword(jPasswordField1.getText());
+        
+        if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)){
+            JOptionPane.showMessageDialog(this, "Bienvenido");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Los datos introducidos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonIniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,6 +181,11 @@ public class PantallaInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonIniciar;
+    private javax.swing.JButton jButtonIrRegistro;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
 }
