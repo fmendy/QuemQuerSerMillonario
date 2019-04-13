@@ -49,5 +49,6 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <mapping class="quemquersermillonario.dto.Estudios"/>
     <mapping class="quemquersermillonario.dto.Usuario"/>
+    <mapping class="quemquersermillonario.dto.Conexion"/>
   </session-factory>
 </hibernate-configuration>

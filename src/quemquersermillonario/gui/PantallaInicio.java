@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
+import quemquersermillonario.gui.usuario.PantallaUsuarioOpciones;
 import quemquersermillonario.gui.usuario.PantallaUsuarioRegistro;
 
 /**
@@ -137,7 +138,8 @@ public class PantallaInicio extends javax.swing.JFrame {
         OpcionesFijas.usuario.setPassword(jPasswordField1.getText());
         
         if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)){
-            JOptionPane.showMessageDialog(this, "Bienvenido");
+            PantallaUsuarioOpciones puo = new PantallaUsuarioOpciones(this, true);
+            puo.setVisible(true);
         }
         else{
             JOptionPane.showMessageDialog(this, "Los datos introducidos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);

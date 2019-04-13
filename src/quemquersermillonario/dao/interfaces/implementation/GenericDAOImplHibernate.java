@@ -5,7 +5,7 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -60,7 +60,7 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         iniciar();
         try {
             session.save(object);
-            LOGGER.log(Level.INFO, this.getClass().getName() + " " + object.getClass().getName() + " guardado");
+            LOGGER.log(Level.INFO, this.getClass().getName() + " " + object.getClass().getSimpleName()+ " guardado");
         } catch (Exception e) {
 
             LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al iniciar session factory");
@@ -75,7 +75,16 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
 
     @Override
     public void borrar(T object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        iniciar();
+            try{
+                session.delete(object);
+                LOGGER.log(Level.INFO, this.getClass().getName() + " " + object.getClass().getSimpleName()+ " borrado");
+            }
+            catch(Exception e){
+                LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al borrar objeto de tipo "+object.getClass().getSimpleName());
+                System.out.println(e);
+            }
+        finalizar();
     }
 
     @Override
@@ -100,5 +109,7 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     public T buscarId(T object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 }

@@ -5,19 +5,18 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
-
-import quemquersermillonario.dao.interfaces.EstudiosDAO;
-import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dao.interfaces.ConexionDAO;
+import quemquersermillonario.dto.Conexion;
 
 /**
  *
  * @author alvaro
  */
-public class EstudiosDAOImplHibernate extends GenericDAOImplHibernate<Estudios> implements EstudiosDAO{
+public class ConexionDAOImplHibernate extends GenericDAOImplHibernate<Conexion> implements ConexionDAO{
 
     @Override
-    public Estudios buscarId(Estudios object) {
+    public Conexion buscarId(Conexion object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -12,58 +12,72 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
  * @author alvaro
  */
-@Entity
-@Table(name = "Estudios")
-public class Estudios implements Serializable {
-
+@Entity 
+@Table (name = "Conexion")
+public class Conexion implements Serializable{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDEstudios", unique = true, nullable = false)
-    private int idEstudios;
-
-    @Column(name = "Nombre", nullable = false)
-    private String nombre;
-
-    @Column(name = "Activo")
-    private int activo;
-
+    @Column(name = "IDConexion", unique = true, nullable = false)
+    private int idConexion;
+    
+    @Column(name = "Dispositivo")
+    private String dispositivo;
+    
+    @Column(name = "IP")
+    private String ip;
+    
     @Column(name = "FechaCreacion")
     private Date fechaCreacion;
 
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
+    
+    @ManyToOne
+    @JoinColumn(name = "Usuario_IDUsuario", nullable = false)
+    private Usuario usuario;
 
-    public Estudios() {
+    public Conexion() {
     }
 
-    public int getIdEstudios() {
-        return idEstudios;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdEstudios(int idEstudios) {
-        this.idEstudios = idEstudios;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdConexion() {
+        return idConexion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdConexion(int idConexion) {
+        this.idConexion = idConexion;
     }
 
-    public int getActivo() {
-        return activo;
+    public String getDispositivo() {
+        return dispositivo;
     }
 
-    public void setActivo(int activo) {
-        this.activo = activo;
+    public void setDispositivo(String dispositivo) {
+        this.dispositivo = dispositivo;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public Date getFechaCreacion() {
@@ -81,10 +95,6 @@ public class Estudios implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-
-    @Override
-    public String toString() {
-        return nombre;
-    }
-
+    
+    
 }

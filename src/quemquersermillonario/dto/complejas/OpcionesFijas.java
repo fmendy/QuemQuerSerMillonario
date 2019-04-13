@@ -8,6 +8,7 @@ package quemquersermillonario.dto.complejas;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.rmi.CORBA.UtilDelegate;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
@@ -45,9 +46,14 @@ public class OpcionesFijas {
         OpcionesFijas.listaEstudios = listaEstudios;
     }
 
-    public static Date fechaActual() {
+    public static Date fechaActualSQL() {
         return new Date(new java.util.Date().getTime());
     }
+    
+    public static java.util.Date fechaActual(){
+        return new java.util.Date();
+    }
+    
 
     public static Usuario getUsuario() {
         return usuario;

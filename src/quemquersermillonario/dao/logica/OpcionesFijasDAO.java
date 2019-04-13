@@ -30,4 +30,8 @@ public class OpcionesFijasDAO {
         EstudiosDAOImplHibernate estudiosDAOImplHibernate = new EstudiosDAOImplHibernate();
         OpcionesFijas.listaEstudios= estudiosDAOImplHibernate.obtenerTodos(new Estudios());
     }
+    
+    public static void deslogearse(){
+        OpcionesFijas.usuario = new Usuario();
+    }
 }

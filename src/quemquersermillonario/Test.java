@@ -9,10 +9,13 @@ package quemquersermillonario;
 
 
 import java.util.List;
+import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.interfaces.implementation.ConexionDAOImplHibernate;
 import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dto.Conexion;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
 import sun.net.www.content.text.Generic;
@@ -27,25 +30,47 @@ public class Test {
         
         estudios.setNombre("FP");
         estudios.setActivo(1);
+        estudios.setIdEstudios(21);
         
       // SessionFactory  SESSION_FACTORY =  (SessionFactory) new AnnotationConfiguration().configure().buildSessionFactory();
-        UsuarioDAO genericDAO = new UsuarioDAOImplHibernate();
+        UsuarioDAO usuarioDAO = new UsuarioDAOImplHibernate();
+        ConexionDAO conexionDAO = new ConexionDAOImplHibernate();
       
       // genericDAO.guardar(estudios);
         
        // List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
-        
+      /*  
         Usuario usuario = new Usuario();
         usuario.setNombre("prueb");
         usuario.setApellidos("hola");
         usuario.setEstudios(estudios);
-        usuario.setEmail("bb");
+        usuario.setEmail("conexion4");
         usuario.setAnoNacimiento(1900);
         usuario.setIdUsuario(1);
         usuario.setPassword("aaa");
+
+     usuario.setIdUsuario(16);
+        */
+        Conexion conexion = new Conexion();
+        conexion.setDispositivo("pc");
+        conexion.setIp("12345");
+        conexion.setIdConexion(6);
+        Conexion conexion1 = new Conexion();
+        conexion1.setDispositivo("movil");
+        conexion1.setIp("2456");
+      /*  conexion1.setUsuario(usuario);
+        usuario.aniadirConexion(conexion1);*/
         
-        //genericDAO.guardar(usuario);
-        usuario = genericDAO.buscarUsuarioEmail(usuario);
-        System.out.println(usuario);
+       /* usuario.aniadirConexion(conexion);
+        conexion.setUsuario(usuario);*/
+        
+        //usuario = usuarioDAO.buscarId(usuario);
+        //System.out.println(usuario);
+       // usuarioDAO.borrar(usuario);
+       //usuarioDAO.guardar(usuario);
+        conexionDAO.borrar(conexion);
+      //  conexionDAO.guardar(conexion);
+       // usuario = genericDAO.buscarUsuarioEmail(usuario);
+       // System.out.println(usuario.getListaConexiones().size());
     }
 }

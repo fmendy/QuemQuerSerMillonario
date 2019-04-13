@@ -6,17 +6,11 @@
 package quemquersermillonario.dao.interfaces;
 
 import quemquersermillonario.dto.Conexion;
-import quemquersermillonario.dto.Usuario;
 
 /**
  *
  * @author alvaro
  */
-public interface UsuarioDAO extends GenericDAO<Usuario> {
-
-    public Usuario buscarUsuarioEmail(Usuario usuario);
-
-    public Boolean iniciarSesion(Usuario usuario);
-
-
+public interface ConexionDAO extends GenericDAO<Conexion>{
+    
 }
