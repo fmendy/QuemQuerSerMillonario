@@ -5,7 +5,6 @@
  */
 package quemquersermillonario.gui.comboboxmodel;
 
-
 import javax.swing.DefaultComboBoxModel;
 
 import quemquersermillonario.dto.Estudios;
@@ -16,12 +15,24 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  * @author alvaro
  */
 public class ComboBoxModelPersonalizados {
-    
-    public static DefaultComboBoxModel getEstudiosComboBoxModel(){
+
+    public static DefaultComboBoxModel getEstudiosComboBoxModel() {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel();
-        for (Estudios estudios: OpcionesFijas.listaEstudios ){
+        for (Estudios estudios : OpcionesFijas.listaEstudios) {
             cbm.addElement(estudios);
         }
         return cbm;
-    } 
+    }
+
+    public static int getIndexOfEstudios(Estudios estudios) {
+        DefaultComboBoxModel cbm = getEstudiosComboBoxModel();
+        int index = 0;
+        for (int i = 0; i < cbm.getSize(); i++) {
+            Estudios es = (Estudios) cbm.getElementAt(i);
+            if (es.getIdEstudios() == estudios.getIdEstudios()) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }

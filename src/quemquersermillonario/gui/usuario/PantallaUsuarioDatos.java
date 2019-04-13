@@ -20,23 +20,32 @@ import quemquersermillonario.gui.comboboxmodel.ComboBoxModelPersonalizados;
  *
  * @author alvaro
  */
-public class PantallaUsuarioRegistro extends javax.swing.JDialog {
+public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
     /**
-     * Creates new form PantallaUsuarioRegistro
+     * Creates new form PantallaUsuarioDatos
      */
     private Usuario usuario;
     private Boolean esModificacion = false;
     private UsuarioDAO usuarioDAO;
 
-    public PantallaUsuarioRegistro(java.awt.Frame parent, boolean modal) {
+    public PantallaUsuarioDatos(java.awt.Frame parent, boolean modal, boolean actualizar) {
         super(parent, modal);
         initComponents();
         usuarioDAO = new UsuarioDAOImplHibernate();
-
-        this.setTitle("Registro Usuario");
-        usuario = new Usuario();
+        this.esModificacion = actualizar;
         this.jComboBoxEstudios.setModel(ComboBoxModelPersonalizados.getEstudiosComboBoxModel());
+
+        if (!esModificacion) {
+            this.setTitle("Registro Usuario");
+            usuario = new Usuario();
+        } else {
+            this.setTitle("Actualizar Usuario");
+            usuario = OpcionesFijas.usuario;
+            this.jTextFieldEmail.setEnabled(false);
+            pasarObjetoACampos();
+        }
+
     }
 
     /**
@@ -218,7 +227,26 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "El Email que ha introducido ya esta en uso, por favor intro"
                         + "duzca otro, gracias.", "Error al registrarse", JOptionPane.INFORMATION_MESSAGE);
             }
+        } //Actualizacion
+        else {
+
+            try {
+                System.out.println("ID "+usuario.getIdUsuario());
+                pasarCamposAObjeto();
+                usuarioDAO.actualizar(usuario);
+                JOptionPane.showMessageDialog(this, "Los datos se han actualizado correctamente", "Actualizado", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                        "Se ha producido un error al actualizar, "
+                        + "por favor contacte con el servicio técnico"
+                        + "indicando el siguente mensaje\n"
+                        + "Clase: " + this.getClass().getName() + "\n"
+                        + "Error: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
@@ -228,10 +256,20 @@ public class PantallaUsuarioRegistro extends javax.swing.JDialog {
         usuario.setEmail(jTextFieldEmail.getText());
         usuario.setAnoNacimiento(Integer.parseInt(jTextFieldAno.getText()));
         usuario.setActivo(1);
-        usuario.setPassword(jPasswordField1.getText());
+        if (!esModificacion || (esModificacion && jPasswordField1.getText().length() > 0)) {
+            usuario.setPassword(jPasswordField1.getText());
+        }
         usuario.setFechaModificacion(OpcionesFijas.fechaActual());
         usuario.setEstudios((Estudios) jComboBoxEstudios.getSelectedItem());
 
+    }
+
+    private void pasarObjetoACampos() {
+        this.jTextFieldNombre.setText(usuario.getNombre());
+        this.jTextFieldApellidos.setText(usuario.getApellidos());
+        this.jTextFieldEmail.setText(usuario.getEmail());
+        this.jTextFieldAno.setText(Integer.toString(usuario.getAnoNacimiento()));
+        this.jComboBoxEstudios.setSelectedIndex(ComboBoxModelPersonalizados.getIndexOfEstudios(usuario.getEstudios()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

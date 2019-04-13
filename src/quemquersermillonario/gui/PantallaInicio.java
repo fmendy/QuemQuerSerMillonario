@@ -11,7 +11,7 @@ import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.usuario.PantallaUsuarioOpciones;
-import quemquersermillonario.gui.usuario.PantallaUsuarioRegistro;
+import quemquersermillonario.gui.usuario.PantallaUsuarioDatos;
 
 /**
  *
@@ -127,7 +127,7 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void jButtonIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrRegistroActionPerformed
         // TODO add your handling code here:
-        PantallaUsuarioRegistro pur= new PantallaUsuarioRegistro(this, true);
+        PantallaUsuarioDatos pur= new PantallaUsuarioDatos(this, true, false);
         
         pur.setVisible(true);
     }//GEN-LAST:event_jButtonIrRegistroActionPerformed

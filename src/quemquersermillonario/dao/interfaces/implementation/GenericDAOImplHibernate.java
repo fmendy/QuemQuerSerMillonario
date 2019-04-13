@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -38,9 +39,9 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
             session = this.sessionFactory.openSession();
             tx = session.beginTransaction();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             System.out.println(e);
-            LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al iniciar session factory");
+            LOGGER.log(Level.SEVERE, "{0} error al iniciar session factory", this.getClass().getSimpleName());
         }
     }
 
@@ -49,9 +50,9 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         try {
             tx.commit();
             session.close();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             System.out.println(e);
-            LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al cerrar session factory");
+            LOGGER.log(Level.SEVERE, "{0} error al cerrar session factory", this.getClass().getSimpleName());
         }
     }
 
@@ -60,10 +61,10 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         iniciar();
         try {
             session.save(object);
-            LOGGER.log(Level.INFO, this.getClass().getName() + " " + object.getClass().getSimpleName()+ " guardado");
+            LOGGER.log(Level.INFO, "{0} {1} guardado", new Object[]{this.getClass().getName(), object.getClass().getSimpleName()});
         } catch (Exception e) {
 
-            LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al iniciar session factory");
+            LOGGER.log(Level.SEVERE, "{0} error al guardar", this.getClass().getSimpleName());
         }
         finalizar();
     }
@@ -78,10 +79,10 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         iniciar();
             try{
                 session.delete(object);
-                LOGGER.log(Level.INFO, this.getClass().getName() + " " + object.getClass().getSimpleName()+ " borrado");
+                LOGGER.log(Level.INFO, "{0} {1} borrado", new Object[]{this.getClass().getName(), object.getClass().getSimpleName()});
             }
             catch(Exception e){
-                LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al borrar objeto de tipo "+object.getClass().getSimpleName());
+                LOGGER.log(Level.SEVERE, "{0} error al borrar objeto de tipo {1}", new Object[]{this.getClass().getName(), object.getClass().getSimpleName()});
                 System.out.println(e);
             }
         finalizar();
@@ -89,7 +90,15 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
 
     @Override
     public void actualizar(T object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        iniciar();
+        try {
+            session.merge(object);
+            LOGGER.log(Level.INFO, "{0} {1} actuliazado", new Object[]{this.getClass().getName(), object.getClass().getSimpleName()});
+        } catch (Exception e) {
+            System.out.println(e);
+            LOGGER.log(Level.SEVERE, "{0} error al actualizar", this.getClass().getName());
+        }
+        finalizar();
     }
 
     @Override
@@ -99,7 +108,7 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         try {
             listaObjetos = session.createQuery("from " + object.getClass().getName()).list();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, this.getClass().getName() + " error al buscar todos los objetos " + object.getClass().getName());
+            LOGGER.log(Level.SEVERE, "{0} error al buscar todos los objetos {1}", new Object[]{this.getClass().getName(), object.getClass().getName()});
         }
         finalizar();
         return listaObjetos;
