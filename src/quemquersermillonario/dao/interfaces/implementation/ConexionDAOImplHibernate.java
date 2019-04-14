@@ -5,18 +5,43 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dto.Conexion;
+import quemquersermillonario.dto.Usuario;
+import quemquersermillonario.dto.complejas.OpcionesFijas;
 
 /**
  *
  * @author alvaro
  */
-public class ConexionDAOImplHibernate extends GenericDAOImplHibernate<Conexion> implements ConexionDAO{
-
+public class ConexionDAOImplHibernate extends GenericDAOImplHibernate<Conexion> implements ConexionDAO {
+    
     @Override
     public Conexion buscarId(Conexion object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    @Override
+    public  Conexion optenerDatosConexion(Usuario usuario) {
+        Conexion conexion = new Conexion();
+        conexion.setUsuario(usuario);
+        conexion.setFechaCreacion(OpcionesFijas.fechaActual());
+        conexion.setFechaModificacion(OpcionesFijas.fechaActual());
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            conexion.setDispositivo(inetAddress.getHostName());
+            System.out.println(conexion.getDispositivo());
+            conexion.setIp(inetAddress.getHostAddress());
+            System.out.println(conexion.getIp());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ConexionDAOImplHibernate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conexion;
+        
+    }
+    
 }

@@ -5,13 +5,12 @@
  */
 package quemquersermillonario.dao.interfaces;
 
-import quemquersermillonario.dto.Conexion;
-import quemquersermillonario.dto.Usuario;
+import quemquersermillonario.dto.Dificultad;
 
 /**
  *
  * @author alvaro
  */
-public interface ConexionDAO extends GenericDAO<Conexion>{
-    public Conexion optenerDatosConexion(Usuario Usuario);
+public interface DificultadDAO extends GenericDAO<Dificultad> {
+    
 }

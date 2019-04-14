@@ -12,6 +12,8 @@ import javax.rmi.CORBA.UtilDelegate;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
+import quemquersermillonario.dto.Categoria;
+import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
 
@@ -22,6 +24,10 @@ import quemquersermillonario.dto.Usuario;
 public class OpcionesFijas {
 
     public static List<Estudios> listaEstudios = new ArrayList<>();
+    
+    public static List<Categoria> listaCategorias = new ArrayList<>();
+    
+    public static List<Dificultad> listaDificultad = new ArrayList<>();
 
     public static Usuario usuario = new Usuario();
     
@@ -29,6 +35,22 @@ public class OpcionesFijas {
 
     public static UsuarioDAO getUsuarioDAO() {
         return usuarioDAO;
+    }
+
+    public static List<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public static void setListaCategorias(List<Categoria> listaCategorias) {
+        OpcionesFijas.listaCategorias = listaCategorias;
+    }
+
+    public static List<Dificultad> getListaDificultad() {
+        return listaDificultad;
+    }
+
+    public static void setListaDificultad(List<Dificultad> listaDificultad) {
+        OpcionesFijas.listaDificultad = listaDificultad;
     }
 
     public static void setUsuarioDAO(UsuarioDAO usuarioDAO) {

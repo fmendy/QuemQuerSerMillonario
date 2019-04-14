@@ -11,10 +11,11 @@ import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
-import quemquersermillonario.gui.comboboxmodel.ComboBoxModelPersonalizados;
+import quemquersermillonario.gui.comboboxmodel.ComboBoxModelEstudios;
 
 /**
  *
@@ -34,7 +35,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         initComponents();
         usuarioDAO = new UsuarioDAOImplHibernate();
         this.esModificacion = actualizar;
-        this.jComboBoxEstudios.setModel(ComboBoxModelPersonalizados.getEstudiosComboBoxModel());
+        this.jComboBoxEstudios.setModel(ComboBoxModelEstudios.getEstudiosComboBoxModel());
 
         if (!esModificacion) {
             this.setTitle("Registro Usuario");
@@ -204,19 +205,51 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        pasarCamposAObjeto();
 
         //Registro de Nuevo usuario
         if (!esModificacion) {
-            usuario.setFechaCreacion(OpcionesFijas.fechaActual());
-            if (usuarioDAO.buscarUsuarioEmail(usuario) == null) {
+
+            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre) && ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)
+                    && ComprobacionText.jTextFieldObligatorio(jTextFieldEmail) && ComprobacionText.jAno(jTextFieldAno)
+                    && ComprobacionText.jTextFieldEmail(jTextFieldEmail) && ComprobacionText.jPassword(jPasswordField1, jPasswordField2)) {
+                pasarCamposAObjeto();
+                usuario.setFechaCreacion(OpcionesFijas.fechaActual());
+                if (usuarioDAO.buscarUsuarioEmail(usuario) == null) {
+                    try {
+                        usuarioDAO.guardar(usuario);
+                        JOptionPane.showMessageDialog(this, "Enhorabuena ya se ha registrado", "Registrado", JOptionPane.INFORMATION_MESSAGE);
+                        this.setVisible(false);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this,
+                                "Se ha producido un error al registrarse, "
+                                + "por favor contacte con el servicio técnico"
+                                + "indicando el siguente mensaje\n"
+                                + "Clase: " + this.getClass().getName() + "\n"
+                                + "Error: " + e.getMessage(),
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El Email que ha introducido ya esta en uso, por favor intro"
+                            + "duzca otro, gracias.", "Error al registrarse", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Los datos introducidos no son validos, por favor reviselos", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } //Actualizacion
+        else {
+            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre) && ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)
+                    && ComprobacionText.jTextFieldObligatorio(jTextFieldEmail) && ComprobacionText.jAno(jTextFieldAno)
+                    && (((jPasswordField1.getText().length() > 0 && jPasswordField2.getText().length() > 0) && ComprobacionText.jPassword(jPasswordField1, jPasswordField2))
+                    || (jPasswordField1.getText().length() == 0 && jPasswordField2.getText().length() == 0))) {
                 try {
-                    usuarioDAO.guardar(usuario);
-                    JOptionPane.showMessageDialog(this, "Enhorabuena ya se ha registrado", "Registrado", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("ID " + usuario.getIdUsuario());
+                    pasarCamposAObjeto();
+                    usuarioDAO.actualizar(usuario);
+                    JOptionPane.showMessageDialog(this, "Los datos se han actualizado correctamente", "Actualizado", JOptionPane.INFORMATION_MESSAGE);
                     this.setVisible(false);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,
-                            "Se ha producido un error al registrarse, "
+                            "Se ha producido un error al actualizar, "
                             + "por favor contacte con el servicio técnico"
                             + "indicando el siguente mensaje\n"
                             + "Clase: " + this.getClass().getName() + "\n"
@@ -224,26 +257,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "El Email que ha introducido ya esta en uso, por favor intro"
-                        + "duzca otro, gracias.", "Error al registrarse", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } //Actualizacion
-        else {
-
-            try {
-                System.out.println("ID "+usuario.getIdUsuario());
-                pasarCamposAObjeto();
-                usuarioDAO.actualizar(usuario);
-                JOptionPane.showMessageDialog(this, "Los datos se han actualizado correctamente", "Actualizado", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,
-                        "Se ha producido un error al actualizar, "
-                        + "por favor contacte con el servicio técnico"
-                        + "indicando el siguente mensaje\n"
-                        + "Clase: " + this.getClass().getName() + "\n"
-                        + "Error: " + e.getMessage(),
-                        "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Los datos introducidos no son validos, por favor reviselos", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
@@ -269,7 +283,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         this.jTextFieldApellidos.setText(usuario.getApellidos());
         this.jTextFieldEmail.setText(usuario.getEmail());
         this.jTextFieldAno.setText(Integer.toString(usuario.getAnoNacimiento()));
-        this.jComboBoxEstudios.setSelectedIndex(ComboBoxModelPersonalizados.getIndexOfEstudios(usuario.getEstudios()));
+        this.jComboBoxEstudios.setSelectedIndex(ComboBoxModelEstudios.getIndexOfEstudios(usuario.getEstudios()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

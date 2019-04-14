@@ -14,7 +14,7 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class ComboBoxModelPersonalizados {
+public class ComboBoxModelEstudios {
 
     public static DefaultComboBoxModel getEstudiosComboBoxModel() {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel();

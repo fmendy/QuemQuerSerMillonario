@@ -5,9 +5,12 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Query;
+import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dto.Conexion;
 import quemquersermillonario.dto.Usuario;
@@ -45,6 +48,7 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
     public Boolean iniciarSesion(Usuario usuario) {
         iniciar();
         Usuario buscado;
+
         Query query = session.createQuery("from Usuario u where u.email =:usuarioEmail and u.password =:usuarioPassword");
         query.setParameter("usuarioEmail", usuario.getEmail());
         query.setParameter("usuarioPassword", usuario.getPassword());
@@ -54,6 +58,10 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
 
         if (buscado != null) {
             OpcionesFijas.usuario = buscado;
+            ConexionDAO conexionDAO = new ConexionDAOImplHibernate();
+            Conexion conexion = conexionDAO.optenerDatosConexion(OpcionesFijas.usuario);
+            usuario.aniadirConexion(conexion);
+            conexionDAO.guardar(conexion);
             return true;
         } else {
             return false;
