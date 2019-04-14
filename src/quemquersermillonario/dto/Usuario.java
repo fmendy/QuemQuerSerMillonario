@@ -68,7 +68,19 @@ public class Usuario implements Serializable {
     
     @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Conexion> listaConexiones= new ArrayList();
+    
+    @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Pregunta> listaPreguntas = new ArrayList<>();
 
+    public List<Pregunta> getListaPreguntas() {
+        return listaPreguntas;
+    }
+
+    public void setListaPreguntas(List<Pregunta> listaPreguntas) {
+        this.listaPreguntas = listaPreguntas;
+    }
+
+    
     public List<Conexion> getListaConexiones() {
         return listaConexiones;
     }
@@ -163,6 +175,10 @@ public class Usuario implements Serializable {
     
     public void aniadirConexion(Conexion conexion){
         this.listaConexiones.add(conexion);
+    }
+    
+    public void aniadirPregunta(Pregunta pregunta){
+        this.listaPreguntas.add(pregunta);
     }
 
     @Override

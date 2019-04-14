@@ -6,12 +6,17 @@
 package quemquersermillonario.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,16 +24,20 @@ import javax.persistence.Table;
  * @author alvaro
  */
 @Entity
-@Table (name = "Dificultad")
-public class Dificultad implements Serializable{
+@Table(name = "Dificultad")
+public class Dificultad implements Serializable {
+
+    public Dificultad() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDDificultad", unique = true, nullable = false)
     private int idDificultad;
-    
+
     @Column(name = "Nombre")
     private String nombre;
-    
+
     @Column(name = "Activo")
     private int activo;
 
@@ -38,8 +47,17 @@ public class Dificultad implements Serializable{
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
 
-    public Dificultad() {
+    @OneToMany(mappedBy = "dificultad", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    private List<Pregunta> listaPreguntas = new ArrayList<>();
+
+    public List<Pregunta> getListaPreguntas() {
+        return listaPreguntas;
     }
+
+    public void setListaPreguntas(List<Pregunta> listaPreguntas) {
+        this.listaPreguntas = listaPreguntas;
+    }
+    
 
     public int getIdDificultad() {
         return idDificultad;
@@ -80,12 +98,14 @@ public class Dificultad implements Serializable{
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+    
+    public void aniadirPregunta(Pregunta pregunta){
+        this.listaPreguntas.add(pregunta);
+    }
 
     @Override
     public String toString() {
-        return  nombre;
+        return nombre;
     }
-    
-    
-    
+
 }
