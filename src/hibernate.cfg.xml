@@ -50,5 +50,9 @@ Contributor(s):
     <mapping class="quemquersermillonario.dto.Estudios"/>
     <mapping class="quemquersermillonario.dto.Usuario"/>
     <mapping class="quemquersermillonario.dto.Conexion"/>
+    <mapping class="quemquersermillonario.dto.Categoria"/>
+    <mapping class="quemquersermillonario.dto.Dificultad"/>
+    <mapping class="quemquersermillonario.dto.Pregunta"/>
+    <mapping class="quemquersermillonario.dto.Respuesta"/>
   </session-factory>
 </hibernate-configuration>
