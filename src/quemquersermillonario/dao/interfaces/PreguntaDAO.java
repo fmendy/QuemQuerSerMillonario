@@ -12,5 +12,8 @@ import quemquersermillonario.dto.Pregunta;
  * @author alvaro
  */
 public interface PreguntaDAO extends GenericDAO<Pregunta> {
-    
+
+    public Pregunta inicializarPregunta();
+
+    public void desactivarPregunta(Pregunta pregunta);
 }

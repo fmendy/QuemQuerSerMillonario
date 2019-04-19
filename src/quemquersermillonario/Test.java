@@ -35,22 +35,22 @@ public class Test {
       // SessionFactory  SESSION_FACTORY =  (SessionFactory) new AnnotationConfiguration().configure().buildSessionFactory();
         UsuarioDAO usuarioDAO = new UsuarioDAOImplHibernate();
         ConexionDAO conexionDAO = new ConexionDAOImplHibernate();
-      
+        
+   
       // genericDAO.guardar(estudios);
         
        // List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
-      /*  
+      
         Usuario usuario = new Usuario();
         usuario.setNombre("prueb");
         usuario.setApellidos("hola");
         usuario.setEstudios(estudios);
         usuario.setEmail("conexion4");
         usuario.setAnoNacimiento(1900);
-        usuario.setIdUsuario(1);
+        usuario.setIdUsuario(2);
         usuario.setPassword("aaa");
 
-     usuario.setIdUsuario(16);
-        */
+        /*
         Conexion conexion = new Conexion();
         conexion.setDispositivo("pc");
         conexion.setIp("12345");
@@ -63,12 +63,17 @@ public class Test {
         
        /* usuario.aniadirConexion(conexion);
         conexion.setUsuario(usuario);*/
+        usuario=usuarioDAO.buscarId(usuario);
         
+        System.out.println(usuarioDAO.listaPreguntasActivas(usuario).size());
+        System.out.println();
+       // usuarioDAO.borrar(usuario);
+        //System.out.println(usuario.getListaPreguntas().size());
         //usuario = usuarioDAO.buscarId(usuario);
         //System.out.println(usuario);
        // usuarioDAO.borrar(usuario);
        //usuarioDAO.guardar(usuario);
-        conexionDAO.borrar(conexion);
+       // conexionDAO.borrar(conexion);
       //  conexionDAO.guardar(conexion);
        // usuario = genericDAO.buscarUsuarioEmail(usuario);
        // System.out.println(usuario.getListaConexiones().size());

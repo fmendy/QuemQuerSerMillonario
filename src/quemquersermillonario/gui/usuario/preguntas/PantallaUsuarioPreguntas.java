@@ -5,6 +5,17 @@
  */
 package quemquersermillonario.gui.usuario.preguntas;
 
+import java.awt.Frame;
+import java.util.List;
+import javax.swing.JOptionPane;
+import quemquersermillonario.dao.interfaces.PreguntaDAO;
+import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dto.Pregunta;
+import quemquersermillonario.dto.complejas.OpcionesFijas;
+import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
+
 /**
  *
  * @author alvaro
@@ -14,9 +25,19 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
     /**
      * Creates new form PantallaUsuarioPreguntas
      */
+    private Frame parent;
+    private UsuarioDAO usuarioDAO;
+    private PreguntaDAO preguntaDAO;
+    private List<Pregunta> listaPreguntas;
+
     public PantallaUsuarioPreguntas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
+        usuarioDAO = new UsuarioDAOImplHibernate();
+        preguntaDAO = new PreguntaDAOImplHibernate();
         initComponents();
+
+        rellenarTabla();
     }
 
     /**
@@ -30,6 +51,9 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
 
         jButtonAniadir = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableUsuarioPreguntas = new javax.swing.JTable();
+        jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,25 +75,56 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
             }
         });
 
+        jTableUsuarioPreguntas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableUsuarioPreguntas);
+
+        jButtonEliminar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEliminar.setText("ELIMINAR");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAniadir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAniadir, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                .addGap(153, 153, 153))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 46, Short.MAX_VALUE))
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButtonEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAniadir)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSalir)
-                .addGap(86, 86, 86))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -77,7 +132,9 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
 
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
         // TODO add your handling code here:
-       
+        PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, false, null);
+        pupd.setVisible(true);
+
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -85,50 +142,31 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaUsuarioPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaUsuarioPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaUsuarioPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaUsuarioPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        if (jTableUsuarioPreguntas.getSelectedRow() >= 0) {
+            int opc = JOptionPane.showConfirmDialog(this, "Esta seguro de que desea eliminar la pregunta ?", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            if (opc == JOptionPane.OK_OPTION) {
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PantallaUsuarioPreguntas dialog = new PantallaUsuarioPreguntas(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                this.preguntaDAO.desactivarPregunta(listaPreguntas.get(jTableUsuarioPreguntas.getSelectedRow()));
+                rellenarTabla();
             }
-        });
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una pregubta", "error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void rellenarTabla() {
+        this.listaPreguntas = usuarioDAO.listaPreguntasActivas(OpcionesFijas.usuario);
+        UsuarioPreguntasTableModel uptm = new UsuarioPreguntasTableModel(listaPreguntas);
+        jTableUsuarioPreguntas.setModel(uptm);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAniadir;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableUsuarioPreguntas;
     // End of variables declaration//GEN-END:variables
 }

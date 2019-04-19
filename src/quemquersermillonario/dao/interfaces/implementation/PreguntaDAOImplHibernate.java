@@ -6,12 +6,45 @@
 package quemquersermillonario.dao.interfaces.implementation;
 
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
+import quemquersermillonario.dao.interfaces.RespuestaDAO;
 import quemquersermillonario.dto.Pregunta;
+import quemquersermillonario.dto.Respuesta;
+import quemquersermillonario.dto.complejas.OpcionesFijas;
 
 /**
  *
  * @author alvaro
  */
 public class PreguntaDAOImplHibernate extends GenericDAOImplHibernate<Pregunta> implements PreguntaDAO {
-    
+
+    @Override
+    public Pregunta inicializarPregunta() {
+        Pregunta p = new Pregunta();
+        Respuesta r1, r2, r3, r4;
+        r1 = new Respuesta();
+        r2 = new Respuesta();
+        r3 = new Respuesta();
+        r4 = new Respuesta();
+        p.aniadirRespuesta(r1);
+        p.aniadirRespuesta(r2);
+        p.aniadirRespuesta(r3);
+        p.aniadirRespuesta(r4);
+
+        return p;
+    }
+
+    @Override
+    public void desactivarPregunta(Pregunta pregunta) {
+        iniciar();
+        pregunta.setActivo(0);
+        pregunta.setFechaModificacion(OpcionesFijas.fechaActual());
+        session.merge(pregunta);
+        RespuestaDAO rdao = new RespuestaDAOImplHibernate();
+        for (Respuesta rp : pregunta.getListaRespuestas()) {
+
+            rdao.desactivarRespuestas(rp);
+        }
+        finalizar();
+    }
+
 }

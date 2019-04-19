@@ -139,6 +139,8 @@ public class PantallaInicio extends javax.swing.JFrame {
         
         if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)){
             PantallaUsuarioOpciones puo = new PantallaUsuarioOpciones(this, true);
+            jTextFieldEmail.setText("");
+            jPasswordField1.setText("");
             puo.setVisible(true);
         }
         else{

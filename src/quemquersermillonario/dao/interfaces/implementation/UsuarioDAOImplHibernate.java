@@ -5,14 +5,15 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Query;
 import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dto.Conexion;
+import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 
@@ -76,6 +77,16 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
         finalizar();
         return user;
 
+    }
+
+    @Override
+    public List<Pregunta> listaPreguntasActivas(Usuario usuario) {
+        List<Pregunta> listaPreguntas;
+        iniciar();
+        Query query = session.createQuery("from Pregunta p where p.activo = 1 and p.usuario=:usuario");
+        query.setInteger("usuario", usuario.getIdUsuario());
+        listaPreguntas = query.list();
+        return listaPreguntas;
     }
 
 }

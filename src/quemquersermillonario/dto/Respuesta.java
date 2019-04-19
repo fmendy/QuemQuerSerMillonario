@@ -30,8 +30,8 @@ public class Respuesta implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDCategoria", unique = true, nullable = false)
-    private int idCategoria;
+    @Column(name = "IDRespuesta", unique = true, nullable = false)
+    private int idRespuesta;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -53,12 +53,12 @@ public class Respuesta implements Serializable{
     private Date fechaModificacion;
 
     
-    public int getIdCategoria() {
-        return idCategoria;
+    public int getIdRespuesta() {
+        return idRespuesta;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
     }
 
     public String getNombre() {

@@ -69,7 +69,7 @@ public class Usuario implements Serializable {
     @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Conexion> listaConexiones= new ArrayList();
     
-    @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Pregunta> listaPreguntas = new ArrayList<>();
 
     public List<Pregunta> getListaPreguntas() {
