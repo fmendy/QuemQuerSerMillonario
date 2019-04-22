@@ -12,9 +12,9 @@ import java.util.List;
 import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.ConexionDAOImplHibernate;
-import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.ConexionDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dto.Conexion;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -33,8 +33,8 @@ public class Test {
         estudios.setIdEstudios(21);
         
       // SessionFactory  SESSION_FACTORY =  (SessionFactory) new AnnotationConfiguration().configure().buildSessionFactory();
-        UsuarioDAO usuarioDAO = new UsuarioDAOImplHibernate();
-        ConexionDAO conexionDAO = new ConexionDAOImplHibernate();
+        UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        ConexionDAO conexionDAO = new ConexionDAOImpl();
         
    
       // genericDAO.guardar(estudios);

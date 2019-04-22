@@ -15,7 +15,7 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class PreguntaDAOImplHibernate extends GenericDAOImplHibernate<Pregunta> implements PreguntaDAO {
+public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements PreguntaDAO {
 
     @Override
     public Pregunta inicializarPregunta() {
@@ -39,7 +39,7 @@ public class PreguntaDAOImplHibernate extends GenericDAOImplHibernate<Pregunta> 
         pregunta.setActivo(0);
         pregunta.setFechaModificacion(OpcionesFijas.fechaActual());
         session.merge(pregunta);
-        RespuestaDAO rdao = new RespuestaDAOImplHibernate();
+        RespuestaDAO rdao = new RespuestaDAOImpl();
         for (Respuesta rp : pregunta.getListaRespuestas()) {
 
             rdao.desactivarRespuestas(rp);

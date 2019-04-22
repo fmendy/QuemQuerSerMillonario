@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.rmi.CORBA.UtilDelegate;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.OpcionesFijasDAO;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
@@ -31,7 +31,7 @@ public class OpcionesFijas {
 
     public static Usuario usuario = new Usuario();
     
-    public static UsuarioDAO usuarioDAO = new UsuarioDAOImplHibernate();
+    public static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 
     public static UsuarioDAO getUsuarioDAO() {
         return usuarioDAO;

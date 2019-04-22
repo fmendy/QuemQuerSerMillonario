@@ -66,10 +66,10 @@ public class Usuario implements Serializable {
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
     
-    @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToMany (mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Conexion> listaConexiones= new ArrayList();
     
-    @OneToMany (mappedBy = "usuario", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToMany (mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Pregunta> listaPreguntas = new ArrayList<>();
 
     public List<Pregunta> getListaPreguntas() {

@@ -12,6 +12,6 @@ import quemquersermillonario.dto.Categoria;
  *
  * @author alvaro
  */
-public class CategoriaDAOImplHibernate extends GenericDAOImplHibernate<Categoria> implements CategoriaDAO{
+public class CategoriaDAOImpl extends GenericDAOImpl<Categoria> implements CategoriaDAO{
     
 }

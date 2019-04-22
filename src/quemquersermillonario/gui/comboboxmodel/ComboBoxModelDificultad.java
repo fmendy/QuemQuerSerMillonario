@@ -24,7 +24,7 @@ public class ComboBoxModelDificultad {
         return cbm;
     }
     
-    public static int getIndexOfEstudios(Dificultad dificultad) {
+    public static int getIndexOfDificultad(Dificultad dificultad) {
         DefaultComboBoxModel cbm = getDificultadComboBoxModel();
         int index = 0;
         for (int i = 0; i < cbm.getSize(); i++) {

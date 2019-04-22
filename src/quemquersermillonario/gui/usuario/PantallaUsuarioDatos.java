@@ -10,7 +10,7 @@ import java.sql.Date;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -33,7 +33,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
     public PantallaUsuarioDatos(java.awt.Frame parent, boolean modal, boolean actualizar) {
         super(parent, modal);
         initComponents();
-        usuarioDAO = new UsuarioDAOImplHibernate();
+        usuarioDAO = new UsuarioDAOImpl();
         this.esModificacion = actualizar;
         this.jComboBoxEstudios.setModel(ComboBoxModelEstudios.getEstudiosComboBoxModel());
 

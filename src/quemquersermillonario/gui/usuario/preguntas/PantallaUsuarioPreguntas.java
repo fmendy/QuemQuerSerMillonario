@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImplHibernate;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
@@ -33,8 +33,8 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
     public PantallaUsuarioPreguntas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
-        usuarioDAO = new UsuarioDAOImplHibernate();
-        preguntaDAO = new PreguntaDAOImplHibernate();
+        usuarioDAO = new UsuarioDAOImpl();
+        preguntaDAO = new PreguntaDAOImpl();
         initComponents();
 
         rellenarTabla();
@@ -54,6 +54,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableUsuarioPreguntas = new javax.swing.JTable();
         jButtonEliminar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,6 +98,15 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
             }
         });
 
+        jButtonModificar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonModificar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificar.setText("MODIFICAR");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +120,10 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
                         .addGap(41, 41, 41)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 46, Short.MAX_VALUE))
-                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -118,9 +131,15 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButtonEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jButtonAniadir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSalir)
@@ -134,6 +153,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         // TODO add your handling code here:
         PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, false, null);
         pupd.setVisible(true);
+        rellenarTabla();
 
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
@@ -155,6 +175,16 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (jTableUsuarioPreguntas.getSelectedRow() >= 0) {
+            PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, true, listaPreguntas.get(jTableUsuarioPreguntas.getSelectedRow()));
+            pupd.setVisible(true);
+            rellenarTabla();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una pregubta", "error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
     private void rellenarTabla() {
         this.listaPreguntas = usuarioDAO.listaPreguntasActivas(OpcionesFijas.usuario);
         UsuarioPreguntasTableModel uptm = new UsuarioPreguntasTableModel(listaPreguntas);
@@ -165,6 +195,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAniadir;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuarioPreguntas;

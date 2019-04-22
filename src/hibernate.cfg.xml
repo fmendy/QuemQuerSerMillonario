@@ -54,5 +54,7 @@ Contributor(s):
     <mapping class="quemquersermillonario.dto.Dificultad"/>
     <mapping class="quemquersermillonario.dto.Pregunta"/>
     <mapping class="quemquersermillonario.dto.Respuesta"/>
+    <mapping class="quemquersermillonario.dto.ModoJuego"/>
+    <mapping class="quemquersermillonario.dto.Partida"/>
   </session-factory>
 </hibernate-configuration>

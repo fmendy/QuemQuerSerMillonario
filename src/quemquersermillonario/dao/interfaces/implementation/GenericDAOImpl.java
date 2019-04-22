@@ -21,15 +21,15 @@ import quemquersermillonario.dao.HibernateUtils;
  *
  * @author alvaro
  */
-public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
+public class GenericDAOImpl<T> implements GenericDAO<T> {
 
     SessionFactory sessionFactory;
     Session session;
     Transaction tx;
 
-    private final static Logger LOGGER = Logger.getLogger(GenericDAOImplHibernate.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(GenericDAOImpl.class.getName());
 
-    public GenericDAOImplHibernate() {
+    public GenericDAOImpl() {
         sessionFactory = HibernateUtils.getSESSION_FACTORY();
     }
 

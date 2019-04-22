@@ -21,9 +21,9 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> implements UsuarioDAO {
+public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO {
 
-    private final static Logger LOGGER = Logger.getLogger(UsuarioDAOImplHibernate.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(UsuarioDAOImpl.class.getName());
 
     @Override
     public Usuario buscarUsuarioEmail(Usuario usuario) {
@@ -59,7 +59,7 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
 
         if (buscado != null) {
             OpcionesFijas.usuario = buscado;
-            ConexionDAO conexionDAO = new ConexionDAOImplHibernate();
+            ConexionDAO conexionDAO = new ConexionDAOImpl();
             Conexion conexion = conexionDAO.optenerDatosConexion(OpcionesFijas.usuario);
             usuario.aniadirConexion(conexion);
             conexionDAO.guardar(conexion);

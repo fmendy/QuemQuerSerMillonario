@@ -5,9 +5,9 @@
  */
 package quemquersermillonario.dao.logica;
 
-import quemquersermillonario.dao.interfaces.implementation.CategoriaDAOImplHibernate;
-import quemquersermillonario.dao.interfaces.implementation.DificultadDAOImplHibernate;
-import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.CategoriaDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.DificultadDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImpl;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Estudios;
@@ -32,7 +32,7 @@ public class OpcionesFijasDAO {
      * hay en la base de datos en las variables estaticas
      */
     private void cargarEstudios() {
-        EstudiosDAOImplHibernate estudiosDAOImplHibernate = new EstudiosDAOImplHibernate();
+        EstudiosDAOImpl estudiosDAOImplHibernate = new EstudiosDAOImpl();
         OpcionesFijas.listaEstudios = estudiosDAOImplHibernate.obtenerTodos(new Estudios());
     }
 
@@ -42,7 +42,7 @@ public class OpcionesFijasDAO {
      * hay en la base de datos en las variables estaticas
      */
     private void cargarDificultad() {
-        DificultadDAOImplHibernate dificultadDAOImplHibernate = new DificultadDAOImplHibernate();
+        DificultadDAOImpl dificultadDAOImplHibernate = new DificultadDAOImpl();
         OpcionesFijas.listaDificultad = dificultadDAOImplHibernate.obtenerTodos(new Dificultad());
     }
 
@@ -52,7 +52,7 @@ public class OpcionesFijasDAO {
      * hay en la base de datos en las variables estaticas
      */
     private void cargarCategoria() {
-        CategoriaDAOImplHibernate categoriaDAOImplHibernate = new CategoriaDAOImplHibernate();
+        CategoriaDAOImpl categoriaDAOImplHibernate = new CategoriaDAOImpl();
         OpcionesFijas.listaCategorias = categoriaDAOImplHibernate.obtenerTodos(new Categoria());
     }
 

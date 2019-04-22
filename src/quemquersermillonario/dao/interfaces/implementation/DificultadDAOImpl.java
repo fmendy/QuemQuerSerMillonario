@@ -12,6 +12,6 @@ import quemquersermillonario.dto.Dificultad;
  *
  * @author alvaro
  */
-public class DificultadDAOImplHibernate extends GenericDAOImplHibernate<Dificultad> implements DificultadDAO {
+public class DificultadDAOImpl extends GenericDAOImpl<Dificultad> implements DificultadDAO {
     
 }

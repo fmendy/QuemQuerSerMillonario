@@ -14,7 +14,7 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class RespuestaDAOImplHibernate extends GenericDAOImplHibernate<Respuesta> implements RespuestaDAO{
+public class RespuestaDAOImpl extends GenericDAOImpl<Respuesta> implements RespuestaDAO{
 
     @Override
     public void desactivarRespuestas(Respuesta respuesta) {

@@ -7,11 +7,12 @@ package quemquersermillonario.gui.usuario.preguntas;
 
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
-import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImplHibernate;
+import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Pregunta;
+import quemquersermillonario.dto.Respuesta;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelCategoria;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelDificultad;
@@ -22,7 +23,7 @@ import quemquersermillonario.gui.comboboxmodel.ComboBoxModelDificultad;
  */
 public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
 
-    private boolean  esModificacion;
+    private boolean esModificacion;
     private Pregunta pregunta;
     private PreguntaDAO preguntaDAO;
 
@@ -41,27 +42,30 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
     }
-    
+
     /**
      * Creates new form PantallaUsuarioPreguntaDatos
+     *
      * @param parent
      * @param modal
      * @param esModificacion
+     * @param pregunta
      */
-    
-    public PantallaUsuarioPreguntaDatos(java.awt.Frame parent, boolean modal, boolean  esModificacion, Pregunta pregunta) {
+    public PantallaUsuarioPreguntaDatos(java.awt.Frame parent, boolean modal, boolean esModificacion, Pregunta pregunta) {
         super(parent, modal);
         initComponents();
         this.esModificacion = esModificacion;
-        this.preguntaDAO = new PreguntaDAOImplHibernate();
-        if (pregunta == null ){
-            this.pregunta = preguntaDAO.inicializarPregunta();
-            
-        }else{
-            this.pregunta = pregunta;
-        }
+        this.preguntaDAO = new PreguntaDAOImpl();
         this.jComboBoxCategoria.setModel(ComboBoxModelCategoria.getCategoriaComboBoxModel());
         this.jComboBoxDificultad.setModel(ComboBoxModelDificultad.getDificultadComboBoxModel());
+        if (esModificacion == false) {
+            this.pregunta = preguntaDAO.inicializarPregunta();
+
+        } else {
+            this.pregunta = pregunta;
+            this.ObjetoACampos();
+        }
+        
     }
 
     /**
@@ -157,29 +161,30 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
                                     .addComponent(jLabelNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButtonAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jComboBoxDificultad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabelNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                        .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                        .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                        .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(210, Short.MAX_VALUE)
+                    .addContainerGap(212, Short.MAX_VALUE)
                     .addComponent(jTextFieldPregunta1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(53, 53, 53)))
+                    .addGap(51, 51, 51)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,30 +228,35 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        if (ComprobacionText.jTextFieldObligatorio(jTextFieldPregunta1) && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta1)
+        if (ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta1) && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta1)
                 && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta2) && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta3)
-                && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta4)){
-            if(!esModificacion){
+                && ComprobacionText.jTextFieldObligatorio(jTextFieldRespuesta4)) {
+            if (!esModificacion) {
                 camposAObjeto();
                 preguntaDAO.guardar(pregunta);
-                JOptionPane.showMessageDialog(this, "Pregunta Registrada, gracias por su colaboracion.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Pregunta registrada, gracias por colaborar.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Faltan datos por rellenar", "Error", JOptionPane.ERROR_MESSAGE);
+            else{
+                camposAObjeto();
+                preguntaDAO.actualizar(pregunta);
+                JOptionPane.showMessageDialog(this, "Pregunta actualizada, gracias por colaborar.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
-
-    private void camposAObjeto(){
+    private void camposAObjeto() {
         this.pregunta.setActivo(1);
         this.pregunta.setFechaModificacion(OpcionesFijas.fechaActual());
-        this.pregunta.setCategoria((Categoria)jComboBoxCategoria.getSelectedItem());
+        this.pregunta.setCategoria((Categoria) jComboBoxCategoria.getSelectedItem());
         this.pregunta.setDificultad((Dificultad) jComboBoxDificultad.getSelectedItem());
         this.pregunta.setUsuario(OpcionesFijas.getUsuario());
         this.pregunta.setNombre(jTextFieldPregunta1.getText());
-        
+
         //Respuestas
         //Respuesta 1 Correcta
         this.pregunta.getListaRespuestas().get(0).setActivo(1);
@@ -272,8 +282,8 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         this.pregunta.getListaRespuestas().get(3).setFechaModificacion(OpcionesFijas.fechaActual());
         this.pregunta.getListaRespuestas().get(3).setPregunta(pregunta);
         this.pregunta.getListaRespuestas().get(3).setNombre(jTextFieldRespuesta4.getText());
-        
-        if (!esModificacion){
+
+        if (!esModificacion) {
             this.pregunta.setFechaCreacion(OpcionesFijas.fechaActual());
             this.pregunta.getListaRespuestas().get(0).setFechaCreacion(OpcionesFijas.fechaActual());
             this.pregunta.getListaRespuestas().get(1).setFechaCreacion(OpcionesFijas.fechaActual());
@@ -282,7 +292,31 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         }
     }
 
-
+    private void ObjetoACampos() {
+        this.jTextFieldPregunta1.setText(this.pregunta.getNombre());
+        int i = 0;
+        for (Respuesta res : this.pregunta.getListaRespuestas()) {
+            if (res.getCorrecta() == 1) {
+                this.jTextFieldRespuesta1.setText(res.getNombre());
+            } else {
+                switch (i) {
+                    case 0:
+                        jTextFieldRespuesta2.setText(res.getNombre());
+                        break;
+                    case 1:
+                        jTextFieldRespuesta3.setText(res.getNombre());
+                        break;
+                    case 2:
+                        jTextFieldRespuesta4.setText(res.getNombre());
+                        break;
+                }
+                i++;
+            }
+        }
+        
+        this.jComboBoxCategoria.setSelectedIndex(ComboBoxModelCategoria.getIndexOfCategoria(this.pregunta.getCategoria()));
+        this.jComboBoxDificultad.setSelectedIndex(ComboBoxModelDificultad.getIndexOfDificultad(this.pregunta.getDificultad()));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;

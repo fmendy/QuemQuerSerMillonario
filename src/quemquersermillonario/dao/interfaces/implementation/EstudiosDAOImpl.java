@@ -13,7 +13,7 @@ import quemquersermillonario.dto.Estudios;
  *
  * @author alvaro
  */
-public class EstudiosDAOImplHibernate extends GenericDAOImplHibernate<Estudios> implements EstudiosDAO{
+public class EstudiosDAOImpl extends GenericDAOImpl<Estudios> implements EstudiosDAO{
 
     @Override
     public Estudios buscarId(Estudios object) {

@@ -18,7 +18,7 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class ConexionDAOImplHibernate extends GenericDAOImplHibernate<Conexion> implements ConexionDAO {
+public class ConexionDAOImpl extends GenericDAOImpl<Conexion> implements ConexionDAO {
     
     @Override
     public Conexion buscarId(Conexion object) {
@@ -38,7 +38,7 @@ public class ConexionDAOImplHibernate extends GenericDAOImplHibernate<Conexion> 
             conexion.setIp(inetAddress.getHostAddress());
             System.out.println(conexion.getIp());
         } catch (UnknownHostException ex) {
-            Logger.getLogger(ConexionDAOImplHibernate.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conexion;
         
