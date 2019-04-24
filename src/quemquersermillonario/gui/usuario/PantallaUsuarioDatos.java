@@ -12,6 +12,7 @@ import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
+import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;

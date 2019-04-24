@@ -65,12 +65,23 @@ public class Usuario implements Serializable {
 
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
-    
-    @OneToMany (mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<Conexion> listaConexiones= new ArrayList();
-    
-    @OneToMany (mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<Conexion> listaConexiones = new ArrayList();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Pregunta> listaPreguntas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<MovimientoPuntos> listaMovimientoPuntos = new ArrayList<>();
+
+    public List<MovimientoPuntos> getListaMovimientoPuntos() {
+        return listaMovimientoPuntos;
+    }
+
+    public void setListaMovimientoPuntos(List<MovimientoPuntos> listaMovimientoPuntos) {
+        this.listaMovimientoPuntos = listaMovimientoPuntos;
+    }
 
     public List<Pregunta> getListaPreguntas() {
         return listaPreguntas;
@@ -80,7 +91,6 @@ public class Usuario implements Serializable {
         this.listaPreguntas = listaPreguntas;
     }
 
-    
     public List<Conexion> getListaConexiones() {
         return listaConexiones;
     }
@@ -88,7 +98,6 @@ public class Usuario implements Serializable {
     public void setListaConexiones(List<Conexion> listaConexiones) {
         this.listaConexiones = listaConexiones;
     }
-    
 
     public Usuario() {
     }
@@ -172,13 +181,17 @@ public class Usuario implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    public void aniadirConexion(Conexion conexion){
+
+    public void aniadirConexion(Conexion conexion) {
         this.listaConexiones.add(conexion);
     }
-    
-    public void aniadirPregunta(Pregunta pregunta){
+
+    public void aniadirPregunta(Pregunta pregunta) {
         this.listaPreguntas.add(pregunta);
+    }
+    
+    public void aniadirMovimientoPuntos(MovimientoPuntos mp){
+        this.listaMovimientoPuntos.add(mp);
     }
 
     @Override

@@ -38,12 +38,10 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         iniciar();
         pregunta.setActivo(0);
         pregunta.setFechaModificacion(OpcionesFijas.fechaActual());
-        session.merge(pregunta);
-        RespuestaDAO rdao = new RespuestaDAOImpl();
         for (Respuesta rp : pregunta.getListaRespuestas()) {
-
-            rdao.desactivarRespuestas(rp);
+            rp.setActivo(0);
         }
+        session.merge(pregunta);
         finalizar();
     }
 

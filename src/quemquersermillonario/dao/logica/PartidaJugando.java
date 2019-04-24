@@ -7,13 +7,16 @@ package quemquersermillonario.dao.logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import quemquersermillonario.dao.interfaces.MovimientoPuntosDAO;
 import quemquersermillonario.dao.interfaces.PartidaDAO;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaUsuarioDAO;
+import quemquersermillonario.dao.interfaces.implementation.MovimientoPuntosDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PartidaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.RespuestaUsuarioDAOImpl;
 import quemquersermillonario.dto.ModoJuego;
+import quemquersermillonario.dto.MovimientoPuntos;
 import quemquersermillonario.dto.Partida;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Respuesta;
@@ -72,15 +75,28 @@ public class PartidaJugando {
 
     public static boolean comprobarRespuesta(RespuestaUsuario ru, int elegida) {
         boolean acierta = (ru.getPregunta().getListaRespuestas().get(elegida).getCorrecta() == 1);
+        String mensaje;
+        int puntos;
         if (acierta){
+            puntos=100;
             ru.setCorrecta(1);
-            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()+100);
+            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()+puntos);
+            mensaje="Pregunta Acertada";
         }else{
+            puntos=200;
             ru.setCorrecta(0);
-            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()-200);
+            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()-puntos);
+            mensaje="Pregunta Fallada";
         }
         ru.setCorrecta((acierta?1:0));
         RESPUESTA_USUARIO_DAO.guardar(ru);
+        MovimientoPuntosDAO mpdao = new MovimientoPuntosDAOImpl();
+        MovimientoPuntos mp = new MovimientoPuntos();
+        mp.setDescripcion(mensaje);
+        mp.setUsuario(OpcionesFijas.usuario);
+        mp.setPuntos(puntos);
+        mp.setRespuestaUsuario(ru);
+        mpdao.guardar(mp);
         return acierta;
     }
 
