@@ -18,9 +18,9 @@ import quemquersermillonario.dto.complejas.OpcionesFijas;
  *
  * @author alvaro
  */
-public class OpcionesFijasDAO {
+public class OpcionesFijasLogica {
 
-    public OpcionesFijasDAO() {
+    public OpcionesFijasLogica() {
         cargarEstudios();
         cargarDificultad();
         cargarCategoria();

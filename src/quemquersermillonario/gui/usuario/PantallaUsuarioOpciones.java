@@ -6,6 +6,7 @@
 package quemquersermillonario.gui.usuario;
 
 import java.awt.Frame;
+import quemquersermillonario.gui.partida.PantallaSeleccionJuego;
 import quemquersermillonario.gui.usuario.preguntas.PantallaUsuarioPreguntas;
 
 /**
@@ -37,6 +38,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jButtonSalir = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonMisPreguntas = new javax.swing.JButton();
+        jButtonJugar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,6 +69,15 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
             }
         });
 
+        jButtonJugar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonJugar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonJugar.setText("JUGAR");
+        jButtonJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonJugarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,13 +87,16 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonMisPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonMisPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(148, 148, 148))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(jButtonJugar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonMisPreguntas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonActualizar)
@@ -111,10 +125,17 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         pup.setVisible(true);
     }//GEN-LAST:event_jButtonMisPreguntasActionPerformed
 
+    private void jButtonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJugarActionPerformed
+        // TODO add your handling code here:
+        PantallaSeleccionJuego psj = new PantallaSeleccionJuego(parent, true);
+        psj.setVisible(true);
+    }//GEN-LAST:event_jButtonJugarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonJugar;
     private javax.swing.JButton jButtonMisPreguntas;
     private javax.swing.JButton jButtonSalir;
     // End of variables declaration//GEN-END:variables

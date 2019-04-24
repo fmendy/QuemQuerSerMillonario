@@ -8,7 +8,7 @@ package quemquersermillonario.gui;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.logica.OpcionesFijasDAO;
+import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.usuario.PantallaUsuarioOpciones;
 import quemquersermillonario.gui.usuario.PantallaUsuarioDatos;
@@ -29,7 +29,7 @@ public class PantallaInicio extends javax.swing.JFrame {
     
     public PantallaInicio() {
         initComponents();
-        new OpcionesFijasDAO();
+        new OpcionesFijasLogica();
         this.setTitle("Bienvenido");
         
     }

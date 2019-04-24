@@ -19,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -56,15 +55,29 @@ public class Pregunta implements Serializable {
     @Column(name = "Activo")
     private int activo;
 
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", updatable = false)
     private Date fechaCreacion;
 
     @Column(name = "FechaModificacion")
     private Date fechaModificacion;
-    
-    @OneToMany
-    (mappedBy = "pregunta", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+
+    @OneToMany(mappedBy = "pregunta", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Respuesta> listaRespuestas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pregunta", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<RespuestaUsuario> listaRespuestaUsuarios = new ArrayList<>();
+
+    public void aniadirRespuestaUsuario(RespuestaUsuario ru) {
+        this.listaRespuestaUsuarios.add(ru);
+    }
+
+    public List<RespuestaUsuario> getListaRespuestaUsuarios() {
+        return listaRespuestaUsuarios;
+    }
+
+    public void setListaRespuestaUsuarios(List<RespuestaUsuario> listaRespuestaUsuarios) {
+        this.listaRespuestaUsuarios = listaRespuestaUsuarios;
+    }
 
     public List<Respuesta> getListaRespuestas() {
         return listaRespuestas;
@@ -74,7 +87,6 @@ public class Pregunta implements Serializable {
         this.listaRespuestas = listaRespuestas;
     }
 
-    
     public int getIdPregunta() {
         return idPregunta;
     }
@@ -138,8 +150,8 @@ public class Pregunta implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    public void aniadirRespuesta(Respuesta respuesta){
+
+    public void aniadirRespuesta(Respuesta respuesta) {
         this.listaRespuestas.add(respuesta);
     }
 

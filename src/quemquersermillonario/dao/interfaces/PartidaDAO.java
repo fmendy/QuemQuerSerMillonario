@@ -5,13 +5,12 @@
  */
 package quemquersermillonario.dao.interfaces;
 
-import quemquersermillonario.dto.ModoJuego;
+import quemquersermillonario.dto.Partida;
 
 /**
  *
  * @author alvaro
  */
-public interface ModoJuegoDAO extends GenericDAO<ModoJuego> {
-
-    public ModoJuego buscarModoJuego(String nombre);
+public interface PartidaDAO extends GenericDAO<Partida>{
+    
 }

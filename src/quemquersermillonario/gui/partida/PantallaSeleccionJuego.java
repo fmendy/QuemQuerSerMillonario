@@ -5,6 +5,11 @@
  */
 package quemquersermillonario.gui.partida;
 
+import java.awt.Frame;
+import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
+import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
+import quemquersermillonario.dto.ModoJuego;
+
 /**
  *
  * @author alvaro
@@ -14,8 +19,11 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
     /**
      * Creates new form PantallaSeleccionJuego
      */
+    
+    private Frame parent;
     public PantallaSeleccionJuego(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
     }
 
@@ -89,7 +97,10 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
-
+        ModoJuegoDAO mjdao = new ModoJuegoDAOImpl();
+        ModoJuego mj = mjdao.buscarModoJuego("NORMAL");
+        PantallaResponderPregunta prp = new PantallaResponderPregunta(parent, true, mj);
+        prp.setVisible(true);
     }//GEN-LAST:event_jButtonNormalActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed

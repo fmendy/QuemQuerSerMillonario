@@ -5,15 +5,13 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
-
-import quemquersermillonario.dao.interfaces.EstudiosDAO;
-import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dao.interfaces.PartidaDAO;
+import quemquersermillonario.dto.Partida;
 
 /**
  *
  * @author alvaro
  */
-public class EstudiosDAOImpl extends GenericDAOImpl<Estudios> implements EstudiosDAO{
-
+public class PartidaDAOImpl extends GenericDAOImpl<Partida> implements PartidaDAO {
     
 }

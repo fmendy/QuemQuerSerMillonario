@@ -109,6 +109,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             listaObjetos = session.createQuery("from " + object.getClass().getName()).list();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "{0} error al buscar todos los objetos {1}", new Object[]{this.getClass().getName(), object.getClass().getName()});
+            
         }
         finalizar();
         return listaObjetos;
