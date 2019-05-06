@@ -51,6 +51,10 @@ public class MovimientoPuntos implements Serializable {
     @JoinColumn(name = "RespuestaUsuario_IDRespuesta")
     private RespuestaUsuario respuestaUsuario;
 
+    @OneToOne()
+    @JoinColumn(name = "UsuarioComodines_IDUsuarioComodines")
+    private UsuarioComodines usuarioComodines;
+
     public MovimientoPuntos() {
     }
 
@@ -108,6 +112,14 @@ public class MovimientoPuntos implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public UsuarioComodines getUsuarioComodines() {
+        return usuarioComodines;
+    }
+
+    public void setUsuarioComodines(UsuarioComodines usuarioComodines) {
+        this.usuarioComodines = usuarioComodines;
     }
 
 }

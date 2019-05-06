@@ -35,10 +35,10 @@ public class Conexion implements Serializable{
     @Column(name = "IP")
     private String ip;
     
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", insertable = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
     
     @ManyToOne

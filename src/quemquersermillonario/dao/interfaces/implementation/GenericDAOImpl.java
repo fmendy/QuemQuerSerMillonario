@@ -52,6 +52,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             session.close();
         } catch (HibernateException e) {
             System.out.println(e);
+            
             LOGGER.log(Level.SEVERE, "{0} error al cerrar session factory", this.getClass().getSimpleName());
         }
     }

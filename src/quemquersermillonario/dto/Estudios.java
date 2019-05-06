@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,14 +31,15 @@ public class Estudios implements Serializable {
     @Column(name = "Nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "Activo")
+    @Column(name = "Activo", insertable = false)
     private int activo;
 
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", insertable = false, updatable = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
+    
 
     public Estudios() {
     }

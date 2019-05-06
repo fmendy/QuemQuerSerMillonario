@@ -24,19 +24,19 @@ import javax.persistence.Table;
  * @author alvaro
  */
 @Entity
-@Table(name = "Categoria")
-public class Categoria implements Serializable {
+@Table(name = "Comodines")
+public class Comodin implements Serializable {
 
-    public Categoria() {
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDCategoria", unique = true, nullable = false)
-    private int idCategoria;
+    @Column(name = "IDComodines", unique = true, nullable = false)
+    private int idComodin;
 
     @Column(name = "Nombre")
     private String nombre;
+
+    @Column(name = "Coste")
+    private int coste;
 
     @Column(name = "Activo", insertable = false)
     private int activo;
@@ -47,23 +47,18 @@ public class Categoria implements Serializable {
     @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private List<Pregunta> listaPreguntas = new ArrayList<>();
+    @OneToMany(mappedBy = "comodin", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<UsuarioComodines> listUsuarioComodines = new ArrayList<>();
 
-    public List<Pregunta> getListaPreguntas() {
-        return listaPreguntas;
+    public Comodin() {
     }
 
-    public void setListaPreguntas(List<Pregunta> listaPreguntas) {
-        this.listaPreguntas = listaPreguntas;
+    public int getIdComodin() {
+        return idComodin;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdComodin(int idCategoria) {
+        this.idComodin = idCategoria;
     }
 
     public String getNombre() {
@@ -72,6 +67,14 @@ public class Categoria implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getCoste() {
+        return coste;
+    }
+
+    public void setCoste(int coste) {
+        this.coste = coste;
     }
 
     public int getActivo() {
@@ -97,9 +100,17 @@ public class Categoria implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    public void aniadirPregunta(Pregunta pregunta){
-        this.listaPreguntas.add(pregunta);
+
+    public List<UsuarioComodines> getListUsuarioComodines() {
+        return listUsuarioComodines;
+    }
+
+    public void setListUsuarioComodines(List<UsuarioComodines> listUsuarioComodines) {
+        this.listUsuarioComodines = listUsuarioComodines;
+    }
+
+    public void aniadirUsuarioComodin(UsuarioComodines uc) {
+        this.listUsuarioComodines.add(uc);
     }
 
     @Override

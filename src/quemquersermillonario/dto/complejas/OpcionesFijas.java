@@ -12,6 +12,7 @@ import javax.rmi.CORBA.UtilDelegate;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dto.Categoria;
+import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -23,14 +24,24 @@ import quemquersermillonario.dto.Usuario;
 public class OpcionesFijas {
 
     public static List<Estudios> listaEstudios = new ArrayList<>();
-    
+
     public static List<Categoria> listaCategorias = new ArrayList<>();
-    
+
     public static List<Dificultad> listaDificultad = new ArrayList<>();
 
+    public static List<Comodin> listaComodines = new ArrayList<>();
+
     public static Usuario usuario = new Usuario();
-    
+
     public static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+
+    public static List<Comodin> getListaComodines() {
+        return listaComodines;
+    }
+
+    public static void setListaComodines(List<Comodin> listaComodines) {
+        OpcionesFijas.listaComodines = listaComodines;
+    }
 
     public static UsuarioDAO getUsuarioDAO() {
         return usuarioDAO;
@@ -70,11 +81,10 @@ public class OpcionesFijas {
     public static Date fechaActualSQL() {
         return new Date(new java.util.Date().getTime());
     }
-    
-    public static java.util.Date fechaActual(){
+
+    public static java.util.Date fechaActual() {
         return new java.util.Date();
     }
-    
 
     public static Usuario getUsuario() {
         return usuario;

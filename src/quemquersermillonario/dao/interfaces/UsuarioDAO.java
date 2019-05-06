@@ -21,6 +21,8 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
     public Boolean iniciarSesion(Usuario usuario);
     
     public List<Pregunta> listaPreguntasActivas(Usuario usuario);
+    
+    public int puntosUsuario();
 
 
 }

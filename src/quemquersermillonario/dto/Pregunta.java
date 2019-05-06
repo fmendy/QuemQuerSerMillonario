@@ -37,28 +37,31 @@ public class Pregunta implements Serializable {
     @Column(name = "IDPregunta", unique = true, nullable = false)
     private int idPregunta;
 
-    @ManyToOne
+    
     @JoinColumn(name = "Categoria_IDCategoria", nullable = false)
+    @ManyToOne
     private Categoria categoria;
 
-    @ManyToOne
+    
     @JoinColumn(name = "Dificultad_IDDificultad", nullable = false)
+    @ManyToOne
     private Dificultad dificultad;
 
+    
+    @JoinColumn(name = "Usuario_IDUsuario")
     @ManyToOne
-    @JoinColumn(name = "Usuario_IDUsuario", nullable = false)
     private Usuario usuario;
 
     @Column(name = "Nombre")
     private String nombre;
 
-    @Column(name = "Activo")
+    @Column(name = "Activo", insertable = false)
     private int activo;
 
-    @Column(name = "FechaCreacion", updatable = false)
+    @Column(name = "FechaCreacion", insertable = false, updatable = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
     @OneToMany(mappedBy = "pregunta", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

@@ -6,11 +6,13 @@
 package quemquersermillonario.dao.interfaces.implementation;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Query;
 import quemquersermillonario.dao.interfaces.ConexionDAO;
+import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dto.Conexion;
 import quemquersermillonario.dto.Pregunta;
@@ -89,4 +91,32 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         return listaPreguntas;
     }
 
+    @Override
+    public void borrar(Usuario object) {
+        iniciar();
+        Usuario user = (Usuario) object;
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+        listaPreguntas = listaPreguntasActivas(user);
+        for (Pregunta p : listaPreguntas){
+            PreguntaDAO pdao = new PreguntaDAOImpl();
+            pdao.desactivarPregunta(p);
+        }
+        session.delete(user);
+        finalizar();
+        
+    }
+
+    @Override
+    public int puntosUsuario() {
+        int puntos = 0;
+        iniciar();
+        Query  query= session.createQuery("SELECT sum (puntos)from MovimientoPuntos where usuario.id=:usuario");
+        query.setInteger("usuario", OpcionesFijas.usuario.getIdUsuario());
+        long g =(long)  query.list().get(0);
+        puntos = Integer.parseInt(Long.toString(g));
+        finalizar();
+        return puntos;
+    }
+
+    
 }

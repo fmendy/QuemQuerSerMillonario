@@ -53,17 +53,17 @@ public class Usuario implements Serializable {
     @Column(name = "Password")
     private String password;
 
-    @JoinColumn(name = "Estudios_IDEstudios")
+    @JoinColumn(name = "Estudios_IDEstudios", nullable = true)
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Estudios estudios;
 
-    @Column(name = "Activo")
+    @Column(name = "Activo", insertable = false)
     private int activo;
 
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", insertable = false, updatable = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
@@ -74,6 +74,28 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<MovimientoPuntos> listaMovimientoPuntos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Partida> listaPartidas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<UsuarioComodines> listaComodines = new ArrayList<>();
+
+    public List<UsuarioComodines> getListaComodines() {
+        return listaComodines;
+    }
+
+    public void setListaComodines(List<UsuarioComodines> listaComodines) {
+        this.listaComodines = listaComodines;
+    }
+
+    public List<Partida> getListaPartidas() {
+        return listaPartidas;
+    }
+
+    public void setListaPartidas(List<Partida> listaPartidas) {
+        this.listaPartidas = listaPartidas;
+    }
 
     public List<MovimientoPuntos> getListaMovimientoPuntos() {
         return listaMovimientoPuntos;
@@ -189,9 +211,17 @@ public class Usuario implements Serializable {
     public void aniadirPregunta(Pregunta pregunta) {
         this.listaPreguntas.add(pregunta);
     }
-    
-    public void aniadirMovimientoPuntos(MovimientoPuntos mp){
+
+    public void aniadirMovimientoPuntos(MovimientoPuntos mp) {
         this.listaMovimientoPuntos.add(mp);
+    }
+
+    public void aniadirPartida(Partida p) {
+        this.listaPartidas.add(p);
+    }
+
+    public void aniadirComodin(UsuarioComodines c) {
+        this.listaComodines.add(c);
     }
 
     @Override

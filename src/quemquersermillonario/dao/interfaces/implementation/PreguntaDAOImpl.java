@@ -9,6 +9,7 @@ import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaDAO;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Respuesta;
+import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 
 /**
@@ -43,6 +44,15 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         }
         session.merge(pregunta);
         finalizar();
+    }
+    
+    @Override
+    public Pregunta buscarId(Pregunta pregunta) {
+        iniciar();
+        pregunta = (Pregunta) session.get(Pregunta.class, pregunta.getIdPregunta());
+        finalizar();
+        return pregunta;
+
     }
 
 }

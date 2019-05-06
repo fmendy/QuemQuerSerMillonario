@@ -6,9 +6,7 @@
 package quemquersermillonario.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +14,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,22 +24,24 @@ import javax.persistence.Table;
  * @author alvaro
  */
 @Entity
-@Table(name = "Categoria")
-public class Categoria implements Serializable {
+@Table(name = "UsuarioComodines")
+public class UsuarioComodines implements Serializable {
 
-    public Categoria() {
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDCategoria", unique = true, nullable = false)
+    @Column(name = "IDUsuarioComodines", unique = true, nullable = false)
     private int idCategoria;
 
-    @Column(name = "Nombre")
-    private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "Usuario_IDUsuario", nullable = false)
+    private Usuario usuario;
 
-    @Column(name = "Activo", insertable = false)
-    private int activo;
+    @ManyToOne()
+    @JoinColumn(name = "Comodines_IDComodines", nullable = false)
+    private Comodin comodin;
+
+    @Column(name = "Usado")
+    private int usado;
 
     @Column(name = "FechaCreacion", insertable = false, updatable = false)
     private Date fechaCreacion;
@@ -47,15 +49,7 @@ public class Categoria implements Serializable {
     @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private List<Pregunta> listaPreguntas = new ArrayList<>();
-
-    public List<Pregunta> getListaPreguntas() {
-        return listaPreguntas;
-    }
-
-    public void setListaPreguntas(List<Pregunta> listaPreguntas) {
-        this.listaPreguntas = listaPreguntas;
+    public UsuarioComodines() {
     }
 
     public int getIdCategoria() {
@@ -66,20 +60,20 @@ public class Categoria implements Serializable {
         this.idCategoria = idCategoria;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getActivo() {
-        return activo;
+    public int getUsado() {
+        return usado;
     }
 
-    public void setActivo(int activo) {
-        this.activo = activo;
+    public void setUsado(int usado) {
+        this.usado = usado;
     }
 
     public Date getFechaCreacion() {
@@ -97,14 +91,13 @@ public class Categoria implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    public void aniadirPregunta(Pregunta pregunta){
-        this.listaPreguntas.add(pregunta);
+
+    public Comodin getComodin() {
+        return comodin;
     }
 
-    @Override
-    public String toString() {
-        return nombre;
+    public void setComodin(Comodin comodin) {
+        this.comodin = comodin;
     }
 
 }

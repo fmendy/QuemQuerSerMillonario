@@ -38,13 +38,13 @@ public class Dificultad implements Serializable {
     @Column(name = "Nombre")
     private String nombre;
 
-    @Column(name = "Activo")
+    @Column(name = "Activo", insertable = false)
     private int activo;
 
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", insertable = false, updatable = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
     @OneToMany(mappedBy = "dificultad", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

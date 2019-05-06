@@ -11,12 +11,15 @@ package quemquersermillonario;
 import java.util.List;
 import quemquersermillonario.dao.interfaces.ConexionDAO;
 import quemquersermillonario.dao.interfaces.GenericDAO;
+import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.ConexionDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dto.Conexion;
 import quemquersermillonario.dto.Estudios;
+import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Usuario;
 import sun.net.www.content.text.Generic;
 
@@ -42,13 +45,19 @@ public class Test {
        // List<Estudios> lista = estudiosDAOImplHibernate.obtenerTodos(estudios);
       
         Usuario usuario = new Usuario();
+        /*usuario.setIdUsuario(3);
         usuario.setNombre("prueb");
         usuario.setApellidos("hola");
         usuario.setEstudios(estudios);
         usuario.setEmail("conexion4");
         usuario.setAnoNacimiento(1900);
-        usuario.setIdUsuario(2);
-        usuario.setPassword("aaa");
+        usuario.setPassword("aaa");*/
+        
+        Pregunta p = new Pregunta();
+        PreguntaDAO pdao = new PreguntaDAOImpl();
+        p.setIdPregunta(3);
+        p = pdao.buscarId(p);
+        pdao.borrar(p);
 
         /*
         Conexion conexion = new Conexion();
@@ -63,9 +72,11 @@ public class Test {
         
        /* usuario.aniadirConexion(conexion);
         conexion.setUsuario(usuario);*/
-        usuario=usuarioDAO.buscarId(usuario);
+       usuario = usuarioDAO.buscarId(usuario);
+       // usuarioDAO.borrar(usuario);
         
-        System.out.println(usuarioDAO.listaPreguntasActivas(usuario).size());
+        
+        
         System.out.println();
        // usuarioDAO.borrar(usuario);
         //System.out.println(usuario.getListaPreguntas().size());

@@ -48,10 +48,10 @@ public class Partida implements Serializable {
     @Column(name = "Puntuacion")
     private int puntuacion;
 
-    @Column(name = "FechaCreacion")
+    @Column(name = "FechaCreacion", insertable = false, unique = false)
     private Date fechaCreacion;
 
-    @Column(name = "FechaModificacion")
+    @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
     @OneToMany(mappedBy = "partida", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})

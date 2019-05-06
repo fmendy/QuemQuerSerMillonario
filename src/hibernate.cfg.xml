@@ -58,5 +58,7 @@ Contributor(s):
     <mapping class="quemquersermillonario.dto.Partida"/>
     <mapping class="quemquersermillonario.dto.RespuestaUsuario"/>
     <mapping class="quemquersermillonario.dto.MovimientoPuntos"/>
+    <mapping class="quemquersermillonario.dto.Comodin"/>
+    <mapping class="quemquersermillonario.dto.UsuarioComodines"/>
   </session-factory>
 </hibernate-configuration>

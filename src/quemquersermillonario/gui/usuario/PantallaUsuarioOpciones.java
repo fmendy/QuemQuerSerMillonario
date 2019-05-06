@@ -12,6 +12,7 @@ import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
+import quemquersermillonario.gui.comodines.PantallaComprarComodines;
 import quemquersermillonario.gui.partida.PantallaSeleccionJuego;
 import quemquersermillonario.gui.usuario.preguntas.PantallaUsuarioPreguntas;
 
@@ -45,7 +46,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jButtonActualizar = new javax.swing.JButton();
         jButtonMisPreguntas = new javax.swing.JButton();
         jButtonJugar = new javax.swing.JButton();
-        jButtonBorrar = new javax.swing.JButton();
+        jButtonTienda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,12 +86,12 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
             }
         });
 
-        jButtonBorrar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonBorrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonBorrar.setText("BORRAR");
-        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTienda.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonTienda.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTienda.setText("TIENDA");
+        jButtonTienda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBorrarActionPerformed(evt);
+                jButtonTiendaActionPerformed(evt);
             }
         });
 
@@ -105,7 +106,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonMisPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonTienda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(148, 148, 148))
         );
         layout.setVerticalGroup(
@@ -120,7 +121,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSalir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBorrar)
+                .addComponent(jButtonTienda)
                 .addGap(65, 65, 65))
         );
 
@@ -152,25 +153,20 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         psj.setVisible(true);
     }//GEN-LAST:event_jButtonJugarActionPerformed
 
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+    private void jButtonTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTiendaActionPerformed
         // TODO add your handling code here:
         
-        UsuarioDAO gdao = new UsuarioDAOImpl();
-        Usuario user = new Usuario();
-        user.setIdUsuario(OpcionesFijas.getUsuario().getIdUsuario());
-        OpcionesFijasLogica.deslogearse();
-        gdao.borrar(OpcionesFijas.getUsuario());
-        
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
+        PantallaComprarComodines pcc = new PantallaComprarComodines(parent,true);
+        pcc.setVisible(true);
+    }//GEN-LAST:event_jButtonTiendaActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
-    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonJugar;
     private javax.swing.JButton jButtonMisPreguntas;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonTienda;
     // End of variables declaration//GEN-END:variables
 }

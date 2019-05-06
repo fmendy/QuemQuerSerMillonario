@@ -6,9 +6,11 @@
 package quemquersermillonario.dao.logica;
 
 import quemquersermillonario.dao.interfaces.implementation.CategoriaDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.ComodinDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.DificultadDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.EstudiosDAOImpl;
 import quemquersermillonario.dto.Categoria;
+import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -24,6 +26,7 @@ public class OpcionesFijasLogica {
         cargarEstudios();
         cargarDificultad();
         cargarCategoria();
+        cargarComodines();
     }
 
     /**
@@ -62,5 +65,14 @@ public class OpcionesFijasLogica {
      */
     public static void deslogearse() {
         OpcionesFijas.usuario = new Usuario();
+    }
+    
+    /**
+     * @since 2019/05/06
+     * Se encarga de cargar las difereentes comodines que hay en la bbdd
+     */
+    private void cargarComodines(){
+        ComodinDAOImpl comodinDAOImpl = new ComodinDAOImpl();
+        OpcionesFijas.listaComodines = comodinDAOImpl.obtenerTodos(new Comodin());
     }
 }
