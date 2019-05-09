@@ -32,7 +32,7 @@
                           <Component id="jButtonRespuesta3" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
                           <Component id="jButtonRespuesta1" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <EmptySpace pref="140" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButtonRespuesta4" pref="300" max="32767" attributes="0"/>
                           <Component id="jButtonRespuesta2" max="32767" attributes="0"/>
@@ -45,6 +45,13 @@
                   <Component id="jLabelTotalPreguntas" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="jButton50Porciento" min="-2" pref="184" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+              <Component id="jButtonCambioPregunta" min="-2" pref="295" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,7 +80,17 @@
                   <Component id="jButtonRespuesta4" pref="98" max="32767" attributes="0"/>
                   <Component id="jButtonRespuesta3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jButton50Porciento" pref="98" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jButtonCambioPregunta" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,6 +142,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton50Porciento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="50 %"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton50PorcientoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonCambioPregunta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cambio Pregunta"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCambioPreguntaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

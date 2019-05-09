@@ -112,9 +112,9 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxComodines, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorComodin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxComodines, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValorComodin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -129,17 +129,17 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
 
     private void jComboBoxComodinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxComodinesActionPerformed
         // TODO add your handling code here:
-        Comodin cmd = (Comodin) jComboBoxComodines.getSelectedItem();
-        cambiarPrecio(cmd);
-        cambiarHay(cmd);
+         comodin = (Comodin) jComboBoxComodines.getSelectedItem();
+        cambiarPrecio(comodin);
+        cambiarHay(comodin);
     }//GEN-LAST:event_jComboBoxComodinesActionPerformed
 
     private void jButtonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarActionPerformed
         if (puntosUsuario >= comodin.getCoste()) {
             UsuarioComodinesDAO  uc = new UsuarioComodinesDAOImpl();
-            uc.comprar(comodin);
-            refrescar();
+            uc.comprar(comodin);       
             JOptionPane.showMessageDialog(this, " Ha comprado " + comodin.getNombre(), " compra ", JOptionPane.INFORMATION_MESSAGE);
+            refrescar();
         } else {
             JOptionPane.showMessageDialog(this, "No dispone de puntos suficientes ", "SIN PUNTOS", JOptionPane.INFORMATION_MESSAGE);
         }

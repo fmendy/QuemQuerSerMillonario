@@ -5,6 +5,7 @@
  */
 package quemquersermillonario.dao.interfaces;
 
+import java.util.List;
 import quemquersermillonario.dto.Pregunta;
 
 /**
@@ -16,4 +17,6 @@ public interface PreguntaDAO extends GenericDAO<Pregunta> {
     public Pregunta inicializarPregunta();
 
     public void desactivarPregunta(Pregunta pregunta);
+    
+    public List<Pregunta> obtenerTodasPreguntasActivas();
 }

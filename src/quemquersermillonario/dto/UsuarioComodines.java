@@ -30,7 +30,7 @@ public class UsuarioComodines implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDUsuarioComodines", unique = true, nullable = false)
-    private int idCategoria;
+    private int idUsuarioComodin;
 
     @ManyToOne
     @JoinColumn(name = "Usuario_IDUsuario", nullable = false)
@@ -52,12 +52,12 @@ public class UsuarioComodines implements Serializable {
     public UsuarioComodines() {
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public int getIdUsuarioComodin() {
+        return idUsuarioComodin;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdUsuarioComodin(int idUsuarioComodin) {
+        this.idUsuarioComodin = idUsuarioComodin;
     }
 
     public Usuario getUsuario() {

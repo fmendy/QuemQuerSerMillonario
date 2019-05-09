@@ -11,16 +11,20 @@ import quemquersermillonario.dao.interfaces.MovimientoPuntosDAO;
 import quemquersermillonario.dao.interfaces.PartidaDAO;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaUsuarioDAO;
+import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.MovimientoPuntosDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PartidaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.RespuestaUsuarioDAOImpl;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
+import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.dto.MovimientoPuntos;
 import quemquersermillonario.dto.Partida;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Respuesta;
 import quemquersermillonario.dto.RespuestaUsuario;
+import quemquersermillonario.dto.UsuarioComodines;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 
 /**
@@ -47,7 +51,7 @@ public class PartidaJugando {
 
         if (partida.getModoJuego().getNombre().equals("NORMAL")) {
             pregunta = new Pregunta();
-            listaPregunta = PREGUNTA_DAO.obtenerTodos(pregunta);
+            listaPregunta = PREGUNTA_DAO.obtenerTodasPreguntasActivas();
         }
     }
 
@@ -77,18 +81,18 @@ public class PartidaJugando {
         boolean acierta = (ru.getPregunta().getListaRespuestas().get(elegida).getCorrecta() == 1);
         String mensaje;
         int puntos;
-        if (acierta){
-            puntos=100;
+        if (acierta) {
+            puntos = 100;
             ru.setCorrecta(1);
-            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()+puntos);
-            mensaje="Pregunta Acertada";
-        }else{
-            puntos=200;
+            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion() + puntos);
+            mensaje = "Pregunta Acertada";
+        } else {
+            puntos = 200;
             ru.setCorrecta(0);
-            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion()-puntos);
-            mensaje="Pregunta Fallada";
+            ru.getPartida().setPuntuacion(ru.getPartida().getPuntuacion() - puntos);
+            mensaje = "Pregunta Fallada";
         }
-        ru.setCorrecta((acierta?1:0));
+        ru.setCorrecta((acierta ? 1 : 0));
         RESPUESTA_USUARIO_DAO.guardar(ru);
         MovimientoPuntosDAO mpdao = new MovimientoPuntosDAOImpl();
         MovimientoPuntos mp = new MovimientoPuntos();
@@ -98,6 +102,66 @@ public class PartidaJugando {
         mp.setRespuestaUsuario(ru);
         mpdao.guardar(mp);
         return acierta;
+    }
+
+    /**
+     * Devuelve un array con 2 integer, los cuales indican la posicion de la
+     * respuesta correcta y de otra de las preguntas.
+     *
+     * @param p pregunta
+     * @return List Integer
+     */
+    public static List<Integer> usarComodin50(Pregunta p) {
+        List<Integer> lista = new ArrayList<>();
+
+        int i = 0, correcta = 0, azar;
+        for (Respuesta r : p.getListaRespuestas()) {
+            if (r.getCorrecta() == 1) {
+
+                lista.add(i);
+                correcta = i;
+            }
+            i++;
+        }
+        azar = (int) (Math.random() * 3);
+        while (azar == correcta) {
+            azar = (int) (Math.random() * 3);
+        }
+        lista.add(azar);
+        return lista;
+    }
+
+    public static boolean tieneComodines50() {
+        UsuarioComodinesDAO ucdao = new UsuarioComodinesDAOImpl();
+        ucdao.listarComodinesActivos();
+        for (UsuarioComodines c : OpcionesFijas.usuario.getListaComodines()) {
+            if (c.getComodin().getIdComodin() == 1) {
+                System.out.println(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean tieneComodinesCambio() {
+        UsuarioComodinesDAO ucdao = new UsuarioComodinesDAOImpl();
+        ucdao.listarComodinesActivos();
+        for (UsuarioComodines c : OpcionesFijas.usuario.getListaComodines()) {
+            if (c.getComodin().getIdComodin() == 2) {
+                System.out.println(c);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static void partidaGanada(){
+        MovimientoPuntosDAO mpdao = new MovimientoPuntosDAOImpl();
+        MovimientoPuntos mp = new MovimientoPuntos();
+        mp.setDescripcion("Partida ganada");
+        mp.setUsuario(OpcionesFijas.usuario);
+        mp.setPuntos(1000);
+        mpdao.guardar(mp);
     }
 
 }

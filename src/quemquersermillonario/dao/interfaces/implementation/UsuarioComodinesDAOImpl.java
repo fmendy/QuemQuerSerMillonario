@@ -5,6 +5,7 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import quemquersermillonario.dao.interfaces.ComodinDAO;
@@ -44,18 +45,17 @@ public class UsuarioComodinesDAOImpl extends GenericDAOImpl<UsuarioComodines> im
     public int comodinesActivos(Comodin comodin) {
         iniciar();
         int activos = 0;
-        String query = "SELECT sum(comodin) from UsuarioComodines where usado=0 and usuario.idUsuario=:usuario and comodin.idComodin=:comodin";
+        String query = "SELECT count(comodin) from UsuarioComodines where usado=0 and usuario.idUsuario=:usuario and comodin.idComodin=:comodin";
         Query q = session.createQuery(query);
         q.setInteger("comodin", comodin.getIdComodin());
         q.setInteger("usuario", OpcionesFijas.usuario.getIdUsuario());
         List l = q.list();
-        if (l.get(0)!= null) {
+        if (l.get(0) != null) {
             long g = (long) l.get(0);
             activos = Integer.parseInt(Long.toString(g));
         }
 
         finalizar();
-
         return activos;
 
         /* Query  query= session.createQuery("SELECT sum (puntos)from MovimientoPuntos where usuario.id=:usuario");
@@ -63,5 +63,34 @@ public class UsuarioComodinesDAOImpl extends GenericDAOImpl<UsuarioComodines> im
         long g =(long)  query.list().get(0);
         puntos = Integer.parseInt(Long.toString(g));
         finalizar();*/
+    }
+
+    @Override
+    public List<UsuarioComodines> listarComodinesActivos() {
+        List<UsuarioComodines> listaComodines = new ArrayList<>();
+        iniciar();
+        String query = "from UsuarioComodines where usado=0 and usuario.idUsuario=:usuario";
+        Query q = session.createQuery(query);
+        q.setInteger("usuario", OpcionesFijas.usuario.getIdUsuario());
+        listaComodines = q.list();
+        OpcionesFijas.usuario.setListaComodines(listaComodines);
+        finalizar();
+        return listaComodines;
+    }
+
+    @Override
+    public void utilizarComodin(Comodin comodin) {
+        iniciar();
+        int posicionUtilizado = 0;
+        UsuarioComodines aux = null;
+        for (UsuarioComodines uc : OpcionesFijas.usuario.getListaComodines()) {
+            if (comodin.getIdComodin() == uc.getComodin().getIdComodin()) {
+                aux = uc;
+            }
+        }
+        aux.setFechaModificacion(OpcionesFijas.fechaActual());
+        aux.setUsado(1);
+        session.merge(aux);
+        finalizar();
     }
 }

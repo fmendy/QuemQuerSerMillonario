@@ -5,6 +5,8 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
+import java.util.ArrayList;
+import java.util.List;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaDAO;
 import quemquersermillonario.dto.Pregunta;
@@ -45,7 +47,7 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         session.merge(pregunta);
         finalizar();
     }
-    
+
     @Override
     public Pregunta buscarId(Pregunta pregunta) {
         iniciar();
@@ -53,6 +55,15 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         finalizar();
         return pregunta;
 
+    }
+
+    @Override
+    public List<Pregunta> obtenerTodasPreguntasActivas() {
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+        iniciar();
+        listaPreguntas = session.createQuery("from Pregunta p where p.activo=1").list();
+        finalizar();
+        return listaPreguntas;
     }
 
 }

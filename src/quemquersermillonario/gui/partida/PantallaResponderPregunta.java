@@ -5,8 +5,12 @@
  */
 package quemquersermillonario.gui.partida;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
+import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.logica.PartidaJugando;
+import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.RespuestaUsuario;
@@ -27,6 +31,7 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
      */
     private int ronda = 0;
     private Pregunta pregunta;
+    private UsuarioComodinesDAO ucdao = new UsuarioComodinesDAOImpl();
 
     public PantallaResponderPregunta(java.awt.Frame parent, boolean modal, ModoJuego modoJuego) {
         super(parent, modal);
@@ -51,6 +56,8 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         jButtonRespuesta4 = new javax.swing.JButton();
         jLabelPuntuacionPartida = new javax.swing.JLabel();
         jLabelTotalPreguntas = new javax.swing.JLabel();
+        jButton50Porciento = new javax.swing.JButton();
+        jButtonCambioPregunta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +95,20 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
 
         jLabelTotalPreguntas.setText("jLabel1");
 
+        jButton50Porciento.setText("50 %");
+        jButton50Porciento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50PorcientoActionPerformed(evt);
+            }
+        });
+
+        jButtonCambioPregunta.setText("Cambio Pregunta");
+        jButtonCambioPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCambioPreguntaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +121,7 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonRespuesta3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRespuesta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonRespuesta4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(jButtonRespuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -109,6 +130,12 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
                     .addComponent(jLabelPuntuacionPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(jLabelTotalPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jButton50Porciento, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155)
+                .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +157,14 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonRespuesta4, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(jButtonRespuesta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton50Porciento, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -156,29 +190,63 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         avanceJuego(responder(3));
     }//GEN-LAST:event_jButtonRespuesta4ActionPerformed
 
+    private void jButton50PorcientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50PorcientoActionPerformed
+        // TODO add your handling code here:
+        comodin50();
+        Comodin comodin = new Comodin();
+        comodin.setIdComodin(1);
+        ucdao.utilizarComodin(comodin);
+        jButton50Porciento.setEnabled(false);
+
+    }//GEN-LAST:event_jButton50PorcientoActionPerformed
+
+    private void jButtonCambioPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambioPreguntaActionPerformed
+        // TODO add your handling code here:
+        cambiarPregunta();
+        Comodin comodin = new Comodin();
+        comodin.setIdComodin(2);
+        ucdao.utilizarComodin(comodin);
+        jButtonCambioPregunta.setEnabled(false);
+    }//GEN-LAST:event_jButtonCambioPreguntaActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public void colocarPregunta() {
+        cambiarPregunta();
+        jLabelPuntuacionPartida.setText(Integer.toString(PartidaJugando.partida.getPuntuacion()));
+        ronda++;
+        jLabelTotalPreguntas.setText(Integer.toString(ronda));
+        resetearRespuestas();
+        resetearComodines();
+    }
+
+    private void cambiarPregunta() {
         this.pregunta = PartidaJugando.seleccionarPregunta();
         jLabelPregunta.setText(this.pregunta.getNombre());
         jButtonRespuesta1.setText(this.pregunta.getListaRespuestas().get(0).getNombre());
         jButtonRespuesta2.setText(this.pregunta.getListaRespuestas().get(1).getNombre());
         jButtonRespuesta3.setText(this.pregunta.getListaRespuestas().get(2).getNombre());
         jButtonRespuesta4.setText(this.pregunta.getListaRespuestas().get(3).getNombre());
-        jLabelPuntuacionPartida.setText(Integer.toString(PartidaJugando.partida.getPuntuacion()));
-        ronda++;
-        jLabelTotalPreguntas.setText(Integer.toString(ronda));
+        resetearRespuestas();
+
     }
 
     private void avanceJuego(Boolean acierto) {
         if (acierto) {
-            int opc = JOptionPane.showConfirmDialog(this, "Pregunta acertada, desea continuar?", "Acierto", JOptionPane.INFORMATION_MESSAGE);
-            if (opc == JOptionPane.YES_OPTION) {
-                colocarPregunta();
-            } else {
-                JOptionPane.showMessageDialog(this, "Gracias por jugar", "Plantado", JOptionPane.INFORMATION_MESSAGE);
+
+            if (PartidaJugando.partida.getModoJuego().getIdModoJuego() == 2 && ronda == 10) {
+                JOptionPane.showMessageDialog(this, "Enhorabuena ha ganado", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+                PartidaJugando.partidaGanada();
                 this.setVisible(false);
+            } else {
+                int opc = JOptionPane.showConfirmDialog(this, "Pregunta acertada, desea continuar?", "Acierto", JOptionPane.INFORMATION_MESSAGE);
+                if (opc == JOptionPane.YES_OPTION) {
+                    colocarPregunta();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gracias por jugar", "Plantado", JOptionPane.INFORMATION_MESSAGE);
+                    this.setVisible(false);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Ha fallado", "Plantado", JOptionPane.INFORMATION_MESSAGE);
@@ -192,7 +260,47 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         respuestaUsuario.setPregunta(this.pregunta);
         return PartidaJugando.comprobarRespuesta(respuestaUsuario, elegida);
     }
+
+    private void comodin50() {
+        List<Integer> listaCorrecta = PartidaJugando.usarComodin50(pregunta);
+        if (!listaCorrecta.contains(0)) {
+            jButtonRespuesta1.setEnabled(false);
+        }
+        if (!listaCorrecta.contains(1)) {
+            jButtonRespuesta2.setEnabled(false);
+        }
+        if (!listaCorrecta.contains(2)) {
+            jButtonRespuesta3.setEnabled(false);
+        }
+        if (!listaCorrecta.contains(3)) {
+            jButtonRespuesta4.setEnabled(false);
+        }
+    }
+
+    private void resetearRespuestas() {
+        jButtonRespuesta1.setEnabled(true);
+        jButtonRespuesta2.setEnabled(true);
+        jButtonRespuesta3.setEnabled(true);
+        jButtonRespuesta4.setEnabled(true);
+        resetearComodines();
+    }
+
+    private void resetearComodines() {
+        if (PartidaJugando.tieneComodines50()) {
+            jButton50Porciento.setEnabled(true);
+        } else {
+            jButton50Porciento.setEnabled(false);
+        }
+        if (PartidaJugando.tieneComodinesCambio()) {
+            jButtonCambioPregunta.setEnabled(true);
+        } else {
+            jButtonCambioPregunta.setEnabled(false);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton50Porciento;
+    private javax.swing.JButton jButtonCambioPregunta;
     private javax.swing.JButton jButtonRespuesta1;
     private javax.swing.JButton jButtonRespuesta2;
     private javax.swing.JButton jButtonRespuesta3;
