@@ -6,8 +6,10 @@
 package quemquersermillonario.gui;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.usuario.PantallaUsuarioOpciones;
@@ -30,7 +32,12 @@ public class PantallaInicio extends javax.swing.JFrame {
     public PantallaInicio() {
         initComponents();
         new OpcionesFijasLogica();
-        this.setTitle("Bienvenido");
+        Locale.setDefault(new Locale("es", "ES"));
+        this.setTitle(Lenguaje.getString("Bienvenido"));
+        this.jButtonIniciar.setText(Lenguaje.getString("IniciarSesion"));
+        this.jButtonIrRegistro.setText(Lenguaje.getString("Registrarse"));
+        this.jLabelEmail.setText(Lenguaje.getString("Email"));
+        this.jLabelPassword.setText(Lenguaje.getString("Password"));
         
     }
 

@@ -7,11 +7,13 @@ package quemquersermillonario.gui.usuario.preguntas;
 
 import java.awt.Frame;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
@@ -36,6 +38,11 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         usuarioDAO = new UsuarioDAOImpl();
         preguntaDAO = new PreguntaDAOImpl();
         initComponents();
+        this.setTitle(Lenguaje.getString("MisPreguntas"));
+        this.jButtonAniadir.setText(Lenguaje.getString("Aniadir"));
+        this.jButtonEliminar.setText(Lenguaje.getString("Eliminar"));
+        this.jButtonModificar.setText(Lenguaje.getString("Modificar"));
+        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
 
         rellenarTabla();
     }
@@ -154,7 +161,6 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, false, null);
         pupd.setVisible(true);
         rellenarTabla();
-
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed

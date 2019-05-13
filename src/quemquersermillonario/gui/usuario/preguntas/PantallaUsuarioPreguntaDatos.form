@@ -28,13 +28,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelNombre1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabelPregunta" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelNombre3" min="-2" pref="154" max="-2" attributes="0"/>
-                                  <Component id="jLabelNombre" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                                  <Component id="jLabelNombre2" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                                  <Component id="jLabelNombre4" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="jLabelRespuestaIncorrecta1" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="jLabelRespuestaCorrecta" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="jLabelRespuestaIncorrecta2" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="jLabelRespuestaIncorrecta3" min="-2" pref="154" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -48,11 +48,11 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabelNombre6" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Component id="jLabelDificultad" min="-2" pref="154" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jComboBoxDificultad" min="-2" pref="164" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabelNombre5" min="-2" pref="102" max="-2" attributes="0"/>
+                      <Component id="jLabelCategoria" min="-2" pref="102" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jComboBoxCategoria" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
@@ -77,33 +77,33 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="jLabelNombre1" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jLabelPregunta" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldRespuesta1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelRespuestaCorrecta" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldRespuesta2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelRespuestaIncorrecta1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldRespuesta3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelRespuestaIncorrecta2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldRespuesta4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre4" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelRespuestaIncorrecta3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBoxDificultad" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="jComboBoxCategoria" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre5" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre6" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelCategoria" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabelDificultad" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jButtonAceptar" min="-2" max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre">
+    <Component class="javax.swing.JLabel" name="jLabelRespuestaCorrecta">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -168,7 +168,7 @@
         <Property name="text" type="java.lang.String" value="Respuesta Correcta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre1">
+    <Component class="javax.swing.JLabel" name="jLabelPregunta">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -216,7 +216,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre2">
+    <Component class="javax.swing.JLabel" name="jLabelRespuestaIncorrecta2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -224,7 +224,7 @@
         <Property name="text" type="java.lang.String" value="Respuesta Incorrecta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre3">
+    <Component class="javax.swing.JLabel" name="jLabelRespuestaIncorrecta1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -232,7 +232,7 @@
         <Property name="text" type="java.lang.String" value="Respuesta Incorrecta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre4">
+    <Component class="javax.swing.JLabel" name="jLabelRespuestaIncorrecta3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -240,7 +240,7 @@
         <Property name="text" type="java.lang.String" value="Respuesta Incorrecta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre5">
+    <Component class="javax.swing.JLabel" name="jLabelCategoria">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>
@@ -248,7 +248,7 @@
         <Property name="text" type="java.lang.String" value="Categoria:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNombre6">
+    <Component class="javax.swing.JLabel" name="jLabelDificultad">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Sans" size="14" style="1"/>

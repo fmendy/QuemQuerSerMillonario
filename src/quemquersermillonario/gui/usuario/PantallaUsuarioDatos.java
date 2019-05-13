@@ -7,11 +7,13 @@ package quemquersermillonario.gui.usuario;
 
 import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.sql.Date;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
@@ -39,14 +41,22 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         this.jComboBoxEstudios.setModel(ComboBoxModelEstudios.getEstudiosComboBoxModel());
 
         if (!esModificacion) {
-            this.setTitle("Registro Usuario");
+            this.setTitle(Lenguaje.getString("RegistroUsuario"));
             usuario = new Usuario();
         } else {
-            this.setTitle("Actualizar Usuario");
+            this.setTitle(Lenguaje.getString("ActualizarUsuario"));
             usuario = OpcionesFijas.usuario;
             this.jTextFieldEmail.setEnabled(false);
             pasarObjetoACampos();
         }
+        
+        this.jLabelAnio.setText(Lenguaje.getString("Anio"));
+        this.jLabelApellidos.setText(Lenguaje.getString("Apellidos"));
+        this.jLabelEmail.setText(Lenguaje.getString("Email"));
+        this.jLabelEstudios.setText(Lenguaje.getString("Estudios"));
+        this.jLabelNombre.setText(Lenguaje.getString("Nombre"));
+        this.jLabelPassword.setText(Lenguaje.getString("Password"));
+             
 
     }
 

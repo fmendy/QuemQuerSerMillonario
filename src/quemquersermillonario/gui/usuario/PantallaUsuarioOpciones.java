@@ -6,9 +6,11 @@
 package quemquersermillonario.gui.usuario;
 
 import java.awt.Frame;
+import java.util.ResourceBundle;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
@@ -31,6 +33,12 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         super(parent, modal);
         this.parent = parent;
         initComponents();
+        this.setTitle(Lenguaje.getString("MenuPrincipal"));
+        this.jButtonJugar.setText(Lenguaje.getString("Jugar"));
+        this.jButtonActualizar.setText(Lenguaje.getString("MisDatos"));
+        this.jButtonMisPreguntas.setText(Lenguaje.getString("MisPreguntas"));
+        this.jButtonTienda.setText(Lenguaje.getString("Tienda"));
+        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
     }
 
     /**
@@ -132,6 +140,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         // TODO add your handling code here:
         OpcionesFijasLogica.deslogearse();
         this.setVisible(false);
+        
         
     }//GEN-LAST:event_jButtonSalirActionPerformed
 

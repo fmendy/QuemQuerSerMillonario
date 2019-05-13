@@ -6,9 +6,11 @@
 package quemquersermillonario.gui.partida;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.PartidaJugando;
 import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.ModoJuego;
@@ -38,6 +40,9 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         initComponents();
         PartidaJugando.inicializarPartida(modoJuego);
         colocarPregunta();
+        this.setTitle(Lenguaje.getString("Jugando"));
+        this.jButton50Porciento.setText(Lenguaje.getString("50Porciento"));
+        this.jButtonCambioPregunta.setText(Lenguaje.getString("CambioPregunta"));
     }
 
     /**

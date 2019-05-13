@@ -6,8 +6,10 @@
 package quemquersermillonario.gui.partida;
 
 import java.awt.Frame;
+import java.util.ResourceBundle;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.PartidaJugando;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
@@ -32,6 +34,10 @@ public class PantallaSeleccionCategoriaDificultad extends javax.swing.JDialog {
         this.jComboBoxCategoria.setModel(ComboBoxModelCategoria.getCategoriaWithDefaultComboBoxModel());
         this.jComboBoxDificultad.setModel(ComboBoxModelDificultad.getDificultadWithDefaultComboBoxModel());
         this.parent = parent;
+        this.setTitle(Lenguaje.getString("Seleccion"));
+        this.jButtonJugar.setText(Lenguaje.getString("Jugar"));
+        this.jLabelCategoria.setText(Lenguaje.getString("Categoria"));
+        this.jLabelDificultad.setText(Lenguaje.getString("Dificultad"));
     }
 
     /**
@@ -46,6 +52,8 @@ public class PantallaSeleccionCategoriaDificultad extends javax.swing.JDialog {
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jComboBoxDificultad = new javax.swing.JComboBox<>();
         jButtonJugar = new javax.swing.JButton();
+        jLabelCategoria = new javax.swing.JLabel();
+        jLabelDificultad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,26 +68,43 @@ public class PantallaSeleccionCategoriaDificultad extends javax.swing.JDialog {
             }
         });
 
+        jLabelCategoria.setText("jLabel1");
+
+        jLabelDificultad.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabelCategoria))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelDificultad)))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBoxDificultad, 0, 167, Short.MAX_VALUE)
-                        .addComponent(jComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jComboBoxDificultad, 0, 167, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jComboBoxDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCategoria))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jComboBoxDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabelDificultad)))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addContainerGap())
@@ -103,5 +128,7 @@ public class PantallaSeleccionCategoriaDificultad extends javax.swing.JDialog {
     private javax.swing.JButton jButtonJugar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JComboBox<String> jComboBoxDificultad;
+    private javax.swing.JLabel jLabelCategoria;
+    private javax.swing.JLabel jLabelDificultad;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,8 +6,10 @@
 package quemquersermillonario.gui.partida;
 
 import java.awt.Frame;
+import java.util.ResourceBundle;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dto.ModoJuego;
 
 /**
@@ -25,6 +27,10 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
         super(parent, modal);
         this.parent = parent;
         initComponents();
+        this.setTitle(Lenguaje.getString("ModoJuegos"));
+        this.jButtonNormal.setText(Lenguaje.getString("Normal"));
+        this.jButtonSupervivencia.setText(Lenguaje.getString("Supervivencia"));
+        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
     }
 
     /**

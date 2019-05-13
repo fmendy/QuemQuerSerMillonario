@@ -5,10 +5,12 @@
  */
 package quemquersermillonario.gui.usuario.preguntas;
 
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Pregunta;
@@ -60,11 +62,23 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         this.jComboBoxDificultad.setModel(ComboBoxModelDificultad.getDificultadComboBoxModel());
         if (esModificacion == false) {
             this.pregunta = preguntaDAO.inicializarPregunta();
+            this.setTitle(Lenguaje.getString("NuevaPregunta"));
 
         } else {
             this.pregunta = pregunta;
             this.ObjetoACampos();
+            this.setTitle(Lenguaje.getString("ActualizarPregunta"));
         }
+        this.jLabelCategoria.setText(Lenguaje.getString("Categoria"));
+        this.jLabelDificultad.setText(Lenguaje.getString("Dificultad"));
+        this.jLabelPregunta.setText(Lenguaje.getString("Pregunta"));
+        this.jLabelRespuestaCorrecta.setText(Lenguaje.getString("RespuestaCorrecta"));
+        this.jLabelRespuestaIncorrecta1.setText(Lenguaje.getString("RespuestaIncorrecta"));
+        this.jLabelRespuestaIncorrecta2.setText(Lenguaje.getString("RespuestaIncorrecta"));
+        this.jLabelRespuestaIncorrecta3.setText(Lenguaje.getString("RespuestaIncorrecta"));
+        this.jButtonAceptar.setText(Lenguaje.getString("Aceptar"));
+        
+        
         
     }
 
@@ -80,17 +94,17 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jComboBoxDificultad = new javax.swing.JComboBox<>();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jTextFieldRespuesta1 = new javax.swing.JTextField();
-        jLabelNombre = new javax.swing.JLabel();
-        jLabelNombre1 = new javax.swing.JLabel();
+        jLabelRespuestaCorrecta = new javax.swing.JLabel();
+        jLabelPregunta = new javax.swing.JLabel();
         jTextFieldPregunta1 = new javax.swing.JTextField();
         jTextFieldRespuesta2 = new javax.swing.JTextField();
         jTextFieldRespuesta3 = new javax.swing.JTextField();
         jTextFieldRespuesta4 = new javax.swing.JTextField();
-        jLabelNombre2 = new javax.swing.JLabel();
-        jLabelNombre3 = new javax.swing.JLabel();
-        jLabelNombre4 = new javax.swing.JLabel();
-        jLabelNombre5 = new javax.swing.JLabel();
-        jLabelNombre6 = new javax.swing.JLabel();
+        jLabelRespuestaIncorrecta2 = new javax.swing.JLabel();
+        jLabelRespuestaIncorrecta1 = new javax.swing.JLabel();
+        jLabelRespuestaIncorrecta3 = new javax.swing.JLabel();
+        jLabelCategoria = new javax.swing.JLabel();
+        jLabelDificultad = new javax.swing.JLabel();
         jButtonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,11 +116,11 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta1.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         jTextFieldRespuesta1.setSelectionColor(new java.awt.Color(255, 255, 0));
 
-        jLabelNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre.setText("Respuesta Correcta:");
+        jLabelRespuestaCorrecta.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelRespuestaCorrecta.setText("Respuesta Correcta:");
 
-        jLabelNombre1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre1.setText("Pregunta:");
+        jLabelPregunta.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelPregunta.setText("Pregunta:");
 
         jTextFieldPregunta1.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         jTextFieldPregunta1.setSelectionColor(new java.awt.Color(255, 255, 0));
@@ -120,20 +134,20 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta4.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         jTextFieldRespuesta4.setSelectionColor(new java.awt.Color(255, 255, 0));
 
-        jLabelNombre2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre2.setText("Respuesta Incorrecta:");
+        jLabelRespuestaIncorrecta2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelRespuestaIncorrecta2.setText("Respuesta Incorrecta:");
 
-        jLabelNombre3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre3.setText("Respuesta Incorrecta:");
+        jLabelRespuestaIncorrecta1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelRespuestaIncorrecta1.setText("Respuesta Incorrecta:");
 
-        jLabelNombre4.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre4.setText("Respuesta Incorrecta:");
+        jLabelRespuestaIncorrecta3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelRespuestaIncorrecta3.setText("Respuesta Incorrecta:");
 
-        jLabelNombre5.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre5.setText("Categoria:");
+        jLabelCategoria.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelCategoria.setText("Categoria:");
 
-        jLabelNombre6.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelNombre6.setText("Dificultad:");
+        jLabelDificultad.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelDificultad.setText("Dificultad:");
 
         jButtonAceptar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonAceptar.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,13 +167,13 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNombre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelPregunta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelRespuestaIncorrecta1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelRespuestaCorrecta, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelRespuestaIncorrecta2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelRespuestaIncorrecta3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -168,11 +182,11 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
                             .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBoxDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53))
@@ -190,29 +204,29 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabelNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelRespuestaCorrecta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelRespuestaIncorrecta1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelRespuestaIncorrecta2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelRespuestaIncorrecta3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jButtonAceptar)
                 .addGap(44, 44, 44))
@@ -321,13 +335,13 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JComboBox<String> jComboBoxDificultad;
-    private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelNombre1;
-    private javax.swing.JLabel jLabelNombre2;
-    private javax.swing.JLabel jLabelNombre3;
-    private javax.swing.JLabel jLabelNombre4;
-    private javax.swing.JLabel jLabelNombre5;
-    private javax.swing.JLabel jLabelNombre6;
+    private javax.swing.JLabel jLabelCategoria;
+    private javax.swing.JLabel jLabelDificultad;
+    private javax.swing.JLabel jLabelPregunta;
+    private javax.swing.JLabel jLabelRespuestaCorrecta;
+    private javax.swing.JLabel jLabelRespuestaIncorrecta1;
+    private javax.swing.JLabel jLabelRespuestaIncorrecta2;
+    private javax.swing.JLabel jLabelRespuestaIncorrecta3;
     private javax.swing.JTextField jTextFieldPregunta1;
     private javax.swing.JTextField jTextFieldRespuesta1;
     private javax.swing.JTextField jTextFieldRespuesta2;

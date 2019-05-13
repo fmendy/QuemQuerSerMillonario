@@ -5,10 +5,12 @@
  */
 package quemquersermillonario.gui.comodines;
 
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
+import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelComodin;
 
@@ -29,6 +31,10 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         refrescar();
+        this.setTitle(Lenguaje.getString("TiendaComodines"));
+        this.jButtonComprar.setText(Lenguaje.getString("Comprar"));
+        this.jLabelTienes.setText(Lenguaje.getString("Tienes"));
+        this.jLabelPrecio.setText(Lenguaje.getString("Precio"));
 
     }
 
@@ -45,7 +51,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
         jLabelValorComodin = new javax.swing.JLabel();
         jLabelPuntosUsuario = new javax.swing.JLabel();
         jButtonComprar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelPrecio = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabelTienes = new javax.swing.JLabel();
 
@@ -69,7 +75,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Precio");
+        jLabelPrecio.setText("Precio");
 
         jLabel2.setText("Tienes");
 
@@ -87,7 +93,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBoxComodines, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
@@ -110,7 +116,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
                 .addGap(30, 30, 30)
                 .addComponent(jLabelPuntosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxComodines, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,8 +177,8 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonComprar;
     private javax.swing.JComboBox<String> jComboBoxComodines;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelPrecio;
     private javax.swing.JLabel jLabelPuntosUsuario;
     private javax.swing.JLabel jLabelTienes;
     private javax.swing.JLabel jLabelValorComodin;
