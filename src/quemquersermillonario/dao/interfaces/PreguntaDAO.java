@@ -6,6 +6,8 @@
 package quemquersermillonario.dao.interfaces;
 
 import java.util.List;
+import quemquersermillonario.dto.Categoria;
+import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Pregunta;
 
 /**
@@ -19,4 +21,6 @@ public interface PreguntaDAO extends GenericDAO<Pregunta> {
     public void desactivarPregunta(Pregunta pregunta);
     
     public List<Pregunta> obtenerTodasPreguntasActivas();
+    
+    public List<Pregunta> obtenerPreguntasCategoriaDificultad(Categoria cat, Dificultad dif);
 }

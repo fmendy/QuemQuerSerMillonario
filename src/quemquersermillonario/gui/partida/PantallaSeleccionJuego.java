@@ -111,6 +111,8 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
 
     private void jButtonSupervivenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupervivenciaActionPerformed
         // TODO add your handling code here:
+        PantallaSeleccionCategoriaDificultad pscd = new PantallaSeleccionCategoriaDificultad(parent,true);
+        pscd.setVisible(true);
     }//GEN-LAST:event_jButtonSupervivenciaActionPerformed
 
     /**

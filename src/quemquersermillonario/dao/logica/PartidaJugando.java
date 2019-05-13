@@ -17,7 +17,9 @@ import quemquersermillonario.dao.interfaces.implementation.PartidaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.RespuestaUsuarioDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
+import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Comodin;
+import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.dto.MovimientoPuntos;
 import quemquersermillonario.dto.Partida;
@@ -39,6 +41,8 @@ public class PartidaJugando {
     private static final RespuestaUsuarioDAO RESPUESTA_USUARIO_DAO = new RespuestaUsuarioDAOImpl();
     private static Pregunta pregunta;
     private static List<Pregunta> listaPregunta;
+    public static Dificultad dificultad;
+    public static Categoria categoria;
 
     public static void inicializarPartida(ModoJuego modoJuego) {
         partida = new Partida();
@@ -52,6 +56,10 @@ public class PartidaJugando {
         if (partida.getModoJuego().getNombre().equals("NORMAL")) {
             pregunta = new Pregunta();
             listaPregunta = PREGUNTA_DAO.obtenerTodasPreguntasActivas();
+        }
+        else if (partida.getModoJuego().getNombre().equals("SUPERVIVENCIA")){
+            pregunta = new Pregunta();
+            listaPregunta = PREGUNTA_DAO.obtenerPreguntasCategoriaDificultad(categoria, dificultad);
         }
     }
 

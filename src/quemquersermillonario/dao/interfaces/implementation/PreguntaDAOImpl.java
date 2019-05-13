@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaDAO;
+import quemquersermillonario.dto.Categoria;
+import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.Respuesta;
 import quemquersermillonario.dto.Usuario;
@@ -62,6 +64,22 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         List<Pregunta> listaPreguntas = new ArrayList<>();
         iniciar();
         listaPreguntas = session.createQuery("from Pregunta p where p.activo=1").list();
+        finalizar();
+        return listaPreguntas;
+    }
+
+    @Override
+    public List<Pregunta> obtenerPreguntasCategoriaDificultad(Categoria cat, Dificultad dif) {
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+        iniciar();
+        String query = "from Pregunta p where p.activo = 1";
+        if (cat.getIdCategoria() > 0) {
+            query = query + " and p.categoria = " + cat.getIdCategoria();
+        }
+        if (dif.getIdDificultad() > 0) {
+            query = query + " and p.dificultad = " + dif.getIdDificultad();
+        }
+        listaPreguntas = session.createQuery(query).list();
         finalizar();
         return listaPreguntas;
     }

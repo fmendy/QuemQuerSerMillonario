@@ -35,4 +35,16 @@ public class ComboBoxModelDificultad {
         }
         return index;
     }
+    
+    public static DefaultComboBoxModel getDificultadWithDefaultComboBoxModel() {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel();
+        Dificultad dif = new Dificultad();
+        dif.setIdDificultad(0);
+        dif.setNombre("TODAS");
+        cbm.addElement(dif);
+        for (Dificultad dificultad : OpcionesFijas.listaDificultad) {
+            cbm.addElement(dificultad);
+        }
+        return cbm;
+    }
 }

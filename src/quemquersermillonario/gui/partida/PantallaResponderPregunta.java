@@ -213,12 +213,17 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public void colocarPregunta() {
-        cambiarPregunta();
-        jLabelPuntuacionPartida.setText(Integer.toString(PartidaJugando.partida.getPuntuacion()));
-        ronda++;
-        jLabelTotalPreguntas.setText(Integer.toString(ronda));
-        resetearRespuestas();
-        resetearComodines();
+        try {
+            cambiarPregunta();
+            jLabelPuntuacionPartida.setText(Integer.toString(PartidaJugando.partida.getPuntuacion()));
+            ronda++;
+            jLabelTotalPreguntas.setText(Integer.toString(ronda));
+            resetearRespuestas();
+            resetearComodines();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No hay mas preguntas relacionadas", "Fin partida", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+        }
     }
 
     private void cambiarPregunta() {

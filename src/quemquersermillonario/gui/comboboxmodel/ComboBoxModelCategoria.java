@@ -34,4 +34,16 @@ public class ComboBoxModelCategoria {
         }
         return index;
     }
+    
+    public static DefaultComboBoxModel getCategoriaWithDefaultComboBoxModel() {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel();
+        Categoria cat = new Categoria();
+        cat.setIdCategoria(0);
+        cat.setNombre("TODAS");
+        cbm.addElement(cat);
+        for (Categoria categoria : OpcionesFijas.listaCategorias) {
+            cbm.addElement(categoria);
+        }
+        return cbm;
+    } 
 }
