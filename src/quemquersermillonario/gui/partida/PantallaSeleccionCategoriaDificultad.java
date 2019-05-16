@@ -11,11 +11,13 @@ import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.PartidaJugando;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelCategoria;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelDificultad;
+
 
 /**
  *
@@ -38,6 +40,7 @@ public class PantallaSeleccionCategoriaDificultad extends javax.swing.JDialog {
         this.jButtonJugar.setText(Lenguaje.getString("Jugar"));
         this.jLabelCategoria.setText(Lenguaje.getString("Categoria"));
         this.jLabelDificultad.setText(Lenguaje.getString("Dificultad"));
+        VentanasLogica.estilizarVentaja(this);
     }
 
     /**

@@ -11,6 +11,7 @@ import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelComodin;
 
@@ -35,6 +36,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
         this.jButtonComprar.setText(Lenguaje.getString("Comprar"));
         this.jLabelTienes.setText(Lenguaje.getString("Tienes"));
         this.jLabelPrecio.setText(Lenguaje.getString("Precio"));
+        VentanasLogica.estilizarVentaja(this);
 
     }
 

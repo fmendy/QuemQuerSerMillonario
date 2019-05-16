@@ -12,6 +12,7 @@ import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comodines.PantallaComprarComodines;
@@ -39,6 +40,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         this.jButtonMisPreguntas.setText(Lenguaje.getString("MisPreguntas"));
         this.jButtonTienda.setText(Lenguaje.getString("Tienda"));
         this.jButtonSalir.setText(Lenguaje.getString("Salir"));
+        VentanasLogica.estilizarVentaja(this);
     }
 
     /**

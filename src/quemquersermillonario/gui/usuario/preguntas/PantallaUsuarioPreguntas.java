@@ -14,6 +14,7 @@ import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
@@ -45,6 +46,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         this.jButtonSalir.setText(Lenguaje.getString("Salir"));
 
         rellenarTabla();
+        VentanasLogica.estilizarVentaja(this);
     }
 
     /**

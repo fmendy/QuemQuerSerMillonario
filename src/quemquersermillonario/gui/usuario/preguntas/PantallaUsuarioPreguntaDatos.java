@@ -11,6 +11,7 @@ import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.Pregunta;
@@ -77,6 +78,7 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         this.jLabelRespuestaIncorrecta2.setText(Lenguaje.getString("RespuestaIncorrecta"));
         this.jLabelRespuestaIncorrecta3.setText(Lenguaje.getString("RespuestaIncorrecta"));
         this.jButtonAceptar.setText(Lenguaje.getString("Aceptar"));
+        VentanasLogica.estilizarVentaja(this);
         
         
         

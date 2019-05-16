@@ -5,9 +5,11 @@
  */
 package quemquersermillonario.gui;
 
+import ch.randelshofer.quaqua.QuaquaManager;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
@@ -30,6 +32,12 @@ public class PantallaInicio extends javax.swing.JFrame {
     private UsuarioDAO usuarioDAO;
     
     public PantallaInicio() {
+        try{
+            UIManager.setLookAndFeel(QuaquaManager.getLookAndFeel());
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         initComponents();
         new OpcionesFijasLogica();
         Locale.setDefault(new Locale("es", "ES"));
@@ -38,6 +46,11 @@ public class PantallaInicio extends javax.swing.JFrame {
         this.jButtonIrRegistro.setText(Lenguaje.getString("Registrarse"));
         this.jLabelEmail.setText(Lenguaje.getString("Email"));
         this.jLabelPassword.setText(Lenguaje.getString("Password"));
+        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
+        setLocationRelativeTo(null);
+        this.setResizable(false);
+        //setDefaultCloseOperation(0);
+
         
     }
 
@@ -56,11 +69,13 @@ public class PantallaInicio extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jTextFieldEmail = new javax.swing.JTextField();
         jButtonIniciar = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonIrRegistro.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonIrRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIrRegistro.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonIrRegistro.setForeground(new java.awt.Color(0, 51, 204));
         jButtonIrRegistro.setText("REGISTRARSE");
         jButtonIrRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,19 +89,31 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabelPassword.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelPassword.setText("Password:");
 
+        jPasswordField1.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         jPasswordField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
 
-        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         jTextFieldEmail.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
 
         jButtonIniciar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIniciar.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonIniciar.setForeground(new java.awt.Color(0, 51, 204));
         jButtonIniciar.setText("INICIAR");
         jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIniciarActionPerformed(evt);
+            }
+        });
+
+        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSalir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonSalir.setForeground(new java.awt.Color(0, 51, 204));
+        jButtonSalir.setText("SALIR");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
             }
         });
 
@@ -95,38 +122,36 @@ public class PantallaInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .addComponent(jTextFieldEmail))
-                .addContainerGap(83, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(133, 133, 133))
+                    .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonIniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPasswordField1)
+                        .addComponent(jTextFieldEmail)
+                        .addComponent(jLabelPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordField1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1))
+                .addComponent(jButtonIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonIniciar)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonIrRegistro)
-                .addGap(61, 61, 61))
+                .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -154,6 +179,11 @@ public class PantallaInicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Los datos introducidos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,6 +224,7 @@ public class PantallaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIniciar;
     private javax.swing.JButton jButtonIrRegistro;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JPasswordField jPasswordField1;

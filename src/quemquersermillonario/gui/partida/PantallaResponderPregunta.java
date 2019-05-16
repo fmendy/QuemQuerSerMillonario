@@ -12,6 +12,7 @@ import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.PartidaJugando;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.dto.Pregunta;
@@ -43,6 +44,7 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         this.setTitle(Lenguaje.getString("Jugando"));
         this.jButton50Porciento.setText(Lenguaje.getString("50Porciento"));
         this.jButtonCambioPregunta.setText(Lenguaje.getString("CambioPregunta"));
+        VentanasLogica.estilizarVentaja(this);
     }
 
     /**

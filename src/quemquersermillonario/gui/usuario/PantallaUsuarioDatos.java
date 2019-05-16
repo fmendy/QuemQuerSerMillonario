@@ -8,13 +8,18 @@ package quemquersermillonario.gui.usuario;
 import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.sql.Date;
 import java.util.ResourceBundle;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Estudios;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
@@ -32,6 +37,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
     private Usuario usuario;
     private Boolean esModificacion = false;
     private UsuarioDAO usuarioDAO;
+    private Popup popup;
 
     public PantallaUsuarioDatos(java.awt.Frame parent, boolean modal, boolean actualizar) {
         super(parent, modal);
@@ -49,14 +55,16 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
             this.jTextFieldEmail.setEnabled(false);
             pasarObjetoACampos();
         }
-        
+
         this.jLabelAnio.setText(Lenguaje.getString("Anio"));
         this.jLabelApellidos.setText(Lenguaje.getString("Apellidos"));
         this.jLabelEmail.setText(Lenguaje.getString("Email"));
         this.jLabelEstudios.setText(Lenguaje.getString("Estudios"));
         this.jLabelNombre.setText(Lenguaje.getString("Nombre"));
         this.jLabelPassword.setText(Lenguaje.getString("Password"));
-             
+        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
+        this.jLabelPasswordRepite.setText(Lenguaje.getString("RepitaPassword"));
+        VentanasLogica.estilizarVentaja(this);
 
     }
 
@@ -69,141 +77,227 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelApellidos = new javax.swing.JLabel();
-        jLabelEmail = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabelNombre = new javax.swing.JLabel();
-        jLabelAnio = new javax.swing.JLabel();
-        jLabelPassword = new javax.swing.JLabel();
-        jLabelEstudios = new javax.swing.JLabel();
-        jButtonAceptar = new javax.swing.JButton();
         jTextFieldNombre = new javax.swing.JTextField();
+        jLabelApellidos = new javax.swing.JLabel();
         jTextFieldApellidos = new javax.swing.JTextField();
+        jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
+        jLabelPassword = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jLabelPasswordRepite = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jComboBoxEstudios = new javax.swing.JComboBox<>();
+        jLabelAnio = new javax.swing.JLabel();
         jTextFieldAno = new javax.swing.JTextField();
+        jLabelEstudios = new javax.swing.JLabel();
+        jComboBoxEstudios = new javax.swing.JComboBox<>();
+        jButtonAceptar = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
+        jLabelInformcionNombre = new javax.swing.JLabel();
+        jLabelInformcionApellido1 = new javax.swing.JLabel();
+        jLabelInformcionEmail2 = new javax.swing.JLabel();
+        jLabelInformcionPassword3 = new javax.swing.JLabel();
+        jLabelInformcionAnio4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelApellidos.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelApellidos.setText("Apellidos:");
-
-        jLabelEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelEmail.setText("Email:");
+        jPanel1.setLayout(new java.awt.GridLayout(8, 8, 7, 7));
 
         jLabelNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelNombre.setText("Nombre:");
+        jPanel1.add(jLabelNombre);
 
-        jLabelAnio.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelAnio.setText("Año Nacimiento:");
+        jTextFieldNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jTextFieldNombre.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNombreKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextFieldNombre);
+
+        jLabelApellidos.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelApellidos.setText("Apellidos:");
+        jPanel1.add(jLabelApellidos);
+
+        jTextFieldApellidos.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jTextFieldApellidos.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jTextFieldApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldApellidosKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextFieldApellidos);
+
+        jLabelEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelEmail.setText("Email:");
+        jPanel1.add(jLabelEmail);
+
+        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jTextFieldEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldEmailKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEmail);
 
         jLabelPassword.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelPassword.setText("Password:");
+        jPanel1.add(jLabelPassword);
+
+        jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jPasswordField1);
+
+        jLabelPasswordRepite.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelPasswordRepite.setText("Password:");
+        jPanel1.add(jLabelPasswordRepite);
+
+        jPasswordField2.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jPasswordField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField2KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jPasswordField2);
+
+        jLabelAnio.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelAnio.setText("Año Nacimiento:");
+        jPanel1.add(jLabelAnio);
+
+        jTextFieldAno.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jTextFieldAno.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jTextFieldAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldAnoKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextFieldAno);
 
         jLabelEstudios.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelEstudios.setText("Estudios:");
+        jPanel1.add(jLabelEstudios);
 
-        jButtonAceptar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAceptar.setText("Aceptar");
-        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAceptarActionPerformed(evt);
-            }
-        });
-
-        jTextFieldNombre.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
-        jTextFieldNombre.setSelectionColor(new java.awt.Color(255, 255, 0));
-
-        jTextFieldApellidos.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
-        jTextFieldApellidos.setSelectionColor(new java.awt.Color(255, 255, 0));
-
-        jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
-        jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
-
-        jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
-
-        jPasswordField2.setSelectionColor(new java.awt.Color(255, 255, 0));
-
+        jComboBoxEstudios.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jComboBoxEstudios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxEstudios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEstudiosActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxEstudios);
 
-        jTextFieldAno.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
-        jTextFieldAno.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jButtonAceptar.setBackground(new java.awt.Color(0, 51, 204));
+        jButtonAceptar.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonAceptar.setForeground(new java.awt.Color(0, 51, 204));
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAceptar);
+
+        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSalir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonSalir.setForeground(new java.awt.Color(0, 51, 204));
+        jButtonSalir.setText("SALIR");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSalir);
+
+        jLabelInformcionNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
+        jLabelInformcionNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelInformcionNombreMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelInformcionNombreMouseExited(evt);
+            }
+        });
+
+        jLabelInformcionApellido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
+        jLabelInformcionApellido1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelInformcionApellido1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelInformcionApellido1MouseExited(evt);
+            }
+        });
+
+        jLabelInformcionEmail2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
+        jLabelInformcionEmail2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelInformcionEmail2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelInformcionEmail2MouseExited(evt);
+            }
+        });
+
+        jLabelInformcionPassword3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
+        jLabelInformcionPassword3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelInformcionPassword3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelInformcionPassword3MouseExited(evt);
+            }
+        });
+
+        jLabelInformcionAnio4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
+        jLabelInformcionAnio4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelInformcionAnio4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelInformcionAnio4MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelAnio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldAno, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(85, 85, 85))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
+                    .addComponent(jLabelInformcionNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInformcionApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInformcionEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInformcionPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInformcionAnio4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jTextFieldNombre))
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jPasswordField1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                        .addComponent(jLabelInformcionNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabelInformcionApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabelInformcionEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabelInformcionPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabelInformcionAnio4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -275,6 +369,118 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
+        // TODO add your handling code here:
+        jTextFieldNombre.setText(jTextFieldNombre.getText().toUpperCase());
+        if (jTextFieldNombre.getText().length() >= 39) {
+            jTextFieldNombre.setText(jTextFieldNombre.getText().substring(0, 39));
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextFieldNombreKeyReleased
+
+    private void jTextFieldApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidosKeyReleased
+        // TODO add your handling code here:
+        jTextFieldApellidos.setText(jTextFieldApellidos.getText().toUpperCase());
+        if (jTextFieldApellidos.getText().length() >= 39) {
+            jTextFieldApellidos.setText(jTextFieldApellidos.getText().substring(0, 39));
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextFieldApellidosKeyReleased
+
+    private void jTextFieldAnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAnoKeyReleased
+        // TODO add your handling code here:
+        try {
+            Integer.parseInt(jTextFieldAno.getText());
+        } catch (Exception e) {
+            jTextFieldAno.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldAnoKeyReleased
+
+    private void jLabelInformcionNombreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionNombreMouseEntered
+        // TODO add your handling code here:
+        popup = VentanasLogica.mensajePopup(popup, "NombreRequerido", evt);
+        popup.show();
+
+    }//GEN-LAST:event_jLabelInformcionNombreMouseEntered
+
+    private void jLabelInformcionNombreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionNombreMouseExited
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_jLabelInformcionNombreMouseExited
+
+    private void jLabelInformcionApellido1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionApellido1MouseEntered
+        // TODO add your handling code here:
+        popup = VentanasLogica.mensajePopup(popup, "ApellidoRequerido", evt);
+        popup.show();
+    }//GEN-LAST:event_jLabelInformcionApellido1MouseEntered
+
+    private void jLabelInformcionApellido1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionApellido1MouseExited
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_jLabelInformcionApellido1MouseExited
+
+    private void jLabelInformcionEmail2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionEmail2MouseEntered
+        // TODO add your handling code here:
+        popup = VentanasLogica.mensajePopup(popup, "EmailRequerido", evt);
+        popup.show();
+    }//GEN-LAST:event_jLabelInformcionEmail2MouseEntered
+
+    private void jLabelInformcionEmail2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionEmail2MouseExited
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_jLabelInformcionEmail2MouseExited
+
+    private void jLabelInformcionPassword3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionPassword3MouseEntered
+        // TODO add your handling code here:
+        popup = VentanasLogica.mensajePopup(popup, "PasswordRequerido", evt);
+        popup.show();
+    }//GEN-LAST:event_jLabelInformcionPassword3MouseEntered
+
+    private void jLabelInformcionPassword3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionPassword3MouseExited
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_jLabelInformcionPassword3MouseExited
+
+    private void jLabelInformcionAnio4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionAnio4MouseEntered
+        // TODO add your handling code here:
+        popup = VentanasLogica.mensajePopup(popup, "AnioRequerido", evt);
+        popup.show();
+    }//GEN-LAST:event_jLabelInformcionAnio4MouseEntered
+
+    private void jLabelInformcionAnio4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionAnio4MouseExited
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_jLabelInformcionAnio4MouseExited
+
+    private void jTextFieldEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmailKeyReleased
+        // TODO add your handling code here:
+        if (jTextFieldEmail.getText().length() >= 39) {
+            jTextFieldEmail.setText(jTextFieldEmail.getText().substring(0, 39));
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextFieldEmailKeyReleased
+
+    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
+        // TODO add your handling code here:
+        if (jPasswordField1.getText().length() >= 39) {
+            jPasswordField1.setText(jPasswordField1.getText().substring(0, 39));
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jPasswordField1KeyReleased
+
+    private void jPasswordField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField2KeyReleased
+        // TODO add your handling code here:
+        if (jPasswordField2.getText().length() >= 39) {
+            jPasswordField2.setText(jPasswordField2.getText().substring(0, 39));
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jPasswordField2KeyReleased
+
     private void pasarCamposAObjeto() {
         usuario.setNombre(jTextFieldNombre.getText());
         usuario.setApellidos(jTextFieldApellidos.getText());
@@ -299,13 +505,21 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxEstudios;
     private javax.swing.JLabel jLabelAnio;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelEstudios;
+    private javax.swing.JLabel jLabelInformcionAnio4;
+    private javax.swing.JLabel jLabelInformcionApellido1;
+    private javax.swing.JLabel jLabelInformcionEmail2;
+    private javax.swing.JLabel jLabelInformcionNombre;
+    private javax.swing.JLabel jLabelInformcionPassword3;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelPasswordRepite;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextFieldAno;

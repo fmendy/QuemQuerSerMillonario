@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.ModoJuego;
 
 /**
@@ -31,6 +32,7 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
         this.jButtonNormal.setText(Lenguaje.getString("Normal"));
         this.jButtonSupervivencia.setText(Lenguaje.getString("Supervivencia"));
         this.jButtonSalir.setText(Lenguaje.getString("Salir"));
+        VentanasLogica.estilizarVentaja(this);
     }
 
     /**
