@@ -8,6 +8,8 @@ package quemquersermillonario.dao.logica;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.Popup;
@@ -31,5 +33,17 @@ public class VentanasLogica {
         label.setForeground(Color.red);
         popup = PopupFactory.getSharedInstance().getPopup(evt.getComponent(), label, evt.getXOnScreen(), evt.getYOnScreen());
         return popup;
+    }
+    
+    public void botonClicado(JButton jb){
+        String nombre = jb.getAccessibleContext().getAccessibleName();
+        String resource="/resources/imagenes/"+ nombre+"_clicado.png";
+        jb.setIcon(new javax.swing.ImageIcon(getClass().getResource(resource)));   
+    }
+    
+    public void botonDesclicado(JButton jb){
+        String nombre = jb.getAccessibleContext().getAccessibleName();
+        String resource="/resources/imagenes/"+ nombre+"_normal.png";
+        jb.setIcon(new javax.swing.ImageIcon(getClass().getResource(resource)));  
     }
 }

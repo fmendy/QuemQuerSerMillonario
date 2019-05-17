@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDUsuario", unique = true, nullable = false)
+    @Column(name = "IDUsuario", unique = true, nullable = false, length = 40)
     private int idUsuario;
 
     @Column(name = "Nombre")
