@@ -53,19 +53,20 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jButtonActualizar = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
         jButtonMisPreguntas = new javax.swing.JButton();
         jButtonJugar = new javax.swing.JButton();
         jButtonTienda = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(4, 2, 0, 6));
+        jPanel1.setLayout(new java.awt.GridLayout(0, 2, 0, 5));
 
         jButtonActualizar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_normal.png"))); // NOI18N
         jButtonActualizar.setToolTipText("");
+        jButtonActualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_clicado.png"))); // NOI18N
         jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ratonEntra(evt);
@@ -82,30 +83,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonActualizar);
         jButtonActualizar.getAccessibleContext().setAccessibleName("mis_datos");
 
-        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
-        jButtonSalir.setPreferredSize(new java.awt.Dimension(250, 23));
-        jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ratonEntra(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ratonSale(evt);
-            }
-        });
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonSalir);
-        jButtonSalir.getAccessibleContext().setAccessibleName("salir");
-
         jButtonMisPreguntas.setBackground(new java.awt.Color(0, 0, 0));
         jButtonMisPreguntas.setForeground(new java.awt.Color(255, 255, 255));
         jButtonMisPreguntas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_normal.png"))); // NOI18N
         jButtonMisPreguntas.setToolTipText("");
+        jButtonMisPreguntas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_clicado.png"))); // NOI18N
         jButtonMisPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ratonEntra(evt);
@@ -125,6 +107,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jButtonJugar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonJugar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/jugar_normal.png"))); // NOI18N
+        jButtonJugar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/jugar_clicado.png"))); // NOI18N
         jButtonJugar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ratonEntra(evt);
@@ -144,6 +127,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jButtonTienda.setBackground(new java.awt.Color(0, 0, 0));
         jButtonTienda.setForeground(new java.awt.Color(255, 255, 255));
         jButtonTienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_normal.png"))); // NOI18N
+        jButtonTienda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_clicado.png"))); // NOI18N
         jButtonTienda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ratonEntra(evt);
@@ -160,20 +144,41 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonTienda);
         jButtonTienda.getAccessibleContext().setAccessibleName("tienda");
 
+        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
+        jButtonSalir.setPreferredSize(new java.awt.Dimension(250, 23));
+        jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_clicado.png"))); // NOI18N
+        jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSalir);
+        jButtonSalir.getAccessibleContext().setAccessibleName("salir");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
@@ -191,18 +196,21 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
         PantallaUsuarioDatos pad = new PantallaUsuarioDatos(parent, true, true);
+        popup.hide();
         pad.setVisible(true);
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonMisPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMisPreguntasActionPerformed
         // TODO add your handling code here:
         PantallaUsuarioPreguntas pup = new PantallaUsuarioPreguntas(parent, true);
+        popup.hide();
         pup.setVisible(true);
     }//GEN-LAST:event_jButtonMisPreguntasActionPerformed
 
     private void jButtonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJugarActionPerformed
         // TODO add your handling code here:
         PantallaSeleccionJuego psj = new PantallaSeleccionJuego(parent, true);
+        popup.hide();
         psj.setVisible(true);
     }//GEN-LAST:event_jButtonJugarActionPerformed
 
@@ -210,24 +218,18 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         PantallaComprarComodines pcc = new PantallaComprarComodines(parent, true);
+        popup.hide();
         pcc.setVisible(true);
     }//GEN-LAST:event_jButtonTiendaActionPerformed
 
     private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
-        // TODO add your handling code here:
         JButton jb = (JButton) evt.getSource();
-        VentanasLogica vl = new VentanasLogica();
         popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
         popup.show();
-        vl.botonClicado(jb);
     }//GEN-LAST:event_ratonEntra
 
     private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
-        // TODO add your handling code here:
-        JButton jb = (JButton) evt.getSource();
-        VentanasLogica vl = new VentanasLogica();
         popup.hide();
-        vl.botonDesclicado(jb);
     }//GEN-LAST:event_ratonSale
 
 

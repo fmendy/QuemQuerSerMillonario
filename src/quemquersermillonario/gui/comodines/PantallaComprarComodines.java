@@ -5,8 +5,11 @@
  */
 package quemquersermillonario.gui.comodines;
 
+import java.awt.Color;
 import java.util.ResourceBundle;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.Popup;
 import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
@@ -27,15 +30,16 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
     private int puntosUsuario;
     private Comodin comodin;
     private UsuarioDAOImpl usuarioDAOImpl = new UsuarioDAOImpl();
+    private Popup popup;
 
     public PantallaComprarComodines(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         refrescar();
         this.setTitle(Lenguaje.getString("TiendaComodines"));
-        this.jButtonComprar.setText(Lenguaje.getString("Comprar"));
-        this.jLabelTienes.setText(Lenguaje.getString("Tienes"));
+        this.jLabelTienesNombre.setText(Lenguaje.getString("Tienes"));
         this.jLabelPrecio.setText(Lenguaje.getString("Precio"));
+        this.jLabelPuntosDisponibles.setText(Lenguaje.getString("PuntosDisponibles"));
         VentanasLogica.estilizarVentaja(this);
 
     }
@@ -54,11 +58,14 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
         jLabelPuntosUsuario = new javax.swing.JLabel();
         jButtonComprar = new javax.swing.JButton();
         jLabelPrecio = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelTienesNombre = new javax.swing.JLabel();
         jLabelTienes = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
+        jLabelPuntosDisponibles = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jComboBoxComodines.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jComboBoxComodines.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxComodines.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,123 +73,186 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
             }
         });
 
-        jLabelPuntosUsuario.setText("jLabel1");
+        jLabelValorComodin.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+
+        jLabelPuntosUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelPuntosUsuario.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        jLabelPuntosUsuario.setText("PuntosUsuario");
 
         jButtonComprar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonComprar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonComprar.setText("COMPRAR");
+        jButtonComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/comprar_normal_min.png"))); // NOI18N
+        jButtonComprar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/comprar_clicado_min.png"))); // NOI18N
+        jButtonComprar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
         jButtonComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonComprarActionPerformed(evt);
             }
         });
 
+        jLabelPrecio.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelPrecio.setText("Precio");
 
-        jLabel2.setText("Tienes");
+        jLabelTienesNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelTienesNombre.setText("Tienes");
 
+        jLabelTienes.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelTienes.setText("0");
+
+        jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_normal_min.png"))); // NOI18N
+        jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_clicado_min.png"))); // NOI18N
+        jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+
+        jLabelPuntosDisponibles.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabelPuntosDisponibles.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabelPuntosUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBoxComodines, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabelValorComodin, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jLabelTienes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 17, Short.MAX_VALUE)))
-                .addGap(82, 82, 82))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                        .addComponent(jLabelPuntosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPuntosDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelValorComodin, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxComodines, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTienesNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelTienes, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jButtonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabelPuntosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPuntosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPuntosDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jComboBoxComodines, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValorComodin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTienesNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTienes, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxComodines, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorComodin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelTienes, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                    .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButtonComprar.getAccessibleContext().setAccessibleName("Comprar");
+        jButtonSalir.getAccessibleContext().setAccessibleName("Salir");
+        jButtonSalir.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxComodinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxComodinesActionPerformed
         // TODO add your handling code here:
-         comodin = (Comodin) jComboBoxComodines.getSelectedItem();
+        comodin = (Comodin) jComboBoxComodines.getSelectedItem();
         cambiarPrecio(comodin);
         cambiarHay(comodin);
     }//GEN-LAST:event_jComboBoxComodinesActionPerformed
 
     private void jButtonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarActionPerformed
+        popup.hide();
         if (puntosUsuario >= comodin.getCoste()) {
-            UsuarioComodinesDAO  uc = new UsuarioComodinesDAOImpl();
-            uc.comprar(comodin);       
-            JOptionPane.showMessageDialog(this, " Ha comprado " + comodin.getNombre(), " compra ", JOptionPane.INFORMATION_MESSAGE);
+            UsuarioComodinesDAO uc = new UsuarioComodinesDAOImpl();
+            uc.comprar(comodin);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Comprado") + " " + comodin.getNombre(), Lenguaje.getString("Compra"), JOptionPane.INFORMATION_MESSAGE);
             refrescar();
         } else {
-            JOptionPane.showMessageDialog(this, "No dispone de puntos suficientes ", "SIN PUNTOS", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("NoDisponePuntos"), Lenguaje.getString("SinPuntos"), JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonComprarActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
+        // TODO add your handling code here:
+        JButton jb = (JButton) evt.getSource();
+        popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
+        popup.show();
+    }//GEN-LAST:event_ratonEntra
+
+    private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_ratonSale
 
     private void refrescar() {
         puntosUsuario = usuarioDAOImpl.puntosUsuario();
         jComboBoxComodines.setModel(ComboBoxModelComodin.getCategoriaComboBoxModel());
         comodin = (Comodin) jComboBoxComodines.getSelectedItem();
         cambiarPrecio(comodin);
-        jLabelPuntosUsuario.setText("Tienes " + puntosUsuario + " puntos disponibles");
+        if (puntosUsuario > 0) {
+            jLabelPuntosUsuario.setForeground(Color.green);
+        } else {
+            jLabelPuntosUsuario.setForeground(Color.RED);
+        }
+        jLabelPuntosUsuario.setText(Integer.toString(puntosUsuario));
         cambiarHay(comodin);
-        
+
     }
 
     private void cambiarPrecio(Comodin cmd) {
         jLabelValorComodin.setText(Integer.toString(cmd.getCoste()));
     }
-    
-    private void cambiarHay(Comodin cmd){
+
+    private void cambiarHay(Comodin cmd) {
         UsuarioComodinesDAOImpl usaComodinesDAOImpl = new UsuarioComodinesDAOImpl();
         int hay = usaComodinesDAOImpl.comodinesActivos(cmd);
         jLabelTienes.setText(Integer.toString(hay));
     }
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonComprar;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxComodines;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelPrecio;
+    private javax.swing.JLabel jLabelPuntosDisponibles;
     private javax.swing.JLabel jLabelPuntosUsuario;
     private javax.swing.JLabel jLabelTienes;
+    private javax.swing.JLabel jLabelTienesNombre;
     private javax.swing.JLabel jLabelValorComodin;
     // End of variables declaration//GEN-END:variables
 }

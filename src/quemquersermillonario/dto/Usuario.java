@@ -35,10 +35,10 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "IDUsuario", unique = true, nullable = false, length = 40)
+    @Column(name = "IDUsuario", unique = true, nullable = false)
     private int idUsuario;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", length = 40)
     private String nombre;
 
     @Column(name = "Apellidos")

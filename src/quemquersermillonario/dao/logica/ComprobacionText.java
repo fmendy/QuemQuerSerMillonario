@@ -58,4 +58,14 @@ public class ComprobacionText {
             return false;
         }
     }
+    
+    public static boolean comprobacionTamanoJTextField(JTextField jtf, int maximo){
+        if (jtf.getText().length()>maximo){
+            jtf.setText(jtf.getText().substring(0, maximo-1));
+            return  false;
+        }
+        else{
+            return  true;
+        }
+    }
 }

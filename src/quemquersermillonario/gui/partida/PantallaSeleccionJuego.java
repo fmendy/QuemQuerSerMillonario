@@ -7,6 +7,8 @@ package quemquersermillonario.gui.partida;
 
 import java.awt.Frame;
 import java.util.ResourceBundle;
+import javax.swing.JButton;
+import javax.swing.Popup;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
@@ -24,14 +26,12 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
      */
     
     private Frame parent;
+    private Popup popup;
     public PantallaSeleccionJuego(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
         this.setTitle(Lenguaje.getString("ModoJuegos"));
-        this.jButtonNormal.setText(Lenguaje.getString("Normal"));
-        this.jButtonSupervivencia.setText(Lenguaje.getString("Supervivencia"));
-        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
         VentanasLogica.estilizarVentaja(this);
     }
 
@@ -44,67 +44,97 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButtonSupervivencia = new javax.swing.JButton();
         jButtonNormal = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
-        jButtonSupervivencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonNormal.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonNormal.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonNormal.setText("NORMAL");
-        jButtonNormal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNormalActionPerformed(evt);
-            }
-        });
-
-        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSalir.setText("SALIR");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1, 0, 10));
 
         jButtonSupervivencia.setBackground(new java.awt.Color(0, 0, 0));
         jButtonSupervivencia.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSupervivencia.setText("SUPERVIVENCIA");
+        jButtonSupervivencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/infinito_normal.png"))); // NOI18N
+        jButtonSupervivencia.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/infinito_clicado.png"))); // NOI18N
+        jButtonSupervivencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
         jButtonSupervivencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSupervivenciaActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonSupervivencia);
+        jButtonSupervivencia.getAccessibleContext().setAccessibleName("Supervivencia");
+
+        jButtonNormal.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonNormal.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonNormal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/jugar_normal_1.png"))); // NOI18N
+        jButtonNormal.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/jugar_clicadol_1.png"))); // NOI18N
+        jButtonNormal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNormalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonNormal);
+        jButtonNormal.getAccessibleContext().setAccessibleName("Normal");
+
+        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
+        jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_clicado.png"))); // NOI18N
+        jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSalir);
+        jButtonSalir.getAccessibleContext().setAccessibleName("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonSupervivencia, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                    .addComponent(jButtonNormal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addComponent(jButtonSupervivencia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
+       popup.hide();
         ModoJuegoDAO mjdao = new ModoJuegoDAOImpl();
         ModoJuego mj = mjdao.buscarModoJuego("NORMAL");
         PantallaResponderPregunta prp = new PantallaResponderPregunta(parent, true, mj);
@@ -119,9 +149,22 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
 
     private void jButtonSupervivenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupervivenciaActionPerformed
         // TODO add your handling code here:
+        popup.hide();
         PantallaSeleccionCategoriaDificultad pscd = new PantallaSeleccionCategoriaDificultad(parent,true);
         pscd.setVisible(true);
     }//GEN-LAST:event_jButtonSupervivenciaActionPerformed
+
+    private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
+        // TODO add your handling code here:
+        JButton jb = (JButton) evt.getSource();
+        popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
+        popup.show();
+    }//GEN-LAST:event_ratonEntra
+
+    private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_ratonSale
 
     /**
      * @param args the command line arguments
@@ -132,5 +175,6 @@ public class PantallaSeleccionJuego extends javax.swing.JDialog {
     private javax.swing.JButton jButtonNormal;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonSupervivencia;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

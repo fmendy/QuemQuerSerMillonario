@@ -376,10 +376,10 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
     private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
         // TODO add your handling code here:
-        /*if (jTextFieldNombre.getText().length() >= 39) {
+        if (jTextFieldNombre.getText().length() >= 39) {
             jTextFieldNombre.setText(jTextFieldNombre.getText().substring(0, 39));
             JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_jTextFieldNombreKeyReleased
 
     private void jTextFieldApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidosKeyReleased
