@@ -7,7 +7,9 @@ package quemquersermillonario.gui.partida;
 
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.Popup;
 import quemquersermillonario.dao.interfaces.UsuarioComodinesDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
@@ -35,16 +37,20 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
     private int ronda = 0;
     private Pregunta pregunta;
     private UsuarioComodinesDAO ucdao = new UsuarioComodinesDAOImpl();
-
+    private Popup popup;
+    
     public PantallaResponderPregunta(java.awt.Frame parent, boolean modal, ModoJuego modoJuego) {
         super(parent, modal);
         initComponents();
         PartidaJugando.inicializarPartida(modoJuego);
         colocarPregunta();
         this.setTitle(Lenguaje.getString("Jugando"));
-        this.jButton50Porciento.setText(Lenguaje.getString("50Porciento"));
-        this.jButtonCambioPregunta.setText(Lenguaje.getString("CambioPregunta"));
+        this.jLabelPuntosPartidaActualTexto.setText(Lenguaje.getString("Puntos.Conseguidos.Partida"));
+        this.jLabelRondalTexto1.setText(Lenguaje.getString("Ronda"));
         VentanasLogica.estilizarVentaja(this);
+        if (modoJuego.getIdModoJuego() == 2) {
+            jLabelRonda10.setText("/10");
+        }
     }
 
     /**
@@ -57,122 +63,164 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabelPregunta = new javax.swing.JLabel();
-        jButtonRespuesta1 = new javax.swing.JButton();
-        jButtonRespuesta2 = new javax.swing.JButton();
-        jButtonRespuesta3 = new javax.swing.JButton();
-        jButtonRespuesta4 = new javax.swing.JButton();
         jLabelPuntuacionPartida = new javax.swing.JLabel();
         jLabelTotalPreguntas = new javax.swing.JLabel();
         jButton50Porciento = new javax.swing.JButton();
         jButtonCambioPregunta = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonRespuesta1 = new javax.swing.JButton();
+        jButtonRespuesta2 = new javax.swing.JButton();
+        jButtonRespuesta4 = new javax.swing.JButton();
+        jButtonRespuesta3 = new javax.swing.JButton();
+        jLabelPuntosPartidaActualTexto = new javax.swing.JLabel();
+        jLabelRondalTexto1 = new javax.swing.JLabel();
+        jLabelRonda10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabelPregunta.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelPregunta.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         jLabelPregunta.setText("jLabel1");
-
-        jButtonRespuesta1.setText("jButton1");
-        jButtonRespuesta1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRespuesta1ActionPerformed(evt);
-            }
-        });
-
-        jButtonRespuesta2.setText("jButton1");
-        jButtonRespuesta2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRespuesta2ActionPerformed(evt);
-            }
-        });
-
-        jButtonRespuesta3.setText("jButton1");
-        jButtonRespuesta3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRespuesta3ActionPerformed(evt);
-            }
-        });
-
-        jButtonRespuesta4.setText("jButton1");
-        jButtonRespuesta4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRespuesta4ActionPerformed(evt);
-            }
-        });
 
         jLabelPuntuacionPartida.setText("jLabel1");
 
         jLabelTotalPreguntas.setText("jLabel1");
 
-        jButton50Porciento.setText("50 %");
+        jButton50Porciento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/50_normal.png"))); // NOI18N
+        jButton50Porciento.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/50_clicado.png"))); // NOI18N
+        jButton50Porciento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
         jButton50Porciento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton50PorcientoActionPerformed(evt);
             }
         });
 
-        jButtonCambioPregunta.setText("Cambio Pregunta");
+        jButtonCambioPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/cambio_pregunta_normal.png"))); // NOI18N
+        jButtonCambioPregunta.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/cambio_pregunta_clicado.png"))); // NOI18N
+        jButtonCambioPregunta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
         jButtonCambioPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCambioPreguntaActionPerformed(evt);
             }
         });
 
+        jPanel1.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
+
+        jButtonRespuesta1.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jButtonRespuesta1.setText("jButton1");
+        jButtonRespuesta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRespuesta1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonRespuesta1);
+
+        jButtonRespuesta2.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jButtonRespuesta2.setText("jButton1");
+        jButtonRespuesta2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRespuesta2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonRespuesta2);
+
+        jButtonRespuesta4.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jButtonRespuesta4.setText("jButton1");
+        jButtonRespuesta4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRespuesta4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonRespuesta4);
+
+        jButtonRespuesta3.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jButtonRespuesta3.setText("jButton1");
+        jButtonRespuesta3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRespuesta3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonRespuesta3);
+
+        jLabelPuntosPartidaActualTexto.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jLabelPuntosPartidaActualTexto.setText("jLabel1");
+
+        jLabelRondalTexto1.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jLabelRondalTexto1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jButton50Porciento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                        .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonRespuesta3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonRespuesta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonRespuesta4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jButtonRespuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelPuntuacionPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                    .addComponent(jLabelTotalPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelPuntosPartidaActualTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelPuntuacionPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelRondalTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelTotalPreguntas)
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabelRonda10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jButton50Porciento, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155)
-                .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabelPuntuacionPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelTotalPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonRespuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jButtonRespuesta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonRespuesta4, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(jButtonRespuesta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPuntuacionPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPuntosPartidaActualTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRondalTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTotalPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelRonda10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton50Porciento, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jButtonCambioPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton50Porciento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        jButton50Porciento.getAccessibleContext().setAccessibleName("50Porciento");
+        jButtonCambioPregunta.getAccessibleContext().setAccessibleName("CambioPregunta");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,7 +246,8 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonRespuesta4ActionPerformed
 
     private void jButton50PorcientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50PorcientoActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:    
+        popup.hide();
         comodin50();
         Comodin comodin = new Comodin();
         comodin.setIdComodin(1);
@@ -209,12 +258,25 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
 
     private void jButtonCambioPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambioPreguntaActionPerformed
         // TODO add your handling code here:
+        popup.hide();
         cambiarPregunta();
         Comodin comodin = new Comodin();
         comodin.setIdComodin(2);
         ucdao.utilizarComodin(comodin);
         jButtonCambioPregunta.setEnabled(false);
     }//GEN-LAST:event_jButtonCambioPreguntaActionPerformed
+
+    private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
+        // TODO add your handling code here:
+        JButton jb = (JButton) evt.getSource();
+        popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
+        popup.show();
+    }//GEN-LAST:event_ratonEntra
+
+    private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
+        // TODO add your handling code here:
+        popup.hide();
+    }//GEN-LAST:event_ratonSale
 
     /**
      * @param args the command line arguments
@@ -228,11 +290,11 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
             resetearRespuestas();
             resetearComodines();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No hay mas preguntas relacionadas", "Fin partida", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("NoMasPreguntas"), Lenguaje.getString("FinPartida"), JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         }
     }
-
+    
     private void cambiarPregunta() {
         this.pregunta = PartidaJugando.seleccionarPregunta();
         jLabelPregunta.setText(this.pregunta.getNombre());
@@ -241,38 +303,38 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         jButtonRespuesta3.setText(this.pregunta.getListaRespuestas().get(2).getNombre());
         jButtonRespuesta4.setText(this.pregunta.getListaRespuestas().get(3).getNombre());
         resetearRespuestas();
-
+        
     }
-
+    
     private void avanceJuego(Boolean acierto) {
         if (acierto) {
-
+            
             if (PartidaJugando.partida.getModoJuego().getIdModoJuego() == 2 && ronda == 10) {
-                JOptionPane.showMessageDialog(this, "Enhorabuena ha ganado", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Enhorabuena.Ganador"), Lenguaje.getString("Ganador"), JOptionPane.INFORMATION_MESSAGE);
                 PartidaJugando.partidaGanada();
                 this.setVisible(false);
             } else {
-                int opc = JOptionPane.showConfirmDialog(this, "Pregunta acertada, desea continuar?", "Acierto", JOptionPane.INFORMATION_MESSAGE);
+                int opc = JOptionPane.showConfirmDialog(this, Lenguaje.getString("Acierto.contiuar.pregunta"), Lenguaje.getString("Acierto"), JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.YES_OPTION) {
                     colocarPregunta();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Gracias por jugar", "Plantado", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Gracias.jugar"), Lenguaje.getString("Plantado"), JOptionPane.INFORMATION_MESSAGE);
                     this.setVisible(false);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Ha fallado", "Plantado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("Fallo"), Lenguaje.getString("Error"), JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         }
     }
-
+    
     private boolean responder(int elegida) {
         RespuestaUsuario respuestaUsuario = new RespuestaUsuario();
         respuestaUsuario.setPartida(PartidaJugando.partida);
         respuestaUsuario.setPregunta(this.pregunta);
         return PartidaJugando.comprobarRespuesta(respuestaUsuario, elegida);
     }
-
+    
     private void comodin50() {
         List<Integer> listaCorrecta = PartidaJugando.usarComodin50(pregunta);
         if (!listaCorrecta.contains(0)) {
@@ -288,7 +350,7 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
             jButtonRespuesta4.setEnabled(false);
         }
     }
-
+    
     private void resetearRespuestas() {
         jButtonRespuesta1.setEnabled(true);
         jButtonRespuesta2.setEnabled(true);
@@ -296,7 +358,7 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
         jButtonRespuesta4.setEnabled(true);
         resetearComodines();
     }
-
+    
     private void resetearComodines() {
         if (PartidaJugando.tieneComodines50()) {
             jButton50Porciento.setEnabled(true);
@@ -318,7 +380,11 @@ public class PantallaResponderPregunta extends javax.swing.JDialog {
     private javax.swing.JButton jButtonRespuesta3;
     private javax.swing.JButton jButtonRespuesta4;
     private javax.swing.JLabel jLabelPregunta;
+    private javax.swing.JLabel jLabelPuntosPartidaActualTexto;
     private javax.swing.JLabel jLabelPuntuacionPartida;
+    private javax.swing.JLabel jLabelRonda10;
+    private javax.swing.JLabel jLabelRondalTexto1;
     private javax.swing.JLabel jLabelTotalPreguntas;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

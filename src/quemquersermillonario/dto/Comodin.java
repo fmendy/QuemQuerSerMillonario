@@ -32,7 +32,7 @@ public class Comodin implements Serializable {
     @Column(name = "IDComodines", unique = true, nullable = false)
     private int idComodin;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", length = 40, unique = true)
     private String nombre;
 
     @Column(name = "Coste")

@@ -60,5 +60,7 @@ Contributor(s):
     <mapping class="quemquersermillonario.dto.MovimientoPuntos"/>
     <mapping class="quemquersermillonario.dto.Comodin"/>
     <mapping class="quemquersermillonario.dto.UsuarioComodines"/>
+    <mapping class="quemquersermillonario.dto.Formulario"/>
+    <mapping class="quemquersermillonario.dto.Formulario"/>
   </session-factory>
 </hibernate-configuration>

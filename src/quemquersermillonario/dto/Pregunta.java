@@ -37,22 +37,19 @@ public class Pregunta implements Serializable {
     @Column(name = "IDPregunta", unique = true, nullable = false)
     private int idPregunta;
 
-    
     @JoinColumn(name = "Categoria_IDCategoria", nullable = false)
     @ManyToOne
     private Categoria categoria;
 
-    
     @JoinColumn(name = "Dificultad_IDDificultad", nullable = false)
     @ManyToOne
     private Dificultad dificultad;
 
-    
     @JoinColumn(name = "Usuario_IDUsuario")
     @ManyToOne
     private Usuario usuario;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", length = 80)
     private String nombre;
 
     @Column(name = "Activo", insertable = false)
@@ -67,7 +64,7 @@ public class Pregunta implements Serializable {
     @OneToMany(mappedBy = "pregunta", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Respuesta> listaRespuestas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pregunta", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "pregunta", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     private List<RespuestaUsuario> listaRespuestaUsuarios = new ArrayList<>();
 
     public void aniadirRespuestaUsuario(RespuestaUsuario ru) {
@@ -156,6 +153,12 @@ public class Pregunta implements Serializable {
 
     public void aniadirRespuesta(Respuesta respuesta) {
         this.listaRespuestas.add(respuesta);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Pregunta p = (Pregunta) obj;
+        return this.idPregunta == p.getIdPregunta();
     }
 
 }

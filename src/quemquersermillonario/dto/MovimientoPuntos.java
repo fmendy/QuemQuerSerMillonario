@@ -34,7 +34,7 @@ public class MovimientoPuntos implements Serializable {
     @Column(name = "Puntos")
     private int puntos;
 
-    @Column(name = "Descripcion")
+    @Column(name = "Descripcion", length = 40)
     private String descripcion;
 
     @Column(name = "FechaCreacion", insertable = false)

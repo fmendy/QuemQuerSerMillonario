@@ -30,10 +30,10 @@ public class ModoJuego implements Serializable {
     @Column(name = "IDModoJuego", unique = true, nullable = false)
     private int idModoJuego;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", unique = true, length = 40)
     private String nombre;
 
-    @Column(name = "Activo", insertable = false)
+    @Column(name = "Activo", insertable = false, length = 1)
     private int activo;
 
     @Column(name = "FechaCreacion", insertable = false, updatable = false)

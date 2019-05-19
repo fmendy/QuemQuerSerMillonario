@@ -27,9 +27,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabelPuntosUsuario" min="-2" pref="95" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelPuntosDisponibles" min="-2" pref="119" max="-2" attributes="0"/>
+                      <Component id="jLabelPuntosUsuario" min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabelPuntosDisponibles" min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabelPrecio" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">

@@ -68,4 +68,14 @@ public class ComprobacionText {
             return  true;
         }
     }
+    
+    public static boolean comprobacionTamanoJPassword(JPasswordField jtf, int maximo){
+        if (jtf.getText().length()>maximo){
+            jtf.setText("");
+            return  false;
+        }
+        else{
+            return  true;
+        }
+    }
 }

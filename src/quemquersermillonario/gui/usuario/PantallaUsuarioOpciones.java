@@ -19,6 +19,7 @@ import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Usuario;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comodines.PantallaComprarComodines;
+import quemquersermillonario.gui.formulario.PantallaFormularioUsuario;
 import quemquersermillonario.gui.partida.PantallaSeleccionJuego;
 import quemquersermillonario.gui.usuario.preguntas.PantallaUsuarioPreguntas;
 
@@ -52,57 +53,16 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonActualizar = new javax.swing.JButton();
-        jButtonMisPreguntas = new javax.swing.JButton();
         jButtonJugar = new javax.swing.JButton();
         jButtonTienda = new javax.swing.JButton();
+        jButtonMisPreguntas = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jButtonFormulario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(0, 2, 0, 5));
-
-        jButtonActualizar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_normal.png"))); // NOI18N
-        jButtonActualizar.setToolTipText("");
-        jButtonActualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_clicado.png"))); // NOI18N
-        jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ratonEntra(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ratonSale(evt);
-            }
-        });
-        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonActualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonActualizar);
-        jButtonActualizar.getAccessibleContext().setAccessibleName("mis_datos");
-
-        jButtonMisPreguntas.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonMisPreguntas.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonMisPreguntas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_normal.png"))); // NOI18N
-        jButtonMisPreguntas.setToolTipText("");
-        jButtonMisPreguntas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_clicado.png"))); // NOI18N
-        jButtonMisPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ratonEntra(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ratonSale(evt);
-            }
-        });
-        jButtonMisPreguntas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMisPreguntasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonMisPreguntas);
-        jButtonMisPreguntas.getAccessibleContext().setAccessibleName("mis_preguntas");
+        jPanel1.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
 
         jButtonJugar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonJugar.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,6 +104,48 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonTienda);
         jButtonTienda.getAccessibleContext().setAccessibleName("tienda");
 
+        jButtonMisPreguntas.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonMisPreguntas.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonMisPreguntas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_normal.png"))); // NOI18N
+        jButtonMisPreguntas.setToolTipText("");
+        jButtonMisPreguntas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_preguntas_clicado.png"))); // NOI18N
+        jButtonMisPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonMisPreguntas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMisPreguntasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonMisPreguntas);
+        jButtonMisPreguntas.getAccessibleContext().setAccessibleName("mis_preguntas");
+
+        jButtonActualizar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_normal.png"))); // NOI18N
+        jButtonActualizar.setToolTipText("");
+        jButtonActualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/mis_datos_clicado.png"))); // NOI18N
+        jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonActualizar);
+        jButtonActualizar.getAccessibleContext().setAccessibleName("mis_datos");
+
         jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
         jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
@@ -165,6 +167,24 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonSalir);
         jButtonSalir.getAccessibleContext().setAccessibleName("salir");
 
+        jButtonFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_normal.png"))); // NOI18N
+        jButtonFormulario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_clicado.png"))); // NOI18N
+        jButtonFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonFormulario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFormularioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonFormulario);
+        jButtonFormulario.getAccessibleContext().setAccessibleName("Formulario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +197,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -232,9 +252,17 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         popup.hide();
     }//GEN-LAST:event_ratonSale
 
+    private void jButtonFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFormularioActionPerformed
+        // TODO add your handling code here:
+        popup.hide();
+        PantallaFormularioUsuario pfu = new PantallaFormularioUsuario(parent, true);
+        pfu.setVisible(true);
+    }//GEN-LAST:event_jButtonFormularioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonFormulario;
     private javax.swing.JButton jButtonJugar;
     private javax.swing.JButton jButtonMisPreguntas;
     private javax.swing.JButton jButtonSalir;

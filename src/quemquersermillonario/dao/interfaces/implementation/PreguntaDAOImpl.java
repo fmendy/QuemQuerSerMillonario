@@ -7,6 +7,7 @@ package quemquersermillonario.dao.interfaces.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Query;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.RespuestaDAO;
 import quemquersermillonario.dto.Categoria;
@@ -81,6 +82,38 @@ public class PreguntaDAOImpl extends GenericDAOImpl<Pregunta> implements Pregunt
         }
         listaPreguntas = session.createQuery(query).list();
         finalizar();
+        return listaPreguntas;
+    }
+
+    @Override
+    public List<Pregunta> obtenerPreguntasCategoriaDificultadTodas(Categoria cat, Dificultad dif, boolean todas) {
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+        try {
+            iniciar();
+            String query = "from Pregunta p where p.activo = 1";
+            if (cat.getIdCategoria() > 0) {
+                query = query + " and p.categoria =:categoria";
+            }
+            if (dif.getIdDificultad() > 0) {
+                query = query + " and p.dificultad =:dificultad";
+            }
+            if (!todas) {
+                query = query + " and p.usuario=:usuario";
+            }
+            Query cQuery = session.createQuery(query);
+            if (cat.getIdCategoria() > 0) {
+                cQuery.setParameter("categoria", cat);
+            }
+            if (dif.getIdDificultad() > 0) {
+                cQuery.setParameter("dificultad", dif);
+            }
+            if (!todas) {
+                cQuery.setParameter("usuario", OpcionesFijas.usuario);
+            }
+            listaPreguntas = cQuery.list();
+            finalizar();
+        } catch (Exception e) {
+        };
         return listaPreguntas;
     }
 

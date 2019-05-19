@@ -33,10 +33,10 @@ public class Respuesta implements Serializable{
     @Column(name = "IDRespuesta", unique = true, nullable = false)
     private int idRespuesta;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", length = 40)
     private String nombre;
 
-    @Column(name = "Correcta")
+    @Column(name = "Correcta", length = 1)
     private int correcta;
     
     @ManyToOne

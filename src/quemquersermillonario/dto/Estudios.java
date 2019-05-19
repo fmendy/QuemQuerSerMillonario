@@ -28,10 +28,10 @@ public class Estudios implements Serializable {
     @Column(name = "IDEstudios", unique = true, nullable = false)
     private int idEstudios;
 
-    @Column(name = "Nombre", nullable = false)
+    @Column(name = "Nombre", nullable = false, length = 40, unique = true)
     private String nombre;
 
-    @Column(name = "Activo", insertable = false)
+    @Column(name = "Activo", insertable = false, length = 1)
     private int activo;
 
     @Column(name = "FechaCreacion", insertable = false, updatable = false)

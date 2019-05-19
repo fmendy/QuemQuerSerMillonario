@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
     @Column(name = "IDCategoria", unique = true, nullable = false)
     private int idCategoria;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", length = 40, unique = true)
     private String nombre;
 
     @Column(name = "Activo", insertable = false)

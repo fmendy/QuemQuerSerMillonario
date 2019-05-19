@@ -11,8 +11,11 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import org.apache.commons.codec.digest.DigestUtils;
 import quemquersermillonario.dao.interfaces.GenericDAO;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
@@ -62,7 +65,6 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         this.jLabelEstudios.setText(Lenguaje.getString("Estudios"));
         this.jLabelNombre.setText(Lenguaje.getString("Nombre"));
         this.jLabelPassword.setText(Lenguaje.getString("Password"));
-        this.jButtonSalir.setText(Lenguaje.getString("Salir"));
         this.jLabelPasswordRepite.setText(Lenguaje.getString("RepitaPassword"));
         VentanasLogica.estilizarVentaja(this);
 
@@ -92,17 +94,17 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jTextFieldAno = new javax.swing.JTextField();
         jLabelEstudios = new javax.swing.JLabel();
         jComboBoxEstudios = new javax.swing.JComboBox<>();
-        jButtonAceptar = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
         jLabelInformcionNombre = new javax.swing.JLabel();
         jLabelInformcionApellido1 = new javax.swing.JLabel();
         jLabelInformcionEmail2 = new javax.swing.JLabel();
         jLabelInformcionPassword3 = new javax.swing.JLabel();
         jLabelInformcionAnio4 = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
+        jButtonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(8, 8, 7, 7));
+        jPanel1.setLayout(new java.awt.GridLayout(7, 8, 10, 20));
 
         jLabelNombre.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelNombre.setText("Nombre:");
@@ -112,7 +114,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jTextFieldNombre.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldNombreKeyReleased(evt);
+                tamanoMaximo(evt);
             }
         });
         jPanel1.add(jTextFieldNombre);
@@ -125,7 +127,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jTextFieldApellidos.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldApellidosKeyReleased(evt);
+                tamanoMaximo(evt);
             }
         });
         jPanel1.add(jTextFieldApellidos);
@@ -138,7 +140,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldEmailKeyReleased(evt);
+                tamanoMaximo(evt);
             }
         });
         jPanel1.add(jTextFieldEmail);
@@ -150,7 +152,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jPasswordField1KeyReleased(evt);
+                tamanoMaximo(evt);
             }
         });
         jPanel1.add(jPasswordField1);
@@ -162,7 +164,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         jPasswordField2.setSelectionColor(new java.awt.Color(255, 255, 0));
         jPasswordField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jPasswordField2KeyReleased(evt);
+                tamanoMaximo(evt);
             }
         });
         jPanel1.add(jPasswordField2);
@@ -193,75 +195,75 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         });
         jPanel1.add(jComboBoxEstudios);
 
-        jButtonAceptar.setBackground(new java.awt.Color(0, 51, 204));
-        jButtonAceptar.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButtonAceptar.setForeground(new java.awt.Color(0, 51, 204));
-        jButtonAceptar.setText("Aceptar");
-        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAceptarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAceptar);
-
-        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonSalir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButtonSalir.setForeground(new java.awt.Color(0, 51, 204));
-        jButtonSalir.setText("SALIR");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonSalir);
-
         jLabelInformcionNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
         jLabelInformcionNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelInformcionNombreMouseEntered(evt);
+                ratonEntra(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelInformcionNombreMouseExited(evt);
+                ratonSale(evt);
             }
         });
 
         jLabelInformcionApellido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
         jLabelInformcionApellido1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelInformcionApellido1MouseEntered(evt);
+                ratonEntra(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelInformcionApellido1MouseExited(evt);
+                ratonSale(evt);
             }
         });
 
         jLabelInformcionEmail2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
         jLabelInformcionEmail2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelInformcionEmail2MouseEntered(evt);
+                ratonEntra(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelInformcionEmail2MouseExited(evt);
+                ratonSale(evt);
             }
         });
 
         jLabelInformcionPassword3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
         jLabelInformcionPassword3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelInformcionPassword3MouseEntered(evt);
+                ratonEntra(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelInformcionPassword3MouseExited(evt);
+                ratonSale(evt);
             }
         });
 
         jLabelInformcionAnio4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/informacion.png"))); // NOI18N
         jLabelInformcionAnio4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelInformcionAnio4MouseEntered(evt);
+                ratonEntra(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelInformcionAnio4MouseExited(evt);
+                ratonSale(evt);
+            }
+        });
+
+        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSalir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonSalir.setForeground(new java.awt.Color(0, 51, 204));
+        jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
+        jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_clicado.png"))); // NOI18N
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+
+        jButtonAceptar.setBackground(new java.awt.Color(0, 51, 204));
+        jButtonAceptar.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButtonAceptar.setForeground(new java.awt.Color(0, 51, 204));
+        jButtonAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/aceptar_normal.png"))); // NOI18N
+        jButtonAceptar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/aceptar_clicado.png"))); // NOI18N
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
             }
         });
 
@@ -270,8 +272,15 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191)
+                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelInformcionNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,8 +293,9 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelInformcionNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
@@ -295,10 +305,20 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
                         .addGap(37, 37, 37)
                         .addComponent(jLabelInformcionPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91)
-                        .addComponent(jLabelInformcionAnio4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelInformcionAnio4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
+
+        jLabelInformcionNombre.getAccessibleContext().setAccessibleName("Required.Nombre");
+        jLabelInformcionApellido1.getAccessibleContext().setAccessibleName("Required.Apellido");
+        jLabelInformcionEmail2.getAccessibleContext().setAccessibleName("Required.Email");
+        jLabelInformcionEmail2.getAccessibleContext().setAccessibleDescription("");
+        jLabelInformcionPassword3.getAccessibleContext().setAccessibleName("Required.Password");
+        jLabelInformcionAnio4.getAccessibleContext().setAccessibleName("Required.Anio.Nacimiento");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -374,22 +394,6 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
-    private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
-        // TODO add your handling code here:
-        if (jTextFieldNombre.getText().length() >= 39) {
-            jTextFieldNombre.setText(jTextFieldNombre.getText().substring(0, 39));
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jTextFieldNombreKeyReleased
-
-    private void jTextFieldApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidosKeyReleased
-        // TODO add your handling code here:
-        if (jTextFieldApellidos.getText().length() >= 39) {
-            jTextFieldApellidos.setText(jTextFieldApellidos.getText().substring(0, 39));
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jTextFieldApellidosKeyReleased
-
     private void jTextFieldAnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAnoKeyReleased
         // TODO add your handling code here:
         try {
@@ -399,85 +403,33 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTextFieldAnoKeyReleased
 
-    private void jLabelInformcionNombreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionNombreMouseEntered
+    private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
         // TODO add your handling code here:
-        popup = VentanasLogica.mensajePopup(popup, "NombreRequerido", evt);
+        JLabel jl = (JLabel) evt.getSource();
+        popup = VentanasLogica.mensajePopup(popup, jl.getAccessibleContext().getAccessibleName(), evt);
         popup.show();
+    }//GEN-LAST:event_ratonEntra
 
-    }//GEN-LAST:event_jLabelInformcionNombreMouseEntered
-
-    private void jLabelInformcionNombreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionNombreMouseExited
+    private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
         // TODO add your handling code here:
         popup.hide();
-    }//GEN-LAST:event_jLabelInformcionNombreMouseExited
+    }//GEN-LAST:event_ratonSale
 
-    private void jLabelInformcionApellido1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionApellido1MouseEntered
+    private void tamanoMaximo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tamanoMaximo
         // TODO add your handling code here:
-        popup = VentanasLogica.mensajePopup(popup, "ApellidoRequerido", evt);
-        popup.show();
-    }//GEN-LAST:event_jLabelInformcionApellido1MouseEntered
-
-    private void jLabelInformcionApellido1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionApellido1MouseExited
-        // TODO add your handling code here:
-        popup.hide();
-    }//GEN-LAST:event_jLabelInformcionApellido1MouseExited
-
-    private void jLabelInformcionEmail2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionEmail2MouseEntered
-        // TODO add your handling code here:
-        popup = VentanasLogica.mensajePopup(popup, "EmailRequerido", evt);
-        popup.show();
-    }//GEN-LAST:event_jLabelInformcionEmail2MouseEntered
-
-    private void jLabelInformcionEmail2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionEmail2MouseExited
-        // TODO add your handling code here:
-        popup.hide();
-    }//GEN-LAST:event_jLabelInformcionEmail2MouseExited
-
-    private void jLabelInformcionPassword3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionPassword3MouseEntered
-        // TODO add your handling code here:
-        popup = VentanasLogica.mensajePopup(popup, "PasswordRequerido", evt);
-        popup.show();
-    }//GEN-LAST:event_jLabelInformcionPassword3MouseEntered
-
-    private void jLabelInformcionPassword3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionPassword3MouseExited
-        // TODO add your handling code here:
-        popup.hide();
-    }//GEN-LAST:event_jLabelInformcionPassword3MouseExited
-
-    private void jLabelInformcionAnio4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionAnio4MouseEntered
-        // TODO add your handling code here:
-        popup = VentanasLogica.mensajePopup(popup, "AnioRequerido", evt);
-        popup.show();
-    }//GEN-LAST:event_jLabelInformcionAnio4MouseEntered
-
-    private void jLabelInformcionAnio4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInformcionAnio4MouseExited
-        // TODO add your handling code here:
-        popup.hide();
-    }//GEN-LAST:event_jLabelInformcionAnio4MouseExited
-
-    private void jTextFieldEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmailKeyReleased
-        // TODO add your handling code here:
-        if (jTextFieldEmail.getText().length() >= 39) {
-            jTextFieldEmail.setText(jTextFieldEmail.getText().substring(0, 39));
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        if (evt.getComponent() instanceof JPasswordField) {
+            JPasswordField jtf = (JPasswordField) evt.getComponent();
+            if (!ComprobacionText.comprobacionTamanoJPassword(jtf, 40)) {
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (evt.getComponent() instanceof JTextField) {
+            JTextField jtf = (JTextField) evt.getComponent();
+            if (!ComprobacionText.comprobacionTamanoJTextField(jtf, 40)) {
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }//GEN-LAST:event_jTextFieldEmailKeyReleased
 
-    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
-        // TODO add your handling code here:
-        if (jPasswordField1.getText().length() >= 39) {
-            jPasswordField1.setText(jPasswordField1.getText().substring(0, 39));
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jPasswordField1KeyReleased
-
-    private void jPasswordField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField2KeyReleased
-        // TODO add your handling code here:
-        if (jPasswordField2.getText().length() >= 39) {
-            jPasswordField2.setText(jPasswordField2.getText().substring(0, 39));
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jPasswordField2KeyReleased
+    }//GEN-LAST:event_tamanoMaximo
 
     private void pasarCamposAObjeto() {
         usuario.setNombre(jTextFieldNombre.getText());
@@ -486,7 +438,7 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
         usuario.setAnoNacimiento(Integer.parseInt(jTextFieldAno.getText()));
         usuario.setActivo(1);
         if (!esModificacion || (esModificacion && jPasswordField1.getText().length() > 0)) {
-            usuario.setPassword(jPasswordField1.getText());
+            usuario.setPassword(DigestUtils.md5Hex(jPasswordField1.getText()));
         }
         usuario.setFechaModificacion(OpcionesFijas.fechaActual());
         usuario.setEstudios((Estudios) jComboBoxEstudios.getSelectedItem());

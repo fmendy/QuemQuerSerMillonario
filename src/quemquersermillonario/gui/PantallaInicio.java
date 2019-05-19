@@ -9,8 +9,12 @@ import ch.randelshofer.quaqua.QuaquaManager;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
+import org.apache.commons.codec.digest.DigestUtils;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
@@ -92,10 +96,20 @@ public class PantallaInicio extends javax.swing.JFrame {
         jPasswordField1.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         jPasswordField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jPasswordField1.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tamanoMaximo(evt);
+            }
+        });
 
         jTextFieldEmail.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         jTextFieldEmail.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jTextFieldEmail.setSelectionColor(new java.awt.Color(255, 255, 0));
+        jTextFieldEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tamanoMaximo(evt);
+            }
+        });
 
         jButtonIniciar.setBackground(new java.awt.Color(0, 0, 0));
         jButtonIniciar.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -122,7 +136,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,12 +146,12 @@ public class PantallaInicio extends javax.swing.JFrame {
                         .addComponent(jPasswordField1)
                         .addComponent(jTextFieldEmail)
                         .addComponent(jLabelPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(20, 20, 20)
                 .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldEmail)
@@ -151,7 +165,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addComponent(jButtonIrRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -167,7 +181,8 @@ public class PantallaInicio extends javax.swing.JFrame {
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
         // TODO add your handling code here:
         OpcionesFijas.usuario.setEmail(jTextFieldEmail.getText());
-        OpcionesFijas.usuario.setPassword(jPasswordField1.getText());
+        
+        OpcionesFijas.usuario.setPassword(DigestUtils.md5Hex(jPasswordField1.getText()));
         
         if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)){
             PantallaUsuarioOpciones puo = new PantallaUsuarioOpciones(this, true);
@@ -176,7 +191,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             puo.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(this, "Los datos introducidos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("DatosIntroducidosIncorrectos"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
 
@@ -184,6 +199,21 @@ public class PantallaInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void tamanoMaximo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tamanoMaximo
+        // TODO add your handling code here:
+        if (evt.getComponent() instanceof JPasswordField) {
+            JPasswordField jtf = (JPasswordField) evt.getComponent();
+            if (!ComprobacionText.comprobacionTamanoJPassword(jtf, 40)) {
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (evt.getComponent() instanceof JTextField) {
+            JTextField jtf = (JTextField) evt.getComponent();
+            if (!ComprobacionText.comprobacionTamanoJTextField(jtf, 40)) {
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_tamanoMaximo
 
     /**
      * @param args the command line arguments

@@ -41,16 +41,16 @@ public class Usuario implements Serializable {
     @Column(name = "Nombre", length = 40)
     private String nombre;
 
-    @Column(name = "Apellidos")
+    @Column(name = "Apellidos", length = 40)
     private String apellidos;
 
-    @Column(name = "Email")
+    @Column(name = "Email", length = 40)
     private String email;
 
-    @Column(name = "AnoNacimiento")
+    @Column(name = "AnoNacimiento", length = 4)
     private int anoNacimiento;
 
-    @Column(name = "Password")
+    @Column(name = "Password", length = 120)
     private String password;
 
     @JoinColumn(name = "Estudios_IDEstudios", nullable = true)
@@ -80,6 +80,17 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<UsuarioComodines> listaComodines = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Formulario> listaFormularios = new ArrayList<>();
+
+    public List<Formulario> getListaFormularios() {
+        return listaFormularios;
+    }
+
+    public void setListaFormularios(List<Formulario> listaFormularios) {
+        this.listaFormularios = listaFormularios;
+    }
 
     public List<UsuarioComodines> getListaComodines() {
         return listaComodines;
@@ -222,6 +233,10 @@ public class Usuario implements Serializable {
 
     public void aniadirComodin(UsuarioComodines c) {
         this.listaComodines.add(c);
+    }
+
+    public void aniadirFormulario(Formulario f) {
+        this.listaFormularios.add(f);
     }
 
     @Override

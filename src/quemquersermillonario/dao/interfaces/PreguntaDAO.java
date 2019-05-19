@@ -23,4 +23,6 @@ public interface PreguntaDAO extends GenericDAO<Pregunta> {
     public List<Pregunta> obtenerTodasPreguntasActivas();
     
     public List<Pregunta> obtenerPreguntasCategoriaDificultad(Categoria cat, Dificultad dif);
+    
+    public List<Pregunta> obtenerPreguntasCategoriaDificultadTodas(Categoria cat, Dificultad dif, boolean todas);
 }

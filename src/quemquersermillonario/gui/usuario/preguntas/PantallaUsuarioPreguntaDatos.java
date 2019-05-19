@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.Popup;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
@@ -110,11 +111,15 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldPregunta1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldPregunta1.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldPregunta1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasarMayusculas(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
         });
         jPanel1.add(jTextFieldPregunta1);
+        jTextFieldPregunta1.getAccessibleContext().setAccessibleName("Pregunta");
 
         jLabelRespuestaCorrecta.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabelRespuestaCorrecta.setText("Respuesta Correcta:");
@@ -123,6 +128,9 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta1.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasarMayusculas(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -136,6 +144,9 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta2.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasarMayusculas(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -149,6 +160,9 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta3.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasarMayusculas(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -162,6 +176,9 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta4.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta4.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasarMayusculas(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -274,26 +291,32 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
             if (!esModificacion) {
                 camposAObjeto();
                 preguntaDAO.guardar(pregunta);
-                JOptionPane.showMessageDialog(this, "Pregunta registrada, gracias por colaborar.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Pregunta.Registrada"), Lenguaje.getString("Correcto"), JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
             } else {
                 camposAObjeto();
                 preguntaDAO.actualizar(pregunta);
-                JOptionPane.showMessageDialog(this, "Pregunta actualizada, gracias por colaborar.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Pregunta.Actualizada"), Lenguaje.getString("Correcto"), JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("RellenarCampos"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void tamanoMaximo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tamanoMaximo
         // TODO add your handling code here:
+
         JTextField jtf = (JTextField) evt.getComponent();
-        if (!ComprobacionText.comprobacionTamanoJTextField(jtf, 40)) {
+        int tam = 40;
+        if ((jtf.getAccessibleContext().getAccessibleName() != null) && (jtf.getAccessibleContext().getAccessibleName().equals("Pregunta"))) {
+            tam = 80;
+        }
+        if (!ComprobacionText.comprobacionTamanoJTextField(jtf, tam)) {
             JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Texto.Longitud"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_tamanoMaximo
 
     private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
@@ -322,11 +345,17 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
-       int opcion= JOptionPane.showConfirmDialog(this, Lenguaje.getString("Confirmacion.Salir"), Lenguaje.getString("Salir"), JOptionPane.YES_NO_OPTION);
-       if (opcion== JOptionPane.YES_OPTION){
-           this.setVisible(false);
-       }
+        int opcion = JOptionPane.showConfirmDialog(this, Lenguaje.getString("Confirmacion.Salir"), Lenguaje.getString("Salir"), JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void pasarMayusculas(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasarMayusculas
+        // TODO add your handling code here:
+        JTextField jtf = (JTextField) evt.getSource();
+        jtf.setText(jtf.getText().toUpperCase());
+    }//GEN-LAST:event_pasarMayusculas
 
     private void camposAObjeto() {
         this.pregunta.setActivo(1);

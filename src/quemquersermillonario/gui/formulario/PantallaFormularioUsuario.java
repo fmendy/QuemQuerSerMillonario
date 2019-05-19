@@ -3,49 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quemquersermillonario.gui.usuario.preguntas;
+package quemquersermillonario.gui.formulario;
 
 import java.awt.Frame;
 import java.util.List;
-import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
-import quemquersermillonario.dao.interfaces.PreguntaDAO;
-import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
+import quemquersermillonario.dao.interfaces.FormularioDAO;
+import quemquersermillonario.dao.interfaces.implementation.FormularioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.VentanasLogica;
-import quemquersermillonario.dto.Pregunta;
-import quemquersermillonario.dto.complejas.OpcionesFijas;
-import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
+import quemquersermillonario.dto.Formulario;
+import quemquersermillonario.gui.tablemodels.UsuarioFormulariosTableModel;
 
 /**
  *
  * @author alvaro
  */
-public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
+public class PantallaFormularioUsuario extends javax.swing.JDialog {
 
     /**
-     * Creates new form PantallaUsuarioPreguntas
+     * Creates new form PantallaFormularioUsuario
      */
     private Frame parent;
-    private UsuarioDAO usuarioDAO;
-    private PreguntaDAO preguntaDAO;
-    private List<Pregunta> listaPreguntas;
     private Popup popup;
+    private List<Formulario> listaFormularios;
+    private FormularioDAO fdao = new FormularioDAOImpl();
 
-    public PantallaUsuarioPreguntas(java.awt.Frame parent, boolean modal) {
+    public PantallaFormularioUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.parent = parent;
-        usuarioDAO = new UsuarioDAOImpl();
-        preguntaDAO = new PreguntaDAOImpl();
         initComponents();
-        this.setTitle(Lenguaje.getString("MisPreguntas"));
-
-        rellenarTabla();
+        this.parent = parent;
         VentanasLogica.estilizarVentaja(this);
+        rellenarTabla();
     }
 
     /**
@@ -58,7 +49,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableUsuarioPreguntas = new javax.swing.JTable();
+        jTableFormularios = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jButtonAniadir = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
@@ -67,8 +58,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTableUsuarioPreguntas.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
-        jTableUsuarioPreguntas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFormularios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -79,14 +69,11 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableUsuarioPreguntas);
+        jScrollPane1.setViewportView(jTableFormularios);
 
         jPanel1.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
 
-        jButtonAniadir.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonAniadir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAniadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/aniadir_pregunta_normal_min.png"))); // NOI18N
-        jButtonAniadir.setPreferredSize(new java.awt.Dimension(64, 64));
         jButtonAniadir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/aniadir_pregunta_clicado_min.png"))); // NOI18N
         jButtonAniadir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -104,8 +91,6 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         jPanel1.add(jButtonAniadir);
         jButtonAniadir.getAccessibleContext().setAccessibleName("Aniadir");
 
-        jButtonModificar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonModificar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/modificar_pregunta_normal_min.png"))); // NOI18N
         jButtonModificar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/modificar_pregunta_clicado_min.png"))); // NOI18N
         jButtonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,10 +108,7 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonModificar);
         jButtonModificar.getAccessibleContext().setAccessibleName("Modificar");
-        jButtonModificar.getAccessibleContext().setAccessibleDescription("");
 
-        jButtonEliminar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/eliminar_normal_min.png"))); // NOI18N
         jButtonEliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/eliminar_clicado_min.png"))); // NOI18N
         jButtonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,8 +127,6 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         jPanel1.add(jButtonEliminar);
         jButtonEliminar.getAccessibleContext().setAccessibleName("Eliminar");
 
-        jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_normal_min.png"))); // NOI18N
         jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_clicado_min.png"))); // NOI18N
         jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,19 +151,19 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,46 +171,31 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
 
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
         // TODO add your handling code here:
-        PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, false, null);
         popup.hide();
-        pupd.setVisible(true);
-        rellenarTabla();
+        PantallaFormularioDatos pfd = new PantallaFormularioDatos(parent, true, false, null);
+        pfd.setVisible(true);
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonSalirActionPerformed
-
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        // TODO add your handling code here:
         popup.hide();
-        if (jTableUsuarioPreguntas.getSelectedRow() >= 0) {
+        if (jTableFormularios.getSelectedRow() >= 0) {
             int opc = JOptionPane.showConfirmDialog(this, Lenguaje.getString("Confirmacion.Eliminar"), Lenguaje.getString("Confirmacion"), JOptionPane.YES_NO_OPTION);
             if (opc == JOptionPane.OK_OPTION) {
-                this.preguntaDAO.desactivarPregunta(listaPreguntas.get(jTableUsuarioPreguntas.getSelectedRow()));
+                this.fdao.borrar(this.listaFormularios.get(jTableFormularios.getSelectedRow()));
                 rellenarTabla();
             }
         } else {
-            JOptionPane.showMessageDialog(this, Lenguaje.getString("SeleccionarPregunta"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("SeleccionarFormulario"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
-
-    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        if (jTableUsuarioPreguntas.getSelectedRow() >= 0) {
-            PantallaUsuarioPreguntaDatos pupd = new PantallaUsuarioPreguntaDatos(this.parent, true, true, listaPreguntas.get(jTableUsuarioPreguntas.getSelectedRow()));
-            popup.hide();
-            pupd.setVisible(true);
-            rellenarTabla();
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una pregubta", "error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
         // TODO add your handling code here:
         JButton jb = (JButton) evt.getSource();
         popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
         popup.show();
+
     }//GEN-LAST:event_ratonEntra
 
     private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
@@ -238,12 +203,32 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
         popup.hide();
     }//GEN-LAST:event_ratonSale
 
-    private void rellenarTabla() {
-        this.listaPreguntas = usuarioDAO.listaPreguntasActivas(OpcionesFijas.usuario);
-        UsuarioPreguntasTableModel uptm = new UsuarioPreguntasTableModel(listaPreguntas);
-        jTableUsuarioPreguntas.setModel(uptm);
-    }
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+        popup.hide();
+        if (jTableFormularios.getSelectedRow() >= 0) {
+            Formulario f = this.listaFormularios.get(jTableFormularios.getSelectedRow());
+            System.out.println(f.getIdFormulario() + " "+ f.getNombre() +" "+f.getListaPreguntas().size());
+            PantallaFormularioDatos pfd = new PantallaFormularioDatos(parent, true, true, f);
+            pfd.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("SeleccionarFormulario"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+
+    private void rellenarTabla() {
+        this.listaFormularios = fdao.getListaFormulariosActivos();
+        UsuarioFormulariosTableModel uftm = new UsuarioFormulariosTableModel(listaFormularios);
+        jTableFormularios.setModel(uftm);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAniadir;
@@ -252,6 +237,6 @@ public class PantallaUsuarioPreguntas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableUsuarioPreguntas;
+    private javax.swing.JTable jTableFormularios;
     // End of variables declaration//GEN-END:variables
 }
