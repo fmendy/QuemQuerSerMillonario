@@ -71,7 +71,7 @@ public class PartidaJugando {
         return p;
     }
 
-    private static void desordenarRespuestas(Pregunta p) {
+    public static void desordenarRespuestas(Pregunta p) {
         List<Respuesta> listAux1 = p.getListaRespuestas();
         List<Respuesta> listAux2 = new ArrayList<>();
 

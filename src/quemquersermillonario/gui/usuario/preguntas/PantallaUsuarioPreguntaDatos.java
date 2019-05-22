@@ -111,9 +111,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldPregunta1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldPregunta1.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldPregunta1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pasarMayusculas(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -128,9 +125,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta1.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pasarMayusculas(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -144,9 +138,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta2.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pasarMayusculas(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -160,9 +151,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta3.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pasarMayusculas(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -176,9 +164,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
         jTextFieldRespuesta4.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jTextFieldRespuesta4.setSelectionColor(new java.awt.Color(255, 255, 0));
         jTextFieldRespuesta4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pasarMayusculas(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tamanoMaximo(evt);
             }
@@ -350,12 +335,6 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
-    private void pasarMayusculas(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasarMayusculas
-        // TODO add your handling code here:
-        JTextField jtf = (JTextField) evt.getSource();
-        jtf.setText(jtf.getText().toUpperCase());
-    }//GEN-LAST:event_pasarMayusculas
 
     private void camposAObjeto() {
         this.pregunta.setActivo(1);

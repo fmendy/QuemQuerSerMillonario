@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formulario_Titulo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b4311788-ba91-4744-90ac-807f4148929e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Dataset1" uuid="cb3c676c-130f-421d-acf2-da928398d848">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	</subDataset>
+	<parameter name="formulario" class="quemquersermillonario.dto.Formulario"/>
+	<field name="listaPreguntas" class="java.util.List">
+		<fieldDescription><![CDATA[listaPreguntas]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="81" uuid="24723d12-68fe-4ed6-8274-fa8ad0806d58"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="3" y="0" width="549" height="30" uuid="4b9e4c3e-e2de-403c-9923-888f7ba37f8f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f7f5ff1-829b-4b74-993e-12e7584fbd5b"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement markup="styled">
+					<font fontName="Consolas" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Test: <b>"+$F{nombre}+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="30" width="67" height="20" uuid="d5e835a3-e2a6-450c-a261-832dac19abd6"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="54" width="67" height="20" uuid="86b13ce9-a957-485c-87d6-5fd025b4001b"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="36" width="179" height="13" uuid="19d3864c-150f-4946-9faf-8c88a5ab9d9f"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[- - - - - - - - - - - - - - - - - - - - - - - - - - - - - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="61" width="162" height="13" uuid="d6acf4a8-24b2-41d7-9b13-f6953ba53de5"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[- - - - - - - - - - - - - - - - - - - - - - - - - - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="30" width="40" height="20" uuid="69cdd76d-b4b6-4c44-8276-c4ba58a0cda8"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="472" y="32" width="60" height="17" uuid="6adf6888-6535-4ffd-a409-ae24ad4572a6"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[_ _/_ _/20_ _]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="30" width="101" height="20" uuid="972a3a12-7840-4ca3-a512-056d6e2f24da">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Preguntas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="54" width="63" height="20" uuid="3bfdfadb-2f97-404e-a655-b03ed2c3e185"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aciertos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="54" width="63" height="20" uuid="bd420065-9fec-4e27-8b18-8504947b09e4"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fallos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="54" width="104" height="20" uuid="65490731-9e74-4008-912b-43affaefde4e"/>
+				<textElement>
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No contestadas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="326" y="30" width="80" height="19" uuid="5b55a032-de70-4fda-9f08-63356c065ab1"/>
+				<textElement>
+					<font fontName="Consolas" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{listaPreguntas}.size()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="147" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="147" uuid="757e4594-e255-492f-941c-86a884718ee1"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaPreguntas})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["Formulario_Preguntas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="0" width="200" height="54" forecolor="#7D7D7D" uuid="9cbfcbf4-4835-4d76-8012-eb4e19bc80d2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Consolas" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+"\n"+
+"Test: "+$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="150">
+			<subreport>
+				<reportElement x="80" y="20" width="400" height="130" uuid="310fd116-dad4-406e-9ab2-b83a177ee9df"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaPreguntas})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["Formularios_Plantilla.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="180" y="-2" width="200" height="20" uuid="1317b3c7-c047-4561-ba97-a9e59a54ec0c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Consolas" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plantilla de espuestas]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

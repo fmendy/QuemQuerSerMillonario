@@ -6,13 +6,24 @@
 package quemquersermillonario.gui.formulario;
 
 import java.awt.Frame;
+import java.io.File;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import quemquersermillonario.dao.interfaces.FormularioDAO;
 import quemquersermillonario.dao.interfaces.implementation.FormularioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.LogicaFormularios;
 import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Formulario;
 import quemquersermillonario.gui.tablemodels.UsuarioFormulariosTableModel;
@@ -30,7 +41,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
     private Popup popup;
     private List<Formulario> listaFormularios;
     private FormularioDAO fdao = new FormularioDAOImpl();
-
+    
     public PantallaFormularioUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -55,6 +66,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         jButtonModificar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,6 +157,13 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         jPanel1.add(jButtonSalir);
         jButtonSalir.getAccessibleContext().setAccessibleName("Salir");
 
+        jButtonImprimir.setText("jButton1");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,6 +174,10 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonImprimir)
+                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +186,9 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonImprimir)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +199,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         popup.hide();
         PantallaFormularioDatos pfd = new PantallaFormularioDatos(parent, true, false, null);
         pfd.setVisible(true);
+        rellenarTabla();
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
@@ -208,7 +234,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         popup.hide();
         if (jTableFormularios.getSelectedRow() >= 0) {
             Formulario f = this.listaFormularios.get(jTableFormularios.getSelectedRow());
-            System.out.println(f.getIdFormulario() + " "+ f.getNombre() +" "+f.getListaPreguntas().size());
+            System.out.println(f.getIdFormulario() + " " + f.getNombre() + " " + f.getListaPreguntas().size());
             PantallaFormularioDatos pfd = new PantallaFormularioDatos(parent, true, true, f);
             pfd.setVisible(true);
         } else {
@@ -218,12 +244,39 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        // TODO add your handling code here:
+        try{
+        Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
+        LogicaFormularios.generarFormulariosTest(f);}
+        catch(Exception e){
+            System.out.println(e);
+        }
+       /* try {
+            JasperReport jp;
+            String path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+            Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
+            List<Formulario> list = new ArrayList<>();
+            list.add(f);
+            JRBeanCollectionDataSource bean = new JRBeanCollectionDataSource(list);
+            Map parametros = new HashMap();
+            parametros.put("formulario", f);
+            
+            new JRBeanCollectionDataSource(listaFormularios);
+            JasperPrint print = JasperFillManager.fillReport(path, parametros, bean);
+            System.out.println(f.getNombre());
+            JasperExportManager.exportReportToPdfFile(print, f.getNombre() + ".pdf");
+        } catch (Exception e) {
+            System.out.println(e);
+        }*/
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
     private void rellenarTabla() {
         this.listaFormularios = fdao.getListaFormulariosActivos();
         UsuarioFormulariosTableModel uftm = new UsuarioFormulariosTableModel(listaFormularios);
@@ -233,6 +286,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAniadir;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JPanel jPanel1;

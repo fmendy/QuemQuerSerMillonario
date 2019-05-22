@@ -9,11 +9,14 @@ import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperReport;
 import quemquersermillonario.dao.interfaces.FormularioDAO;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.implementation.FormularioDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
+import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
@@ -314,10 +317,15 @@ public class PantallaFormularioDatos extends javax.swing.JDialog {
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
         if (formulario.getListaPreguntas().size() > 0) {
-            if (jTextFieldNombre.getText() != null && jTextFieldNombre.getText().length() < 40 && jTextFieldNombre.getText().trim().length()>0) {
+            if (jTextFieldNombre.getText() != null && jTextFieldNombre.getText().length() < 40 && jTextFieldNombre.getText().trim().length() > 0) {
                 formulario.setNombre(jTextFieldNombre.getText());
-                System.out.println(formulario);
-                fdao.guardar(formulario);
+                if (!esModificacion) {
+                    fdao.guardar(formulario);
+                } else {
+                    formulario.setFechaModificacion(OpcionesFijas.fechaActual());
+                    fdao.actualizar(formulario);
+                }
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.ListadoPreguntas.Tamano"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
             }
@@ -349,6 +357,7 @@ public class PantallaFormularioDatos extends javax.swing.JDialog {
         if (opcion == JOptionPane.YES_OPTION) {
             this.setVisible(false);
         }
+
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void actualizarTablas() {

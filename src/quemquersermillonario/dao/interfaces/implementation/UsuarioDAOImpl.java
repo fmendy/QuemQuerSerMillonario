@@ -5,7 +5,6 @@
  */
 package quemquersermillonario.dao.interfaces.implementation;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -97,26 +96,29 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         Usuario user = (Usuario) object;
         List<Pregunta> listaPreguntas = new ArrayList<>();
         listaPreguntas = listaPreguntasActivas(user);
-        for (Pregunta p : listaPreguntas){
+        for (Pregunta p : listaPreguntas) {
             PreguntaDAO pdao = new PreguntaDAOImpl();
             pdao.desactivarPregunta(p);
         }
         session.delete(user);
         finalizar();
-        
+
     }
 
     @Override
     public int puntosUsuario() {
         int puntos = 0;
-        iniciar();
-        Query  query= session.createQuery("SELECT sum (puntos)from MovimientoPuntos where usuario.id=:usuario");
-        query.setInteger("usuario", OpcionesFijas.usuario.getIdUsuario());
-        long g =(long)  query.list().get(0);
-        puntos = Integer.parseInt(Long.toString(g));
-        finalizar();
+        try {
+            iniciar();
+            Query query = session.createQuery("SELECT sum (puntos)from MovimientoPuntos where usuario.id=:usuario");
+            query.setInteger("usuario", OpcionesFijas.usuario.getIdUsuario());
+            long g = (long) query.list().get(0);
+            puntos = Integer.parseInt(Long.toString(g));
+            finalizar();
+        } catch (Exception e) {
+            puntos = 0;
+        }
         return puntos;
     }
 
-    
 }
