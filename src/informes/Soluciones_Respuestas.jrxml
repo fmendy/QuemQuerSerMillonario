@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Soluciones_Respuestas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c9bd65d-dc94-46f6-b60e-e1d4b833ee5d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<field name="correcta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[correcta]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="160" height="22" uuid="d03d11e7-f31e-4e54-9e20-0d6624021079"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="8" width="18" height="10" uuid="5b38fbe4-2c87-4d7c-82e3-137324aa1e3d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="128" y="4" width="28" height="18" uuid="4f6c8baf-a7ae-4b98-aebe-92d8f0e94dc3"/>
+				<text><![CDATA[d]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="103" y="8" width="18" height="10" uuid="9e5bdec5-fdd9-4d1e-9f51-b062a2b243b0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="96" y="4" width="28" height="18" uuid="d83ebc41-9569-4760-a729-9876d8c798ae">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[c]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="70" y="8" width="18" height="10" uuid="e524e2dd-0f80-4cab-958f-dcf17f525f74"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="63" y="4" width="28" height="18" uuid="0038be0f-60ef-4dbb-bd3a-e74cdedfbf47">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[b]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="4" width="28" height="18" uuid="18af4e95-8a3c-4823-a319-1f1fe9eaa25d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="37" y="8" width="18" height="10" uuid="a3107697-dc6e-40b2-93de-e43a556d6101"/>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

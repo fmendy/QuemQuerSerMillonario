@@ -41,7 +41,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
     private Popup popup;
     private List<Formulario> listaFormularios;
     private FormularioDAO fdao = new FormularioDAOImpl();
-    
+
     public PantallaFormularioUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -65,8 +65,8 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         jButtonAniadir = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
         jButtonImprimir = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,6 +139,24 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         jPanel1.add(jButtonEliminar);
         jButtonEliminar.getAccessibleContext().setAccessibleName("Eliminar");
 
+        jButtonImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/imprimir_normal_min.png"))); // NOI18N
+        jButtonImprimir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/imprimir_clicado_min.png"))); // NOI18N
+        jButtonImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonImprimir);
+        jButtonImprimir.getAccessibleContext().setAccessibleName("Imprimir");
+
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_normal_min.png"))); // NOI18N
         jButtonSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/min/salir_clicado_min.png"))); // NOI18N
         jButtonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,13 +175,6 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         jPanel1.add(jButtonSalir);
         jButtonSalir.getAccessibleContext().setAccessibleName("Salir");
 
-        jButtonImprimir.setText("jButton1");
-        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImprimirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,21 +185,15 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonImprimir)
-                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonImprimir)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -249,29 +254,22 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
 
     private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
         // TODO add your handling code here:
-        try{
-        Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
-        LogicaFormularios.generarFormulariosTest(f);}
-        catch(Exception e){
-            System.out.println(e);
+
+        if (jTableFormularios.getSelectedRow() >= 0) {
+            try {
+                Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
+                if (LogicaFormularios.generarFormulariosTest(f)) {
+                    JOptionPane.showMessageDialog(this, Lenguaje.getString("ErrorImprimir"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                }
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Impreso") + "En el directorio " + new File("").getAbsolutePath(), Lenguaje.getString("Imprimir"), JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, Lenguaje.getString("SeleccionarFormulario"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+
         }
-       /* try {
-            JasperReport jp;
-            String path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
-            Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
-            List<Formulario> list = new ArrayList<>();
-            list.add(f);
-            JRBeanCollectionDataSource bean = new JRBeanCollectionDataSource(list);
-            Map parametros = new HashMap();
-            parametros.put("formulario", f);
-            
-            new JRBeanCollectionDataSource(listaFormularios);
-            JasperPrint print = JasperFillManager.fillReport(path, parametros, bean);
-            System.out.println(f.getNombre());
-            JasperExportManager.exportReportToPdfFile(print, f.getNombre() + ".pdf");
-        } catch (Exception e) {
-            System.out.println(e);
-        }*/
+
     }//GEN-LAST:event_jButtonImprimirActionPerformed
 
     /**

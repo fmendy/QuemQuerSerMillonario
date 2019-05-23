@@ -29,28 +29,29 @@ public class LogicaFormularios {
         try {
             desordenarPreguntas(f);
             JasperReport jp;
-            String path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+
             List<Formulario> list = new ArrayList<>();
             list.add(f);
             JRBeanCollectionDataSource bean = new JRBeanCollectionDataSource(list);
             Map parametros = new HashMap();
             parametros.put("formulario", f);
 
+            String path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+
             JasperPrint print = JasperFillManager.fillReport(path, parametros, bean);
-            JasperExportManager.exportReportToPdfFile(print, f.getNombre() + ".pdf");
-            
+            JasperExportManager.exportReportToPdfFile(print, f.getNombre().trim() + ".pdf");
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
         return true;
     }
-    
-    private static Formulario desordenarPreguntas(Formulario f){
+
+    private static Formulario desordenarPreguntas(Formulario f) {
         List<Pregunta> listAux = f.getListaPreguntas();
         f.setListaPreguntas(new ArrayList<Pregunta>());
-        while(listAux.size()>0){
-            int azar =(int) (Math.random()*listAux.size());
+        while (listAux.size() > 0) {
+            int azar = (int) (Math.random() * listAux.size());
             Pregunta p = listAux.get(azar);
             PartidaJugando.desordenarRespuestas(p);
             f.aniadirPegunta(p);
@@ -58,5 +59,5 @@ public class LogicaFormularios {
         }
         return f;
     }
-    
+
 }

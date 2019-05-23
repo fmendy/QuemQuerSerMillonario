@@ -30,7 +30,7 @@ public class VentanasLogica {
     public static Popup mensajePopup(Popup popup, String s, MouseEvent evt){
         s = Lenguaje.getString(s);
         JLabel label = new JLabel(s);
-        label.setForeground(Color.red);
+        label.setForeground(Color.blue);
         popup = PopupFactory.getSharedInstance().getPopup(evt.getComponent(), label, evt.getXOnScreen(), evt.getYOnScreen());
         return popup;
     }
