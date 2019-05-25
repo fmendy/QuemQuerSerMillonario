@@ -6,7 +6,6 @@
 package quemquersermillonario.gui.partida;
 
 import java.awt.Frame;
-import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.Popup;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;

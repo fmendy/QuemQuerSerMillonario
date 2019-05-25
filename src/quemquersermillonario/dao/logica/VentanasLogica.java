@@ -6,9 +6,7 @@
 package quemquersermillonario.dao.logica;
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;

@@ -18,7 +18,6 @@ import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.RespuestaUsuarioDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.UsuarioComodinesDAOImpl;
 import quemquersermillonario.dto.Categoria;
-import quemquersermillonario.dto.Comodin;
 import quemquersermillonario.dto.Dificultad;
 import quemquersermillonario.dto.ModoJuego;
 import quemquersermillonario.dto.MovimientoPuntos;

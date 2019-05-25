@@ -9,14 +9,11 @@ import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperReport;
 import quemquersermillonario.dao.interfaces.FormularioDAO;
 import quemquersermillonario.dao.interfaces.PreguntaDAO;
 import quemquersermillonario.dao.interfaces.implementation.FormularioDAOImpl;
 import quemquersermillonario.dao.interfaces.implementation.PreguntaDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
-import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dao.logica.VentanasLogica;
 import quemquersermillonario.dto.Categoria;
 import quemquersermillonario.dto.Dificultad;
@@ -24,8 +21,7 @@ import quemquersermillonario.dto.Formulario;
 import quemquersermillonario.dto.Pregunta;
 import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comboboxmodel.ComboBoxModelCategoria;
-import quemquersermillonario.gui.comboboxmodel.ComboBoxModelDificultad;
-import quemquersermillonario.gui.tablemodels.UsuarioFormulariosTableModel;
+import quemquersermillonario.gui.comboboxmodel.ComboBoxModelDificultad;;
 import quemquersermillonario.gui.tablemodels.UsuarioPreguntasTableModel;
 
 /**
@@ -327,7 +323,7 @@ public class PantallaFormularioDatos extends javax.swing.JDialog {
                 }
                 this.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.ListadoPreguntas.Tamano"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.Formulario.Nombre"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, Lenguaje.getString("Error.ListadoPreguntas.Tamano"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);

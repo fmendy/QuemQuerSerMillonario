@@ -74,10 +74,12 @@
                   <Component id="jLabelPuntosPartidaActualTexto" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelRondalTexto1" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jLabelTotalPreguntas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelRonda10" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelRondalTexto1" alignment="3" max="32767" attributes="0"/>
+                      <Component id="jLabelTotalPreguntas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="241" max="-2" attributes="0"/>

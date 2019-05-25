@@ -123,7 +123,7 @@ public class PantallaComprarComodines extends javax.swing.JDialog {
         });
 
         jLabelPuntosDisponibles.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabelPuntosDisponibles.setText("jLabel1");
+        jLabelPuntosDisponibles.setText("Puntos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

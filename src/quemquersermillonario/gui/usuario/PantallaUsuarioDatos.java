@@ -333,57 +333,77 @@ public class PantallaUsuarioDatos extends javax.swing.JDialog {
 
         //Registro de Nuevo usuario
         if (!esModificacion) {
-
-            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre) && ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)
-                    && ComprobacionText.jTextFieldObligatorio(jTextFieldEmail) && ComprobacionText.jAno(jTextFieldAno)
-                    && ComprobacionText.jTextFieldEmail(jTextFieldEmail) && ComprobacionText.jPassword(jPasswordField1, jPasswordField2)) {
-                pasarCamposAObjeto();
-                usuario.setFechaCreacion(OpcionesFijas.fechaActual());
-                if (usuarioDAO.buscarUsuarioEmail(usuario) == null) {
-                    try {
-                        usuarioDAO.guardar(usuario);
-                        JOptionPane.showMessageDialog(this, "Enhorabuena ya se ha registrado", "Registrado", JOptionPane.INFORMATION_MESSAGE);
-                        this.setVisible(false);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this,
-                                "Se ha producido un error al registrarse, "
-                                + "por favor contacte con el servicio técnico"
-                                + "indicando el siguente mensaje\n"
-                                + "Clase: " + this.getClass().getName() + "\n"
-                                + "Error: " + e.getMessage(),
-                                "Error", JOptionPane.ERROR_MESSAGE);
+            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre)) {
+                if (ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)) {
+                    if (ComprobacionText.jTextFieldEmail(jTextFieldEmail) && ComprobacionText.jTextFieldEmail(jTextFieldEmail)) {
+                        if (ComprobacionText.jAno(jTextFieldAno)) {
+                            if (ComprobacionText.jPassword(jPasswordField1, jPasswordField2)) {
+                                pasarCamposAObjeto();
+                                usuario.setFechaCreacion(OpcionesFijas.fechaActual());
+                                if (usuarioDAO.buscarUsuarioEmail(usuario) == null) {
+                                    try {
+                                        usuarioDAO.guardar(usuario);
+                                        JOptionPane.showMessageDialog(this, Lenguaje.getString("Usuario.Registrado"), Lenguaje.getString("RegistroUsuario"), JOptionPane.INFORMATION_MESSAGE);
+                                        this.setVisible(false);
+                                    } catch (Exception e) {
+                                        JOptionPane.showMessageDialog(this, Lenguaje.getString("Usuario.Registrado.Error"),
+                                                Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Usuario.Registrado.Error.Email"), Lenguaje.getString("Error"), JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Password"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Anio.Nacimiento"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Email"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "El Email que ha introducido ya esta en uso, por favor intro"
-                            + "duzca otro, gracias.", "Error al registrarse", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Apellido"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Los datos introducidos no son validos, por favor reviselos", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Nombre"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
             }
         } //Actualizacion
         else {
-            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre) && ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)
-                    && ComprobacionText.jTextFieldObligatorio(jTextFieldEmail) && ComprobacionText.jAno(jTextFieldAno)
-                    && (((jPasswordField1.getText().length() > 0 && jPasswordField2.getText().length() > 0) && ComprobacionText.jPassword(jPasswordField1, jPasswordField2))
-                    || (jPasswordField1.getText().length() == 0 && jPasswordField2.getText().length() == 0))) {
-                try {
-                    System.out.println("ID " + usuario.getIdUsuario());
-                    pasarCamposAObjeto();
-                    usuarioDAO.actualizar(usuario);
-                    JOptionPane.showMessageDialog(this, "Los datos se han actualizado correctamente", "Actualizado", JOptionPane.INFORMATION_MESSAGE);
-                    this.setVisible(false);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,
-                            "Se ha producido un error al actualizar, "
-                            + "por favor contacte con el servicio técnico"
-                            + "indicando el siguente mensaje\n"
-                            + "Clase: " + this.getClass().getName() + "\n"
-                            + "Error: " + e.getMessage(),
-                            "Error", JOptionPane.ERROR_MESSAGE);
+
+            if (ComprobacionText.jTextFieldObligatorio(jTextFieldNombre)) {
+                if (ComprobacionText.jTextFieldObligatorio(jTextFieldApellidos)) {
+                    if (ComprobacionText.jTextFieldEmail(jTextFieldEmail) && ComprobacionText.jTextFieldEmail(jTextFieldEmail)) {
+                        if (ComprobacionText.jAno(jTextFieldAno)) {
+                            if ((((jPasswordField1.getText().length() > 0 && jPasswordField2.getText().length() > 0) && ComprobacionText.jPassword(jPasswordField1, jPasswordField2))
+                                    || (jPasswordField1.getText().length() == 0 && jPasswordField2.getText().length() == 0))) {
+
+                                try {
+                                    System.out.println("ID " + usuario.getIdUsuario());
+                                    pasarCamposAObjeto();
+                                    usuarioDAO.actualizar(usuario);
+                                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Usuario.Actualizado"), Lenguaje.getString("Actualizado"), JOptionPane.INFORMATION_MESSAGE);
+                                    this.setVisible(false);
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(this,
+                                            Lenguaje.getString("Usuario.Actualizar.Error"),
+                                            Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Password"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Anio.Nacimiento"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Email"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Apellidos"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Los datos introducidos no son validos, por favor reviselos", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, Lenguaje.getString("Required.Nombre"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
             }
+
         }
 
 

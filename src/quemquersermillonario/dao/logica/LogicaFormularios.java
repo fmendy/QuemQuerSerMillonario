@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import quemquersermillonario.dto.Formulario;
 import quemquersermillonario.dto.Pregunta;
-import quemquersermillonario.dto.Respuesta;
 
 /**
  *

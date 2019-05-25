@@ -49,11 +49,14 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     public void finalizar() {
         try {
             tx.commit();
-            session.close();
+            //session.close();
         } catch (HibernateException e) {
+            tx.rollback();
             System.out.println(e);
-            
             LOGGER.log(Level.SEVERE, "{0} error al cerrar session factory", this.getClass().getSimpleName());
+        }
+        finally{
+            session.close();
         }
     }
 

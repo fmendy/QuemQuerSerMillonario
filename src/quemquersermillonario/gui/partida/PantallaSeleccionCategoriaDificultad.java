@@ -6,7 +6,6 @@
 package quemquersermillonario.gui.partida;
 
 import java.awt.Frame;
-import java.util.ResourceBundle;
 import quemquersermillonario.dao.interfaces.ModoJuegoDAO;
 import quemquersermillonario.dao.interfaces.implementation.ModoJuegoDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;

@@ -6,18 +6,11 @@
 package quemquersermillonario.gui.usuario;
 
 import java.awt.Frame;
-import java.awt.event.MouseEvent;
-import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.Popup;
-import quemquersermillonario.dao.interfaces.GenericDAO;
-import quemquersermillonario.dao.interfaces.UsuarioDAO;
-import quemquersermillonario.dao.interfaces.implementation.UsuarioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;
 import quemquersermillonario.dao.logica.VentanasLogica;
-import quemquersermillonario.dto.Usuario;
-import quemquersermillonario.dto.complejas.OpcionesFijas;
 import quemquersermillonario.gui.comodines.PantallaComprarComodines;
 import quemquersermillonario.gui.formulario.PantallaFormularioUsuario;
 import quemquersermillonario.gui.partida.PantallaSeleccionJuego;
@@ -26,6 +19,8 @@ import quemquersermillonario.gui.usuario.preguntas.PantallaUsuarioPreguntas;
 /**
  *
  * @author alvaro
+ * @version 1.0
+ * @since 2019-05
  */
 public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
@@ -54,11 +49,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jButtonJugar = new javax.swing.JButton();
-        jButtonTienda = new javax.swing.JButton();
         jButtonMisPreguntas = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
         jButtonFormulario = new javax.swing.JButton();
+        jButtonTienda = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,26 +78,6 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonJugar);
         jButtonJugar.getAccessibleContext().setAccessibleName("jugar");
-
-        jButtonTienda.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonTienda.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_normal.png"))); // NOI18N
-        jButtonTienda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_clicado.png"))); // NOI18N
-        jButtonTienda.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ratonEntra(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ratonSale(evt);
-            }
-        });
-        jButtonTienda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTiendaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonTienda);
-        jButtonTienda.getAccessibleContext().setAccessibleName("tienda");
 
         jButtonMisPreguntas.setBackground(new java.awt.Color(0, 0, 0));
         jButtonMisPreguntas.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +121,44 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonActualizar);
         jButtonActualizar.getAccessibleContext().setAccessibleName("mis_datos");
 
+        jButtonFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_normal.png"))); // NOI18N
+        jButtonFormulario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_clicado.png"))); // NOI18N
+        jButtonFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonFormulario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFormularioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonFormulario);
+        jButtonFormulario.getAccessibleContext().setAccessibleName("Formulario");
+
+        jButtonTienda.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonTienda.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_normal.png"))); // NOI18N
+        jButtonTienda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/tienda_clicado.png"))); // NOI18N
+        jButtonTienda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ratonEntra(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ratonSale(evt);
+            }
+        });
+        jButtonTienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTiendaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonTienda);
+        jButtonTienda.getAccessibleContext().setAccessibleName("tienda");
+
         jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
         jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/salir_normal.png"))); // NOI18N
@@ -167,24 +180,6 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonSalir);
         jButtonSalir.getAccessibleContext().setAccessibleName("salir");
 
-        jButtonFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_normal.png"))); // NOI18N
-        jButtonFormulario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenes/formulario_clicado.png"))); // NOI18N
-        jButtonFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ratonEntra(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ratonSale(evt);
-            }
-        });
-        jButtonFormulario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFormularioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonFormulario);
-        jButtonFormulario.getAccessibleContext().setAccessibleName("Formulario");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,6 +200,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Accion que se realiza al clicar el boton salir. Se sale de la apliacion
+     * @param evt 
+     * 
+     */
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
         OpcionesFijasLogica.deslogearse();
@@ -213,6 +213,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
+    /**
+     * Accion que se realiza al clicar el boton actualiza.
+     * Nos abre la ventana con los datos del usuario.
+     * @param evt 
+     */
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
         PantallaUsuarioDatos pad = new PantallaUsuarioDatos(parent, true, true);
@@ -220,6 +225,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         pad.setVisible(true);
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
+    /**
+     * Accion que se realiza al clicar sobre el boton mis preguntas
+     * Nos abre la ventana con las preguntas del usuario
+     * @param evt 
+     */
     private void jButtonMisPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMisPreguntasActionPerformed
         // TODO add your handling code here:
         PantallaUsuarioPreguntas pup = new PantallaUsuarioPreguntas(parent, true);
@@ -227,6 +237,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         pup.setVisible(true);
     }//GEN-LAST:event_jButtonMisPreguntasActionPerformed
 
+    /**
+     * Accion que se realiza al clicar sobre el boton de jugar.
+     * Abre la ventana para seleccionar juegos.
+     * @param evt 
+     */
     private void jButtonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJugarActionPerformed
         // TODO add your handling code here:
         PantallaSeleccionJuego psj = new PantallaSeleccionJuego(parent, true);
@@ -234,6 +249,11 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         psj.setVisible(true);
     }//GEN-LAST:event_jButtonJugarActionPerformed
 
+    /**
+     * Accion al clicar sobre la tienda.
+     * Abre la tienda.
+     * @param evt 
+     */
     private void jButtonTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTiendaActionPerformed
         // TODO add your handling code here:
 
@@ -242,16 +262,30 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         pcc.setVisible(true);
     }//GEN-LAST:event_jButtonTiendaActionPerformed
 
+    /**
+     * Cuando el raton pasa por encima de alguno de los elementos, en el evento MouseEvent.
+     * Aparece un recuadro que indica el nombre del boton.
+     * @param evt 
+     */
     private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
         JButton jb = (JButton) evt.getSource();
         popup = VentanasLogica.mensajePopup(popup, jb.getAccessibleContext().getAccessibleName(), evt);
         popup.show();
     }//GEN-LAST:event_ratonEntra
 
+    /**
+     * Cuando se retira el raton de encima del boton. Se cierra el dialogo.
+     * @param evt 
+     */
     private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
         popup.hide();
     }//GEN-LAST:event_ratonSale
 
+    /**
+     * Accion al clicar el boton formularios.
+     * Abre la ventana de formularios.
+     * @param evt 
+     */
     private void jButtonFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFormularioActionPerformed
         // TODO add your handling code here:
         popup.hide();

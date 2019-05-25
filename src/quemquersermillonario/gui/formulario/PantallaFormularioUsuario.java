@@ -7,19 +7,10 @@ package quemquersermillonario.gui.formulario;
 
 import java.awt.Frame;
 import java.io.File;
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import quemquersermillonario.dao.interfaces.FormularioDAO;
 import quemquersermillonario.dao.interfaces.implementation.FormularioDAOImpl;
 import quemquersermillonario.dao.logica.Lenguaje;
@@ -47,6 +38,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         initComponents();
         this.parent = parent;
         VentanasLogica.estilizarVentaja(this);
+        this.setTitle(Lenguaje.getString("MisFormularios"));
         rellenarTabla();
     }
 
@@ -258,10 +250,12 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
         if (jTableFormularios.getSelectedRow() >= 0) {
             try {
                 Formulario f = listaFormularios.get(jTableFormularios.getSelectedRow());
-                if (LogicaFormularios.generarFormulariosTest(f)) {
+                if (!LogicaFormularios.generarFormulariosTest(f)) {
                     JOptionPane.showMessageDialog(this, Lenguaje.getString("ErrorImprimir"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(this, Lenguaje.getString("Impreso") + "En el directorio " + new File("").getAbsolutePath(), Lenguaje.getString("Imprimir"), JOptionPane.INFORMATION_MESSAGE);
+                {
+                    JOptionPane.showMessageDialog(this, Lenguaje.getString("Impreso") + new File("").getAbsolutePath(), Lenguaje.getString("Imprimir"), JOptionPane.INFORMATION_MESSAGE);
+                }
             } catch (Exception e) {
                 System.out.println(e);
             }
