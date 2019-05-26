@@ -15,13 +15,13 @@ InstallDir $DESKTOP
 Section
  
 	# definimos el directorio a donde vamos a extraer el test.txt
-	SetOutPath "$INSTDIR\QQSM"
+	SetOutPath "$INSTDIR"
 	 
 	# especificamos el archivo
-	File /r "QuemQuerSerMillonario.jar"
+	File /r "QuemQuerSerMillonario"
 	
 	# Creamos el acceso en el escritorio
-	CreateShortCut "$DESKTOP\QQSM.lnk" "$INSTDIR\QuemQuerSerMillonario.jar"
+	CreateShortCut "$DESKTOP\QQSM.lnk" "$INSTDIR\QuemQuerSerMillonario\dist\QuemQuerSerMillonario.jar"
 	# Creamos el acceso en el menu
 	CreateShortCut "$SMPROGRAMS\QQSM.lnk" "$INSTDIR\QuemQuerSerMillonario.jar"
 	 
@@ -41,5 +41,5 @@ Section "Uninstall"
 	Delete "$SMPROGRAMS\QQSM.lnk"
 	
 	#Borramos el lugar donde se instalo
-	RMDir /r "$INSTDIR\QQSM"
+	RMDir /r "$INSTDIR\QuemQuerSerMillonario"
 SectionEnd

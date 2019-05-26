@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.apache.commons.codec.digest.DigestUtils;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
 import quemquersermillonario.dao.logica.ComprobacionText;
@@ -40,8 +41,8 @@ public class PantallaInicio extends javax.swing.JFrame {
         try {
             LOGGER.log(Level.SEVERE, "{0} comienzo establecer look and feel ", this.getClass().getSimpleName());
             UIManager.setLookAndFeel(QuaquaManager.getLookAndFeel());
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "{0} error al establecer look and feel "+e.getMessage(), this.getClass().getSimpleName());
+        } catch (UnsupportedLookAndFeelException e) {
+            LOGGER.log(Level.SEVERE, "{0} error al establecer look and feel " + e.getMessage(), this.getClass().getSimpleName());
             System.out.println(e);
         }
         initComponents();
