@@ -7,6 +7,8 @@ package quemquersermillonario.gui;
 
 import ch.randelshofer.quaqua.QuaquaManager;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -28,17 +30,18 @@ import quemquersermillonario.gui.usuario.PantallaUsuarioDatos;
 public class PantallaInicio extends javax.swing.JFrame {
 
     /**
-     * Creates new form PantallaIncio
-     * En el momento de la creacion se cargan las opciones las cuales seran fijas
+     * Creates new form PantallaIncio En el momento de la creacion se cargan las
+     * opciones las cuales seran fijas
      */
-    
     private UsuarioDAO usuarioDAO;
-    
+    private final static Logger LOGGER = Logger.getLogger(PantallaInicio.class.getName());
+
     public PantallaInicio() {
-        try{
+        try {
+            LOGGER.log(Level.SEVERE, "{0} comienzo establecer look and feel ", this.getClass().getSimpleName());
             UIManager.setLookAndFeel(QuaquaManager.getLookAndFeel());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "{0} error al establecer look and feel "+e.getMessage(), this.getClass().getSimpleName());
             System.out.println(e);
         }
         initComponents();
@@ -171,24 +174,23 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void jButtonIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrRegistroActionPerformed
         // TODO add your handling code here:
-        PantallaUsuarioDatos pur= new PantallaUsuarioDatos(this, true, false);
-        
+        PantallaUsuarioDatos pur = new PantallaUsuarioDatos(this, true, false);
+
         pur.setVisible(true);
     }//GEN-LAST:event_jButtonIrRegistroActionPerformed
 
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
         // TODO add your handling code here:
         OpcionesFijas.usuario.setEmail(jTextFieldEmail.getText());
-        
+
         OpcionesFijas.usuario.setPassword(DigestUtils.md5Hex(jPasswordField1.getText()));
-        
-        if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)){
+
+        if (OpcionesFijas.usuarioDAO.iniciarSesion(OpcionesFijas.usuario)) {
             PantallaUsuarioOpciones puo = new PantallaUsuarioOpciones(this, true);
             jTextFieldEmail.setText("");
             jPasswordField1.setText("");
             puo.setVisible(true);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, Lenguaje.getString("DatosIntroducidosIncorrectos"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
