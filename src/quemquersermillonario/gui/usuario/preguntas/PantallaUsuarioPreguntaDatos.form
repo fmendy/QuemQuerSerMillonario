@@ -237,7 +237,7 @@
         </Property>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Informacion.Preguntas&#xa;"/>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Informacion.Preguntas"/>
       </AccessibilityProperties>
       <Events>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ratonEntra"/>

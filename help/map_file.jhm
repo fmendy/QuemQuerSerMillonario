@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE map
+PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN"
+"http://java.sun.com/products/javahelp/map_2_0.dtd">
+<map version="1.0">
+	<mapID target="index" url="html/index.html"/>
+	<mapID target="expliacion_formularios" url="html/explicacion_formulario.html"/>
+	<mapID target="formularios_crear" url="html/formularios_crear.html"/>
+	<mapID target="formularios_imprimir" url="html/formularios_imprimir.html"/>
+	<mapID target="formularios_modificar" url="html/formularios_modificar.html"/>
+	<mapID target="formularios_principal" url="html/formularios_principal.html"/>
+	<mapID target="iniciar_sesion" url="html/iniciar_sesion.html"/>
+	<mapID target="jugar_contestar" url="html/jugar_contestar.html"/>
+	<mapID target="jugar_principal" url="html/jugar_principal.html"/>
+	<mapID target="jugar_supervivencia" url="html/jugar_supervivencia.html"/>
+	<mapID target="menu_principal" url="html/menu_principal.html"/>
+	<mapID target="mis_datos" url="html/mis_datos.html"/>
+	<mapID target="preguntas_crear" url="html/preguntas_crear.html"/>
+	<mapID target="preguntas_modificar" url="html/preguntas_modificar.html"/>
+	<mapID target="preguntas_principal" url="html/preguntas_principal.html"/>
+	<mapID target="registro" url="html/registro.html"/>
+	<mapID target="tienda" url="html/tienda.html"/>
+</map>

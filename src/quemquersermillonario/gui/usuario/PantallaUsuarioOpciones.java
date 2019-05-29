@@ -6,6 +6,10 @@
 package quemquersermillonario.gui.usuario;
 
 import java.awt.Frame;
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JButton;
 import javax.swing.Popup;
 import quemquersermillonario.dao.logica.Lenguaje;
@@ -54,6 +58,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jButtonFormulario = new javax.swing.JButton();
         jButtonTienda = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -180,6 +185,8 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
         jPanel1.add(jButtonSalir);
         jButtonSalir.getAccessibleContext().setAccessibleName("salir");
 
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,8 +209,9 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
     /**
      * Accion que se realiza al clicar el boton salir. Se sale de la apliacion
-     * @param evt 
-     * 
+     *
+     * @param evt
+     *
      */
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
@@ -214,9 +222,10 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
-     * Accion que se realiza al clicar el boton actualiza.
-     * Nos abre la ventana con los datos del usuario.
-     * @param evt 
+     * Accion que se realiza al clicar el boton actualiza. Nos abre la ventana
+     * con los datos del usuario.
+     *
+     * @param evt
      */
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
@@ -226,9 +235,10 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     /**
-     * Accion que se realiza al clicar sobre el boton mis preguntas
-     * Nos abre la ventana con las preguntas del usuario
-     * @param evt 
+     * Accion que se realiza al clicar sobre el boton mis preguntas Nos abre la
+     * ventana con las preguntas del usuario
+     *
+     * @param evt
      */
     private void jButtonMisPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMisPreguntasActionPerformed
         // TODO add your handling code here:
@@ -238,9 +248,10 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonMisPreguntasActionPerformed
 
     /**
-     * Accion que se realiza al clicar sobre el boton de jugar.
-     * Abre la ventana para seleccionar juegos.
-     * @param evt 
+     * Accion que se realiza al clicar sobre el boton de jugar. Abre la ventana
+     * para seleccionar juegos.
+     *
+     * @param evt
      */
     private void jButtonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJugarActionPerformed
         // TODO add your handling code here:
@@ -250,9 +261,9 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonJugarActionPerformed
 
     /**
-     * Accion al clicar sobre la tienda.
-     * Abre la tienda.
-     * @param evt 
+     * Accion al clicar sobre la tienda. Abre la tienda.
+     *
+     * @param evt
      */
     private void jButtonTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTiendaActionPerformed
         // TODO add your handling code here:
@@ -263,9 +274,10 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonTiendaActionPerformed
 
     /**
-     * Cuando el raton pasa por encima de alguno de los elementos, en el evento MouseEvent.
-     * Aparece un recuadro que indica el nombre del boton.
-     * @param evt 
+     * Cuando el raton pasa por encima de alguno de los elementos, en el evento
+     * MouseEvent. Aparece un recuadro que indica el nombre del boton.
+     *
+     * @param evt
      */
     private void ratonEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonEntra
         JButton jb = (JButton) evt.getSource();
@@ -275,16 +287,17 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
 
     /**
      * Cuando se retira el raton de encima del boton. Se cierra el dialogo.
-     * @param evt 
+     *
+     * @param evt
      */
     private void ratonSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratonSale
         popup.hide();
     }//GEN-LAST:event_ratonSale
 
     /**
-     * Accion al clicar el boton formularios.
-     * Abre la ventana de formularios.
-     * @param evt 
+     * Accion al clicar el boton formularios. Abre la ventana de formularios.
+     *
+     * @param evt
      */
     private void jButtonFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFormularioActionPerformed
         // TODO add your handling code here:
@@ -301,6 +314,7 @@ public class PantallaUsuarioOpciones extends javax.swing.JDialog {
     private javax.swing.JButton jButtonMisPreguntas;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonTienda;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

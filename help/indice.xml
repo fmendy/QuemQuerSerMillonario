@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE index
+PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 1.0//EN"
+"http://java.sun.com/products/javahelp/index_1_0.dtd">
+<index version="1.0">
+	<indexitem text="Indice" target="index" />
+	<indexitem text="Registro" target="registro" />
+	<indexitem text="Iniciar Sesion" target="iniciar_sesion" />
+	<indexitem text="Menu principal" target="menu_principal"/>
+	<indexitem text="Mis Datos" target="mis_datos" />	
+		<indexitem text="Formularios" target="formularios_principal" >
+		<indexitem text="Explicacion Formularios" target="expliacion_formularios"/>
+		<indexitem text="Formularios Crear" target="formularios_crear" />
+		<indexitem text="Formularios Imprimir" target="formularios_imprimir" />
+		<indexitem text="Formularios Modificar" target="formularios_modificar"/>
+	</indexitem>
+	<indexitem text="Jugar" target="jugar_principal" >
+		<indexitem text="Jugar Contestar" target="jugar_contestar"/>
+		<indexitem text="Jugar Supervivencia" target="jugar_supervivencia"/>
+	</indexitem>
+	<indexitem text="Preguntas Principal" target="preguntas_principal" >
+		<indexitem text="Preguntas Crear" target="preguntas_crear"/>
+		<indexitem text="Preguntas Modificar" target="preguntas_modificar"/>
+	</indexitem>	
+	<indexitem text="Tienda" target="tienda"/>
+</index>

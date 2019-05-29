@@ -261,7 +261,7 @@ public class PantallaUsuarioPreguntaDatos extends javax.swing.JDialog {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jLabelInformacion.getAccessibleContext().setAccessibleName("Informacion.Preguntas\n");
+        jLabelInformacion.getAccessibleContext().setAccessibleName("Informacion.Preguntas");
         jButtonAceptar.getAccessibleContext().setAccessibleName("Aceptar");
         jButtonSalir.getAccessibleContext().setAccessibleName("Salir");
 

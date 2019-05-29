@@ -6,9 +6,13 @@
 package quemquersermillonario.gui;
 
 import ch.randelshofer.quaqua.QuaquaManager;
+import java.io.File;
+import java.net.URL;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -54,10 +58,12 @@ public class PantallaInicio extends javax.swing.JFrame {
         this.jLabelEmail.setText(Lenguaje.getString("Email"));
         this.jLabelPassword.setText(Lenguaje.getString("Password"));
         this.jButtonSalir.setText(Lenguaje.getString("Salir"));
+        this.jMenuAyuda.setText(Lenguaje.getString("Ayuda"));
+        this.jMenuItemAyuda.setText(Lenguaje.getString("Ayuda.Mostrar"));
         setLocationRelativeTo(null);
         this.setResizable(false);
         //setDefaultCloseOperation(0);
-
+        this.ponAyuda();
     }
 
     /**
@@ -76,6 +82,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jButtonIniciar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenuAyuda = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +141,20 @@ public class PantallaInicio extends javax.swing.JFrame {
                 jButtonSalirActionPerformed(evt);
             }
         });
+
+        jMenuAyuda.setText("File");
+
+        jMenuItemAyuda.setText("jMenuItem1");
+        jMenuItemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAyudaActionPerformed(evt);
+            }
+        });
+        jMenuAyuda.add(jMenuItemAyuda);
+
+        jMenuBar.add(jMenuAyuda);
+
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,6 +239,27 @@ public class PantallaInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tamanoMaximo
 
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        // TODO add your handling code here:
+        this.ponAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void ponAyuda() {
+        try {
+            File fichero = new File("help" + File.separator + "help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            HelpSet helpSet = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpSet.createHelpBroker();
+
+            hb.enableHelpOnButton(jMenuItemAyuda, "index", helpSet);
+            hb.enableHelpKey(getRootPane(), "index", helpSet);
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +302,9 @@ public class PantallaInicio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JMenu jMenuAyuda;
+    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables

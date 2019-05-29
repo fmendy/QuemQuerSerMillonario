@@ -1,0 +1,21 @@
+<toc version="1.0">
+	<tocitem text="Menu principal" target="index" />
+	<tocitem text="Iniciar Sesion" target="iniciar_sesion" />
+	<tocitem text="Registro" target="registro" />
+	<tocitem text="Registrar" target="registro" />
+	<tocitem text="Formularios Principal" target="formularios_principal">
+		<tocitem text="Formularios Crear" target="formularios_crear" />
+		<tocitem text="Formularios Imprimir" target="formularios_imprimir" />
+		<tocitem text="Formularios Modificar" target="formularios_modificar" />
+	</tocitem>
+	<tocitem text="Jugar Principal" target="jugar_principal" >
+		<tocitem text="Jugar Contestar" target="jugar_contestar" />
+		<tocitem text="Jugar Supervivencia" target="jugar_supervivencia" />
+	</tocitem>
+	<tocitem text="Mis datos" target="mis_datos" />
+	<tocitem text="Preguntas Principal" target="preguntas_principal" >
+		<tocitem text="Preguntas Crear" target="preguntas_crear" />
+		<tocitem text="Preguntas Modificar" target="preguntas_modificar" />
+	</tocitem>
+	<tocitem text="Tienda" target="tienda" />
+</toc>

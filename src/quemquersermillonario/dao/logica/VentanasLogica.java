@@ -7,11 +7,13 @@ package quemquersermillonario.dao.logica;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.border.Border;
 
 /**
  *
@@ -29,6 +31,10 @@ public class VentanasLogica {
         s = Lenguaje.getString(s);
         JLabel label = new JLabel(s);
         label.setForeground(Color.blue);
+        label.setOpaque(true);
+        label.setBackground(Color.WHITE);
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
+        label.setBorder(border);
         popup = PopupFactory.getSharedInstance().getPopup(evt.getComponent(), label, evt.getXOnScreen(), evt.getYOnScreen());
         return popup;
     }
