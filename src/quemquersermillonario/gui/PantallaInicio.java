@@ -20,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.apache.commons.codec.digest.DigestUtils;
 import quemquersermillonario.dao.interfaces.UsuarioDAO;
+import quemquersermillonario.dao.interfaces.implementation.GenericDAOImpl;
 import quemquersermillonario.dao.logica.ComprobacionText;
 import quemquersermillonario.dao.logica.Lenguaje;
 import quemquersermillonario.dao.logica.OpcionesFijasLogica;

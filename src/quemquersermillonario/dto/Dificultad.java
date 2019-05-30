@@ -47,7 +47,7 @@ public class Dificultad implements Serializable {
     @Column(name = "FechaModificacion", insertable = false)
     private Date fechaModificacion;
 
-    @OneToMany(mappedBy = "dificultad", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "dificultad", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Pregunta> listaPreguntas = new ArrayList<>();
 
     public List<Pregunta> getListaPreguntas() {
