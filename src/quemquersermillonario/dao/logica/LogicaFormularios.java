@@ -40,7 +40,7 @@ public class LogicaFormularios {
             if (file.exists()) {
                 path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
             } else {
-                path = ".." + File.separator + ".." + File.separator + "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+                path = ".." + File.separator + "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
             }
 
             JasperPrint print = JasperFillManager.fillReport(path, parametros, bean);
