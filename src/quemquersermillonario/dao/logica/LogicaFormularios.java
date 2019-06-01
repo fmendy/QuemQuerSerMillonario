@@ -35,7 +35,13 @@ public class LogicaFormularios {
             Map parametros = new HashMap();
             parametros.put("formulario", f);
 
-            String path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+            File file = new File("src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper");
+            String path;
+            if (file.exists()) {
+                path = "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+            } else {
+                path = ".." + File.separator + ".." + File.separator + "src" + File.separator + "informes" + File.separator + "Formulario_Titulo.jasper";
+            }
 
             JasperPrint print = JasperFillManager.fillReport(path, parametros, bean);
             JasperExportManager.exportReportToPdfFile(print, f.getNombre().trim() + ".pdf");

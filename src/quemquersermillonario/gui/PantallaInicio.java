@@ -223,6 +223,7 @@ public class PantallaInicio extends javax.swing.JFrame {
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void tamanoMaximo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tamanoMaximo

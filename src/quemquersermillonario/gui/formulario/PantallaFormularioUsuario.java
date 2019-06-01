@@ -253,6 +253,7 @@ public class PantallaFormularioUsuario extends javax.swing.JDialog {
                 if (!LogicaFormularios.generarFormulariosTest(f)) {
                     JOptionPane.showMessageDialog(this, Lenguaje.getString("ErrorImprimir"), Lenguaje.getString("Error"), JOptionPane.ERROR_MESSAGE);
                 }
+                else
                 {
                     JOptionPane.showMessageDialog(this, Lenguaje.getString("Impreso") + new File("").getAbsolutePath(), Lenguaje.getString("Imprimir"), JOptionPane.INFORMATION_MESSAGE);
                 }
